@@ -21,27 +21,42 @@ public class VideoServiceImpl implements VideoService {
     private final String FILE_PATH = Paths.get("src/main/resources/static/videos").toAbsolutePath().toString() + File.separator;
 
     @Override
-    public String saveVideo(MultipartFile file) throws IOException {
+    public Video saveVideo(MultipartFile file) throws IOException {
         String filePath = FILE_PATH + file.getOriginalFilename();
-        Video video = repository.save(Video.builder()
-                .title(file.getOriginalFilename())
-                .type(file.getContentType())
-                .videoPath(filePath).build());
-
+        Video video = new Video();
+        video.setTitle(file.getOriginalFilename());
+        video.setType(file.getContentType());
+        video.setVideoPath(filePath);
+        Video savedVideo = repository.save(video);
         file.transferTo(new File(filePath));
-
-        if (video != null)
-            return "Video Uploaded Successfully: " + filePath;
-        return null;
+        return video;
     }
 
     @Override
-    public byte[] getVideoByTitle(String title) throws IOException {
+    public Optional<Video> getVideoByTitle(String title){
+        return repository.findByTitle(title);
+    }
+
+    @Override
+    public byte[] getVideoContentByTitle(String title) throws IOException {
         Optional<Video> videoOptional = repository.findByTitle(title);
         String videoPath = videoOptional.get().getVideoPath();
 
         byte[] file = Files.readAllBytes(new File(videoPath).toPath());
 
+        return file;
+    }
+
+    @Override
+    public Optional<Video> getVideoById(Long id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public byte[] getVideoContentById(Long id) throws IOException {
+        Optional<Video> videoOptional = repository.findById(id);
+        String videoPath = videoOptional.get().getVideoPath();
+        byte[] file = Files.readAllBytes(new File(videoPath).toPath());
         return file;
     }
 }

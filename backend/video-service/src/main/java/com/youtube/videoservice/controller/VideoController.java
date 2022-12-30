@@ -1,5 +1,8 @@
 package com.youtube.videoservice.controller;
 
+import com.youtube.videoservice.exception.ResourceAlreadyExistsException;
+import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/video")
@@ -18,16 +22,32 @@ public class VideoController {
     private VideoService service;
 
     @PostMapping({"", "/"})
-    public ResponseEntity<String> saveVideo(@RequestParam("video") MultipartFile file) throws IOException {
-        String response = service.saveVideo(file);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<Video> saveVideo(@RequestParam("video") MultipartFile file) throws IOException, ResourceAlreadyExistsException {
+        Optional<Video> videoOptional = service.getVideoByTitle(file.getOriginalFilename());
+        if (videoOptional.isPresent()) {
+            throw new ResourceAlreadyExistsException("A video with this title already exists.");
+        }
+        Video savedVideo = service.saveVideo(file);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedVideo);
     }
 
-    @GetMapping("/{title}")
-    public ResponseEntity<?> getVideoByTitle(@PathVariable String title) throws IOException {
-        byte[] video = service.getVideoByTitle(title);
-        if (video == null || video.length == 0)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
+    @GetMapping("/title/{title}")
+    public ResponseEntity<?> getVideoByTitle(@PathVariable String title) throws IOException, ResourceNotFoundException {
+        Optional<Video> videoOptional = service.getVideoByTitle(title);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this title doesn't exist.");
+        }
+        byte[] video = service.getVideoContentByTitle(title);
+        return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getVideoById(@PathVariable Long id) throws IOException, ResourceNotFoundException {
+        Optional<Video> videoOptional = service.getVideoById(id);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        byte[] video = service.getVideoContentById(id);
         return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
     }
 }

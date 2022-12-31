@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/video")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VideoController {
 
     @Autowired
@@ -50,4 +51,6 @@ public class VideoController {
         byte[] video = service.getVideoContentById(id);
         return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.youtube.videoservice.service;
 
+import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.model.Video;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,4 +18,6 @@ public interface VideoService {
     public Optional<Video> getVideoById(Long id);
 
     public byte[] getVideoContentById(Long id) throws IOException;
+
+    public Video updateVideo(VideoDto videoDto);
 }

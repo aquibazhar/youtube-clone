@@ -1,5 +1,6 @@
 package com.youtube.videoservice.controller;
 
+import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.exception.ResourceAlreadyExistsException;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
 import com.youtube.videoservice.model.Video;
@@ -48,9 +49,18 @@ public class VideoController {
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
         }
-        byte[] video = service.getVideoContentById(id);
-        return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
+        return ResponseEntity.status(HttpStatus.FOUND).body(videoOptional.get());
     }
 
+    @PutMapping({"", "/"})
+    public ResponseEntity<?> updateVideoDetails(@RequestBody VideoDto videoDto){
+
+        Optional<Video> videoOptional = service.getVideoById(videoDto.getId());
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        Video updatedVideo =  service.updateVideo(videoDto);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.youtube.videoservice.service;
 
+import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,17 @@ public class VideoServiceImpl implements VideoService {
         String videoPath = videoOptional.get().getVideoPath();
         byte[] file = Files.readAllBytes(new File(videoPath).toPath());
         return file;
+    }
+
+    @Override
+    public Video updateVideo(VideoDto videoDto) {
+        Video existingVideo = repository.findById(videoDto.getId()).get();
+        existingVideo.setTitle(videoDto.getTitle());
+        existingVideo.setDescription(videoDto.getDescription());
+        existingVideo.setTags(videoDto.getTags());
+        existingVideo.setVideoStatus(videoDto.getVideoStatus());
+
+        Video updatedVideo = repository.save(existingVideo);
+        return updatedVideo;
     }
 }

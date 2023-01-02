@@ -1,9 +1,6 @@
 package com.youtube.videoservice.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -27,8 +24,7 @@ public class Video {
     private HashSet<String> tags;
     private String videoStatus;
     private Integer views;
-    private String thumbnailId;
+    private String thumbnailUrl;
     private ArrayList<Comment> comments;
-    private String type;
     private String url;
 }

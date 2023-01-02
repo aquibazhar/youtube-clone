@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http'
 
 import { catchError, Observable, retry, throwError } from 'rxjs'
+import { Video } from '../models/video';
 
 const URL_VIDEO_UPLOAD = 'http://localhost:8080/api/v1/video'
 const httpOptions = {
@@ -21,10 +22,10 @@ export class VideoUploadService {
 
   constructor(private http: HttpClient) { }
 
-  uploadVideo(videoData : File): Observable<any> {
+  uploadVideo(videoData : File): Observable<Video> {
     const formData = new FormData()
     formData.append('video', videoData, videoData.name)
-    return this.http.post(URL_VIDEO_UPLOAD, formData);
+    return this.http.post<Video>(URL_VIDEO_UPLOAD, formData);
   }
 
   private handleError(error: HttpErrorResponse) {

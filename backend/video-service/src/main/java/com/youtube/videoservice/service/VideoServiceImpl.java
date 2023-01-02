@@ -1,16 +1,14 @@
 package com.youtube.videoservice.service;
 
 import com.youtube.videoservice.dto.VideoDto;
+import com.youtube.videoservice.exception.ResourceNotFoundException;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 @Service
@@ -37,20 +35,12 @@ public class VideoServiceImpl implements VideoService {
         return repository.findByTitle(title);
     }
 
-    @Override
-    public byte[] getVideoContentByTitle(String title) throws IOException {
-        return null;
-    }
 
     @Override
     public Optional<Video> getVideoById(String id) {
         return repository.findById(id);
     }
 
-    @Override
-    public byte[] getVideoContentById(String id) throws IOException {
-        return null;
-    }
 
     @Override
     public Video updateVideo(VideoDto videoDto) {
@@ -58,9 +48,23 @@ public class VideoServiceImpl implements VideoService {
         existingVideo.setTitle(videoDto.getTitle());
         existingVideo.setDescription(videoDto.getDescription());
         existingVideo.setTags(videoDto.getTags());
+        existingVideo.setUrl(videoDto.getUrl());
         existingVideo.setVideoStatus(videoDto.getVideoStatus());
 
         Video updatedVideo = repository.save(existingVideo);
         return updatedVideo;
+    }
+
+    @Override
+    public String saveThumbnail(MultipartFile file, String videoId) throws IOException {
+        Optional<Video> existingVideoOptional =  repository.findById(videoId);
+        if(existingVideoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+
+        Video existingVideo = existingVideoOptional.get();
+        String thumbnailUrl = s3Service.uploadFile(file);
+        existingVideo.setThumbnailUrl(thumbnailUrl);
+        repository.save(existingVideo);
+        return thumbnailUrl;
     }
 }

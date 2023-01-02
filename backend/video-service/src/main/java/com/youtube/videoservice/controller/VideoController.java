@@ -7,7 +7,6 @@ import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/video")
-@CrossOrigin(origins = "http://localhost:4200")
 public class VideoController {
 
     @Autowired
@@ -33,18 +31,8 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedVideo);
     }
 
-    @GetMapping("/title/{title}")
-    public ResponseEntity<?> getVideoByTitle(@PathVariable String title) throws IOException, ResourceNotFoundException {
-        Optional<Video> videoOptional = service.getVideoByTitle(title);
-        if (videoOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Video with this title doesn't exist.");
-        }
-        byte[] video = service.getVideoContentByTitle(title);
-        return ResponseEntity.status(HttpStatus.FOUND).contentType(MediaType.valueOf("video/mp4")).body(video);
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<?> getVideoById(@PathVariable Long id) throws IOException, ResourceNotFoundException {
+    public ResponseEntity<Video> getVideoById(@PathVariable String id) throws IOException, ResourceNotFoundException {
         Optional<Video> videoOptional = service.getVideoById(id);
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
@@ -53,7 +41,7 @@ public class VideoController {
     }
 
     @PutMapping({"", "/"})
-    public ResponseEntity<?> updateVideoDetails(@RequestBody VideoDto videoDto){
+    public ResponseEntity<?> updateVideoMetaData(@RequestBody VideoDto videoDto){
 
         Optional<Video> videoOptional = service.getVideoById(videoDto.getId());
         if (videoOptional.isEmpty()) {
@@ -61,6 +49,12 @@ public class VideoController {
         }
         Video updatedVideo =  service.updateVideo(videoDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
+    }
+
+    @PostMapping("/thumbnail")
+    public ResponseEntity<String> saveThumbnail(@RequestParam("thumbnail") MultipartFile file, @RequestParam("videoId") String videoId) throws IOException, ResourceAlreadyExistsException {
+        String thumbnailUrl = service.saveThumbnail(file, videoId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(thumbnailUrl);
     }
 
 }

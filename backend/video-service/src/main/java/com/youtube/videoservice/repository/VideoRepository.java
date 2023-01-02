@@ -1,7 +1,6 @@
 package com.youtube.videoservice.repository;
 
 import com.youtube.videoservice.model.Video;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

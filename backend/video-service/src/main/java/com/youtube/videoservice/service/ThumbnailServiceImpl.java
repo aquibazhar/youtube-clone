@@ -26,7 +26,7 @@ public class ThumbnailServiceImpl implements ThumbnailService{
     private final String FILE_PATH = Paths.get("src/main/resources/static/thumbnails").toAbsolutePath().toString() + File.separator;
 
     @Override
-    public Thumbnail saveThumbnail(MultipartFile file, Long videoId) throws IOException {
+    public Thumbnail saveThumbnail(MultipartFile file, String videoId) throws IOException {
         String filePath = FILE_PATH + file.getOriginalFilename();
         Thumbnail thumbnail = new Thumbnail();
         thumbnail.setThumbnailPath(filePath);
@@ -40,12 +40,12 @@ public class ThumbnailServiceImpl implements ThumbnailService{
     }
 
     @Override
-    public Optional<Thumbnail> getThumbnailById(Long id) {
+    public Optional<Thumbnail> getThumbnailById(String id) {
         return thumbnailRepository.findById(id);
     }
 
     @Override
-    public byte[] getThumbnailContentById(Long id) throws IOException {
+    public byte[] getThumbnailContentById(String id) throws IOException {
         Optional<Thumbnail> thumbnailOptional = thumbnailRepository.findById(id);
         String thumbnailPath = thumbnailOptional.get().getThumbnailPath();
         byte[] file = Files.readAllBytes(new File(thumbnailPath).toPath());

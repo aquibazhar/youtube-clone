@@ -11,6 +11,7 @@ export class UploadVideoComponent implements OnInit {
 
   fileUploaded : boolean = false
   videoData : FileSystemFileEntry | undefined
+  video:File | undefined
 
   constructor(private videoService : VideoUploadService) { }
 
@@ -46,6 +47,7 @@ export class UploadVideoComponent implements OnInit {
    
     if(this.videoData !== undefined){
       this.videoData.file(video => {
+        this.video = video
         this.videoService.uploadVideo(video).subscribe(data => {
           console.log(data)
         })

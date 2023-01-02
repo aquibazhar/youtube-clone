@@ -1,21 +1,24 @@
 package com.youtube.videoservice.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Document
 public class Video {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @MongoId
+    private String id;
     private String title;
     private String description;
     private Long userId;
@@ -24,8 +27,8 @@ public class Video {
     private HashSet<String> tags;
     private String videoStatus;
     private Integer views;
-    private Long thumbnailId;
+    private String thumbnailId;
     private ArrayList<Comment> comments;
     private String type;
-    private String videoPath;
+    private String url;
 }

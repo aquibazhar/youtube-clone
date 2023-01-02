@@ -1,19 +1,20 @@
 package com.youtube.videoservice.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import javax.persistence.*;
-
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "thumbnail")
+@Document
 public class Thumbnail {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @MongoId
+    private String id;
     private String name;
     private String thumbnailPath;
 }

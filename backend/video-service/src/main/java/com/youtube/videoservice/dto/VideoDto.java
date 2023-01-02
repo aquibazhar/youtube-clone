@@ -12,7 +12,7 @@ import java.util.HashSet;
 @Getter
 @Setter
 public class VideoDto {
-    private Long id;
+    private String id;
     private String title;
     private String description;
 //    private Long userId;

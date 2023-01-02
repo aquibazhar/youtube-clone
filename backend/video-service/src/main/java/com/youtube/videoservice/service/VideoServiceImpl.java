@@ -19,46 +19,37 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private VideoRepository repository;
 
-    private final String FILE_PATH = Paths.get("src/main/resources/static/videos").toAbsolutePath().toString() + File.separator;
+    @Autowired
+    private S3Service s3Service;
+
 
     @Override
     public Video saveVideo(MultipartFile file) throws IOException {
-        String filePath = FILE_PATH + file.getOriginalFilename();
+        String videoUrl = s3Service.uploadFile(file);
         Video video = new Video();
-        video.setTitle(file.getOriginalFilename());
-        video.setType(file.getContentType());
-        video.setVideoPath(filePath);
+        video.setUrl(videoUrl);
         Video savedVideo = repository.save(video);
-        file.transferTo(new File(filePath));
         return video;
     }
 
     @Override
-    public Optional<Video> getVideoByTitle(String title){
+    public Optional<Video> getVideoByTitle(String title) {
         return repository.findByTitle(title);
     }
 
     @Override
     public byte[] getVideoContentByTitle(String title) throws IOException {
-        Optional<Video> videoOptional = repository.findByTitle(title);
-        String videoPath = videoOptional.get().getVideoPath();
-
-        byte[] file = Files.readAllBytes(new File(videoPath).toPath());
-
-        return file;
+        return null;
     }
 
     @Override
-    public Optional<Video> getVideoById(Long id) {
+    public Optional<Video> getVideoById(String id) {
         return repository.findById(id);
     }
 
     @Override
-    public byte[] getVideoContentById(Long id) throws IOException {
-        Optional<Video> videoOptional = repository.findById(id);
-        String videoPath = videoOptional.get().getVideoPath();
-        byte[] file = Files.readAllBytes(new File(videoPath).toPath());
-        return file;
+    public byte[] getVideoContentById(String id) throws IOException {
+        return null;
     }
 
     @Override

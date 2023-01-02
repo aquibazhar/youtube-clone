@@ -1,11 +1,11 @@
 package com.youtube.videoservice.repository;
 
 import com.youtube.videoservice.model.Thumbnail;
-import com.youtube.videoservice.model.Video;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface ThumbnailRepository extends JpaRepository<Thumbnail, Long> {
+public interface ThumbnailRepository extends MongoRepository
+        <Thumbnail, String> {
     Optional<Thumbnail> findByName(String name);
 }

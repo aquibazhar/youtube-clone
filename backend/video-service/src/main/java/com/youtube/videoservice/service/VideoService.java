@@ -15,9 +15,9 @@ public interface VideoService {
 
     public byte[] getVideoContentByTitle(String title) throws IOException;
 
-    public Optional<Video> getVideoById(Long id);
+    public Optional<Video> getVideoById(String id);
 
-    public byte[] getVideoContentById(Long id) throws IOException;
+    public byte[] getVideoContentById(String id) throws IOException;
 
     public Video updateVideo(VideoDto videoDto);
 }

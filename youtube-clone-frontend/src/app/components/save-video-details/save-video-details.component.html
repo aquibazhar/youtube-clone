@@ -1,1 +1,46 @@
-<p>save-video-details works!</p>
+<div fxLayout="row wrap">
+  <div fxFlex="20%">20%</div>
+  <div fxFlex="30%">
+    <div class="mat-title">Enter Video Details</div>
+    <form action="" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          placeholder="Enter a Video Title."
+          type="text"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          matInput
+          formControlName="description"
+          placeholder="Enter the Video Description."
+          type="text"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Select</mat-label>
+        <mat-select matInput formControlName="videoStatus">
+          <mat-option value="PUBLIC">PUBLIC</mat-option>
+          <mat-option value="PRIVATE">PRIVATE</mat-option>
+          <mat-option value="UNLISTED">UNLISTED</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        type="submit"
+        color="primary"
+        mat-raised-button
+        class="register-button"
+      >
+        <mat-icon>save</mat-icon>
+        Create
+      </button>
+    </form>
+  </div>
+  <div fxFlex="30%">30%</div>
+  <div fxFlex="20%">20%</div>
+</div>

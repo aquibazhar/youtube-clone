@@ -52,7 +52,7 @@ public class VideoController {
     }
 
     @PostMapping("/thumbnail")
-    public ResponseEntity<String> saveThumbnail(@RequestParam("thumbnail") MultipartFile file, @RequestParam("videoId") String videoId) throws IOException, ResourceAlreadyExistsException {
+    public ResponseEntity<String> saveThumbnail(@RequestParam("thumbnail") MultipartFile file, @RequestParam("videoId") String videoId) throws IOException {
         String thumbnailUrl = service.saveThumbnail(file, videoId);
         return ResponseEntity.status(HttpStatus.CREATED).body(thumbnailUrl);
     }

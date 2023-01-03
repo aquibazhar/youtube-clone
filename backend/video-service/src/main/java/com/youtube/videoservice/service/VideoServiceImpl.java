@@ -44,11 +44,16 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public Video updateVideo(VideoDto videoDto) {
-        Video existingVideo = repository.findById(videoDto.getId()).get();
+        Optional<Video> existingVideoOptional = this.getVideoById(videoDto.getId());
+
+        if(existingVideoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+
+        Video existingVideo = existingVideoOptional.get();
+
         existingVideo.setTitle(videoDto.getTitle());
         existingVideo.setDescription(videoDto.getDescription());
         existingVideo.setTags(videoDto.getTags());
-        existingVideo.setUrl(videoDto.getUrl());
         existingVideo.setVideoStatus(videoDto.getVideoStatus());
 
         Video updatedVideo = repository.save(existingVideo);
@@ -57,7 +62,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public String saveThumbnail(MultipartFile file, String videoId) throws IOException {
-        Optional<Video> existingVideoOptional =  repository.findById(videoId);
+        Optional<Video> existingVideoOptional =  this.getVideoById(videoId);
         if(existingVideoOptional.isEmpty())
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
 

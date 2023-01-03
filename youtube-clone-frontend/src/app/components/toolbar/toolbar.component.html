@@ -18,11 +18,7 @@
         <mat-icon mat-list-icon class="">home</mat-icon>
         <span>Home</span>
       </a>
-      <a
-        mat-list-item
-        matTooltip="upload video"
-        routerLink="/upload-video"
-      >
+      <a mat-list-item matTooltip="upload video" routerLink="/upload-video">
         <mat-icon mat-list-icon class="">video_call</mat-icon>
         <span>Upload Video</span>
       </a>
@@ -46,37 +42,17 @@
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon>home</mat-icon>
       </button>
-      <button
-        
-        mat-button
-        routerLink="/accounts/login"
-        matTooltip="login"
-      >
+      <button mat-button routerLink="/accounts/login" matTooltip="login">
         <span>Sign In</span>
       </button>
-      <button
-        
-        mat-icon-button
-        routerLink="/upload-video"
-        matTooltip="Upload"
-      >
+      <button mat-icon-button routerLink="/upload-video" matTooltip="Upload">
         <mat-icon>video_call</mat-icon>
       </button>
-      <button
-        
-        mat-icon-button
-        routerLink="/search"
-        matTooltip="Search AQI"
-      >
+      <button mat-icon-button routerLink="/search" matTooltip="Search AQI">
         <mat-icon>search</mat-icon>
       </button>
-      <div >
-        <button
-          mat-button
-          class="user-button"
-          [matMenuTriggerFor]="menu"
-          
-        >
+      <div>
+        <button mat-button class="user-button" [matMenuTriggerFor]="menu">
           <span class="username">Hi, </span>
 
           <mat-icon class="arrow-icon">arrow_drop_down</mat-icon>
@@ -86,7 +62,7 @@
             User Profile
           </button>
 
-          <button  mat-menu-item>Logout</button>
+          <button mat-menu-item>Logout</button>
         </mat-menu>
       </div>
     </mat-toolbar>
@@ -94,4 +70,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-

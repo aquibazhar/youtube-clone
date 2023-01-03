@@ -8,21 +8,18 @@ import { UploadVideoComponent } from './components/upload-video/upload-video.com
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { NgMaterialModule } from './modules/ng-material/ng-material.module';
+import { SaveVideoDetailsComponent } from './components/save-video-details/save-video-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadVideoComponent,
     HomeComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SaveVideoDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,14 +28,9 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     FormsModule,
     HttpClientModule,
     NgxFileDropModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule
+    NgMaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

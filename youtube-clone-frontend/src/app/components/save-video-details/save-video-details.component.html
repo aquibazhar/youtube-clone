@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
   <div fxFlex="20%">20%</div>
-  <div fxFlex="30%">
+  <div fxFlex="30%" class="save-video-form">
     <div class="mat-title">Enter Video Details</div>
     <form action="" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline">
@@ -30,6 +30,24 @@
           <mat-option value="UNLISTED">UNLISTED</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field class="tag-chip-list" appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="New tag..."
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+      </mat-form-field>
       <button
         type="submit"
         color="primary"
@@ -37,7 +55,7 @@
         class="register-button"
       >
         <mat-icon>save</mat-icon>
-        Create
+        Save
       </button>
     </form>
   </div>

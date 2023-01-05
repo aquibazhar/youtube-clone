@@ -48,11 +48,34 @@
           />
         </mat-chip-list>
       </mat-form-field>
+      <div class="upload-thumbnail">
+        <mat-label>Upload a Thumbnail</mat-label>
+        <div class="thumbnail-file">
+          <input (change)="onFileSelected($event)" type="file" />
+        </div>
+        <div class="show-upload" *ngIf="thumbnailSelected">
+          <div class="selected-file">
+            <p>{{ thumbnailName }}</p>
+          </div>
+          <div class="upload">
+            <button
+              type="submit"
+              color="primary"
+              mat-raised-button
+              class="upload-button"
+              (click)="onUpload()"
+            >
+              <mat-icon>upload</mat-icon>
+              Upload
+            </button>
+          </div>
+        </div>
+      </div>
       <button
         type="submit"
         color="primary"
         mat-raised-button
-        class="register-button"
+        class="save-button"
       >
         <mat-icon>save</mat-icon>
         Save

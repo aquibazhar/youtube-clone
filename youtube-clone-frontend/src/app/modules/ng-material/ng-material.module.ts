@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const MaterialModules = [
   MatIconModule,
@@ -23,6 +24,7 @@ const MaterialModules = [
   MatSelectModule,
   MatChipsModule,
   MatGridListModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@ import { UploadVideoComponent } from './components/upload-video/upload-video.com
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'upload-video', component: UploadVideoComponent },
-  { path: 'save-video/:id', component: SaveVideoDetailsComponent },
+  { path: 'save-video/:videoId', component: SaveVideoDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

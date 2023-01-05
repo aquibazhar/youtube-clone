@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ActivatedRoute } from '@angular/router';
+import { VideoUploadService } from 'src/app/services/video-upload.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-save-video-details',
@@ -13,7 +16,19 @@ export class SaveVideoDetailsComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  thumbnail!: File;
+  thumbnailName: string = '';
+  videoId: string = '';
+  thumbnailSelected: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private videoService: VideoUploadService,
+    private _snackBar: MatSnackBar
+  ) {
+    this.videoId = this.activatedRoute.snapshot.params['videoId'];
+  }
   ngOnInit(): void {}
 
   add(event: MatChipInputEvent): void {
@@ -45,5 +60,28 @@ export class SaveVideoDetailsComponent implements OnInit {
 
   onSubmit() {
     console.log(this.videoForm.value);
+  }
+
+  onFileSelected(event: Event) {
+    // @ts-ignore
+    this.thumbnail = event.target.files[0];
+    this.thumbnailName = this.thumbnail.name;
+    this.thumbnailSelected = true;
+  }
+
+  onUpload() {
+    this.videoService
+      .uploadThumbnail(this.thumbnail, this.videoId)
+      .subscribe((data) => {
+        console.log(data);
+        this.openSnackBar('Thumbnail uploaded successfully!', 'OK');
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
   }
 }

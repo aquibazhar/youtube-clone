@@ -34,11 +34,8 @@ public class VideoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Video> getVideoById(@PathVariable String id) throws ResourceNotFoundException {
-        Optional<Video> videoOptional = service.getVideoById(id);
-        if (videoOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
-        }
-        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(videoOptional.get());
+        Video video = service.getVideoDetails(id);
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(video);
     }
 
     @PutMapping({"", "/"})

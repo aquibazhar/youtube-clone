@@ -111,5 +111,12 @@ public class UserServiceImpl implements UserService {
         return this.getCurrentUser().getDislikedVideos().stream().anyMatch((dislikedVideo) -> dislikedVideo.equals(videoId));
     }
 
+    @Override
+    public void addToHistory(String videoId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.addToHistory(videoId);
+        repository.save(currentUser);
+    }
+
 
 }

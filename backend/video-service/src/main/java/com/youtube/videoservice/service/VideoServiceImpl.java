@@ -44,6 +44,25 @@ public class VideoServiceImpl implements VideoService {
         return repository.findById(id);
     }
 
+    public Video getVideoDetails(String id) {
+        Optional<Video> videoOptional = this.getVideoById(id);
+
+        if (videoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+
+        Video video = videoOptional.get();
+
+        this.incrementViewCount(video);
+        userService.addToHistory(id);
+
+        return video;
+    }
+
+    @Override
+    public void incrementViewCount(Video video) {
+        video.incrementViewCount(video.getId());
+        repository.save(video);
+    }
 
     @Override
     public Video updateVideo(VideoDto videoDto) {

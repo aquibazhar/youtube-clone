@@ -18,4 +18,6 @@ public interface UserService {
     public boolean ifLikedVideo(String videoId);
 
     public boolean ifDislikedVideo(String videoId);
+
+    public void addToHistory(String videoId);
 }

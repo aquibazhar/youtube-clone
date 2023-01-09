@@ -21,4 +21,8 @@ public interface VideoService {
     public Video likeVideo(String videoId);
 
     public Video dislikeVideo(String videoId);
+
+    public Video getVideoDetails(String id);
+
+    public void incrementViewCount(Video video);
 }

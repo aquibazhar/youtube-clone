@@ -29,6 +29,7 @@ export class SaveVideoDetailsComponent implements OnInit {
   videoStatus: string = '';
 
   videoForm: FormGroup;
+  videoAvailable: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
       console.log(data);
       this.videoUrl = data.url;
+      this.videoAvailable = true;
     });
     this.videoForm = this.fb.group({
       title: [''],

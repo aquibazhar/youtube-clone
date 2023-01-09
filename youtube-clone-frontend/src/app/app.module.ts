@@ -20,6 +20,7 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { AuthInterceptor } from 'angular-auth-oidc-client';
+import { WatchVideoComponent } from './components/watch-video/watch-video.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AuthInterceptor } from 'angular-auth-oidc-client';
     ToolbarComponent,
     UploadVideoComponent,
     VideoPlayerComponent,
+    WatchVideoComponent,
   ],
   imports: [
     BrowserModule,

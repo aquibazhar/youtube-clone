@@ -3,14 +3,14 @@ export class Video {
     public id: string,
     public title: string,
     public description: string,
-    public userId: String,
+    public userId: string,
     public likes: number,
     public dislikes: number,
-    public tags: String[],
-    public videoStatus: String,
+    public tags: string[],
+    public videoStatus: string,
     public views: number,
-    public thumbnailId: String,
-    public comments: String[],
-    public url: String
+    public thumbnailUrl: string,
+    public comments: string[],
+    public url: string
   ) {}
 }

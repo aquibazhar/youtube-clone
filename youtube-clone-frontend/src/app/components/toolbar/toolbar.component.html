@@ -42,7 +42,12 @@
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon>home</mat-icon>
       </button>
-      <button mat-button routerLink="/accounts/login" matTooltip="login">
+      <button
+        *ngIf="!isAuthenticated"
+        mat-button
+        matTooltip="login"
+        (click)="login()"
+      >
         <span>Sign In</span>
       </button>
       <button mat-icon-button routerLink="/upload-video" matTooltip="Upload">
@@ -51,7 +56,7 @@
       <button mat-icon-button routerLink="/search" matTooltip="Search AQI">
         <mat-icon>search</mat-icon>
       </button>
-      <div>
+      <div *ngIf="isAuthenticated">
         <button mat-button class="user-button" [matMenuTriggerFor]="menu">
           <span class="username">Hi, </span>
 
@@ -62,7 +67,7 @@
             User Profile
           </button>
 
-          <button mat-menu-item>Logout</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </div>
     </mat-toolbar>

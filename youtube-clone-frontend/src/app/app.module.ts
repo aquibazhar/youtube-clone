@@ -12,8 +12,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgMaterialModule } from './modules/ng-material/ng-material.module';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { AuthConfigModule } from './auth/auth-config.module';
+import { AuthInterceptor } from 'angular-auth-oidc-client';
 
 @NgModule({
   declarations: [
@@ -34,8 +40,15 @@ import { NgMaterialModule } from './modules/ng-material/ng-material.module';
     FormsModule,
     HttpClientModule,
     NgMaterialModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    AuthConfigModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

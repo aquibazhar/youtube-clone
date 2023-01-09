@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Video } from 'src/app/models/video';
 
 @Component({
   selector: 'app-save-video-details',
@@ -20,6 +21,14 @@ export class SaveVideoDetailsComponent implements OnInit {
   thumbnailName: string = '';
   videoId: string = '';
   thumbnailSelected: boolean = false;
+  videoUrl: string = '';
+  thumbnailUrl: string = '';
+
+  title: string = '';
+  description: string = '';
+  videoStatus: string = '';
+
+  videoForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +37,16 @@ export class SaveVideoDetailsComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
+    this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
+      console.log(data);
+      this.videoUrl = data.url;
+    });
+    this.videoForm = this.fb.group({
+      title: [''],
+      description: [''],
+      videoStatus: [''],
+      tagList: [this.tags],
+    });
   }
   ngOnInit(): void {}
 
@@ -51,17 +70,6 @@ export class SaveVideoDetailsComponent implements OnInit {
     }
   }
 
-  videoForm = this.fb.group({
-    title: [''],
-    description: [''],
-    videoStatus: [''],
-    tagList: [this.tags],
-  });
-
-  onSubmit() {
-    console.log(this.videoForm.value);
-  }
-
   onFileSelected(event: Event) {
     // @ts-ignore
     this.thumbnail = event.target.files[0];
@@ -73,7 +81,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService
       .uploadThumbnail(this.thumbnail, this.videoId)
       .subscribe((data) => {
-        console.log(data);
+        this.thumbnailUrl = data;
         this.openSnackBar('Thumbnail uploaded successfully!', 'OK');
       });
   }
@@ -82,6 +90,28 @@ export class SaveVideoDetailsComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 2000,
       panelClass: ['blue-snackbar'],
+    });
+  }
+
+  onSubmit() {
+    console.log(this.videoForm.value);
+    const videoMetaData: Video = new Video(
+      this.videoId,
+      this.videoForm.value.title,
+      this.videoForm.value.description,
+      '',
+      0,
+      0,
+      this.videoForm.value.tagList,
+      this.videoForm.value.videoStatus,
+      0,
+      this.thumbnailUrl,
+      [],
+      this.videoUrl
+    );
+    this.videoService.saveVideoMetaData(videoMetaData).subscribe((data) => {
+      console.log(data);
+      this.openSnackBar('Video MetaData updated successfully', 'OK');
     });
   }
 }

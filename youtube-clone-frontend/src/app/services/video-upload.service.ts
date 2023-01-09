@@ -9,7 +9,11 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Video } from '../models/video';
 
 const VIDEO_SERVICE_URL = 'http://localhost:8080/api/v1/video';
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +33,14 @@ export class VideoUploadService {
     return this.http.post(VIDEO_SERVICE_URL + '/thumbnail', formData, {
       responseType: 'text',
     });
+  }
+
+  getVideoDetails(videoId: string): Observable<Video> {
+    return this.http.get<Video>(VIDEO_SERVICE_URL + '/' + videoId);
+  }
+
+  saveVideoMetaData(video: Video): Observable<Video> {
+    return this.http.put<Video>(VIDEO_SERVICE_URL, video);
   }
 
   private handleError(error: HttpErrorResponse) {

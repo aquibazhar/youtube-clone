@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   titleFlag: boolean = true;
-  constructor() {}
+  isAuthenticated: boolean = false;
+  constructor(private oidcSecurityService: OidcSecurityService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      ({ isAuthenticated }) => {
+        this.isAuthenticated = isAuthenticated;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
+  }
+
+  logout() {
+    this.oidcSecurityService.logoffAndRevokeTokens();
+  }
 }

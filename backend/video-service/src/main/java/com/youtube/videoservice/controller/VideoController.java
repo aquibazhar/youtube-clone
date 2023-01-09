@@ -7,6 +7,7 @@ import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,12 +33,12 @@ public class VideoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Video> getVideoById(@PathVariable String id) throws IOException, ResourceNotFoundException {
+    public ResponseEntity<Video> getVideoById(@PathVariable String id)throws ResourceNotFoundException {
         Optional<Video> videoOptional = service.getVideoById(id);
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(videoOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(videoOptional.get());
     }
 
     @PutMapping({"", "/"})

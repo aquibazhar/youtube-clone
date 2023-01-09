@@ -12,7 +12,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
         responseType: 'code',
         silentRenew: true,
         useRefreshToken: true,
-        // Http Interceptop: It'll intercept all the http requests made to spring boot and automatically add the token to the http request.
+        // Http Interceptor: It'll intercept all the http requests made to spring boot and automatically add the token to the http request.
         secureRoutes: ['http://localhost:8080'],
         customParamsAuthRequest: {
           audience: 'http://localhost:8080',

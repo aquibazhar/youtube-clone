@@ -20,6 +20,9 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private S3Service s3Service;
 
+    @Autowired
+    private UserService userService;
+
 
     @Override
     public Video saveVideo(MultipartFile file) throws IOException {
@@ -46,7 +49,7 @@ public class VideoServiceImpl implements VideoService {
     public Video updateVideo(VideoDto videoDto) {
         Optional<Video> existingVideoOptional = this.getVideoById(videoDto.getId());
 
-        if(existingVideoOptional.isEmpty())
+        if (existingVideoOptional.isEmpty())
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
 
         Video existingVideo = existingVideoOptional.get();
@@ -62,8 +65,8 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public String saveThumbnail(MultipartFile file, String videoId) throws IOException {
-        Optional<Video> existingVideoOptional =  this.getVideoById(videoId);
-        if(existingVideoOptional.isEmpty())
+        Optional<Video> existingVideoOptional = this.getVideoById(videoId);
+        if (existingVideoOptional.isEmpty())
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
 
         Video existingVideo = existingVideoOptional.get();
@@ -71,5 +74,58 @@ public class VideoServiceImpl implements VideoService {
         existingVideo.setThumbnailUrl(thumbnailUrl);
         repository.save(existingVideo);
         return thumbnailUrl;
+    }
+
+    @Override
+    public Video likeVideo(String videoId) {
+        // Three cases can happen when like button is pressed
+        // 1. Like and Dislike both were 0 for the user, and he liked it.
+        // 2. Like was 1 for the user, and he chose to unlike the video.
+        // 3. Dislike was 1 and, user chose to Like the video.
+
+        Optional<Video> videoOptional = repository.findById(videoId);
+        if (videoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        Video video = videoOptional.get();
+
+        if (userService.ifLikedVideo(videoId)) {
+            userService.removeFromLikedVideos(videoId);
+            video.decrementLikes();
+        } else if (userService.ifDislikedVideo(videoId)) {
+            userService.removeFromDislikedVideos(videoId);
+            userService.addToLikedVideos(videoId);
+            video.decrementDislikes();
+            video.incrementLikes();
+        } else {
+            video.incrementLikes();
+            userService.addToLikedVideos(videoId);
+        }
+
+        Video updatedVideo = repository.save(video);
+        return updatedVideo;
+    }
+
+    @Override
+    public Video dislikeVideo(String videoId) {
+        Optional<Video> videoOptional = repository.findById(videoId);
+        if (videoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        Video video = videoOptional.get();
+
+        if (userService.ifDislikedVideo(videoId)) {
+            video.decrementDislikes();
+            userService.removeFromDislikedVideos(videoId);
+        } else if (userService.ifLikedVideo(videoId)) {
+            video.decrementLikes();
+            userService.removeFromLikedVideos(videoId);
+            video.incrementDislikes();
+            userService.addToDislikedVideos(videoId);
+        } else {
+            video.incrementDislikes();
+            userService.addToDislikedVideos(videoId);
+        }
+
+        Video updatedVideo = repository.save(video);
+        return updatedVideo;
     }
 }

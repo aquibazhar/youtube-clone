@@ -28,5 +28,4 @@ public class UserController {
         User user = service.registerUser(jwt.getTokenValue());
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
-
 }

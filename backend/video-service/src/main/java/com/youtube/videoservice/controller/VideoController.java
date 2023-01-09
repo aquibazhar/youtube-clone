@@ -33,7 +33,7 @@ public class VideoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Video> getVideoById(@PathVariable String id)throws ResourceNotFoundException {
+    public ResponseEntity<Video> getVideoById(@PathVariable String id) throws ResourceNotFoundException {
         Optional<Video> videoOptional = service.getVideoById(id);
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
@@ -42,13 +42,13 @@ public class VideoController {
     }
 
     @PutMapping({"", "/"})
-    public ResponseEntity<?> updateVideoMetaData(@RequestBody VideoDto videoDto){
+    public ResponseEntity<?> updateVideoMetaData(@RequestBody VideoDto videoDto) {
 
         Optional<Video> videoOptional = service.getVideoById(videoDto.getId());
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
         }
-        Video updatedVideo =  service.updateVideo(videoDto);
+        Video updatedVideo = service.updateVideo(videoDto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
 
@@ -56,6 +56,26 @@ public class VideoController {
     public ResponseEntity<String> saveThumbnail(@RequestParam("thumbnail") MultipartFile file, @RequestParam("videoId") String videoId) throws IOException {
         String thumbnailUrl = service.saveThumbnail(file, videoId);
         return ResponseEntity.status(HttpStatus.CREATED).body(thumbnailUrl);
+    }
+
+    @PostMapping("/like/{videoId}")
+    public ResponseEntity<Video> likeVideo(@PathVariable String videoId) {
+        Optional<Video> videoOptional = service.getVideoById(videoId);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        Video updatedVideo = service.likeVideo(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
+    }
+
+    @PostMapping("/dislike/{videoId}")
+    public ResponseEntity<Video> dislikeVideo(@PathVariable String videoId) {
+        Optional<Video> videoOptional = service.getVideoById(videoId);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        Video updatedVideo = service.dislikeVideo(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
 
 }

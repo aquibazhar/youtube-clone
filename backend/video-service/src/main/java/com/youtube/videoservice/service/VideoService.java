@@ -17,4 +17,8 @@ public interface VideoService {
     public Video updateVideo(VideoDto videoDto);
 
     public String saveThumbnail(MultipartFile file, String videoId)throws IOException;
+
+    public Video likeVideo(String videoId);
+
+    public Video dislikeVideo(String videoId);
 }

@@ -15,7 +15,7 @@ public class Comment {
     @MongoId
     private String id;
     private String text;
-    private Long authorId;
+    private String authorId;
     private Integer likes;
     private Integer dislikes;
 }

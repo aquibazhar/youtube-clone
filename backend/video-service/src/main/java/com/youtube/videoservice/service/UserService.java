@@ -2,6 +2,8 @@ package com.youtube.videoservice.service;
 
 import com.youtube.videoservice.model.User;
 
+import java.util.Set;
+
 public interface UserService {
     public User registerUser(String tokenValue);
 
@@ -20,4 +22,10 @@ public interface UserService {
     public boolean ifDislikedVideo(String videoId);
 
     public void addToHistory(String videoId);
+
+    public void subscribeUser(String userId);
+
+    public void unsubscribeUser(String userId);
+
+    public Set<String> getUserHistory(String userId);
 }

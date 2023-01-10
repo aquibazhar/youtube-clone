@@ -9,10 +9,9 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -27,5 +26,23 @@ public class UserController {
 
         User user = service.registerUser(jwt.getTokenValue());
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/subscribe/{userId}")
+    public ResponseEntity<String> subscribeUser(@PathVariable String userId){
+        service.subscribeUser(userId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Subscribed successfully.");
+    }
+
+    @PostMapping("/unsubscribe/{userId}")
+    public ResponseEntity<String> unsubscribeUser(@PathVariable String userId){
+        service.unsubscribeUser(userId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Unsubscribed successfully.");
+    }
+
+    @GetMapping("/history/{userId}")
+    public ResponseEntity<Set<String>> getUserHistory(@PathVariable String userId){
+        Set<String> userHistory = service.getUserHistory(userId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userHistory);
     }
 }

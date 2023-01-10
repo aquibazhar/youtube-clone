@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -26,7 +28,7 @@ public class Video {
     private String videoStatus;
     private AtomicInteger views = new AtomicInteger(0);
     private String thumbnailUrl;
-    private ArrayList<Comment> comments;
+    private List<Comment> comments = new CopyOnWriteArrayList<>();
     private String url;
 
     public void incrementLikes() {
@@ -47,5 +49,9 @@ public class Video {
 
     public void incrementViewCount(String id) {
         views.incrementAndGet();
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

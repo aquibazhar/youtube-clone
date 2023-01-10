@@ -1,7 +1,9 @@
 package com.youtube.videoservice.service;
 
+import com.youtube.videoservice.dto.CommentDto;
 import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.Comment;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +41,11 @@ public class VideoServiceImpl implements VideoService {
         return repository.findByTitle(title);
     }
 
+    @Override
+    public List<Video> getAllVideos() {
+        return repository.findAll();
+    }
+
 
     @Override
     public Optional<Video> getVideoById(String id) {
@@ -63,6 +71,8 @@ public class VideoServiceImpl implements VideoService {
         video.incrementViewCount(video.getId());
         repository.save(video);
     }
+
+
 
     @Override
     public Video updateVideo(VideoDto videoDto) {
@@ -147,4 +157,29 @@ public class VideoServiceImpl implements VideoService {
         Video updatedVideo = repository.save(video);
         return updatedVideo;
     }
+
+    @Override
+    public void addComment(CommentDto commentDto, String videoId) {
+        Optional<Video> videoOptional = repository.findById(videoId);
+        if (videoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        Video video = videoOptional.get();
+
+        Comment comment = new Comment();
+        comment.setText(commentDto.getText());
+        comment.setAuthorId(commentDto.getAuthorId());
+
+        video.addComment(comment);
+    }
+
+    @Override
+    public List<Comment> getAllComments(String videoId) {
+        Optional<Video> videoOptional = repository.findById(videoId);
+        if (videoOptional.isEmpty())
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        Video video = videoOptional.get();
+        return video.getComments();
+    }
+
+
 }

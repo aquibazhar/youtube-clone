@@ -1,10 +1,13 @@
 package com.youtube.videoservice.service;
 
+import com.youtube.videoservice.dto.CommentDto;
 import com.youtube.videoservice.dto.VideoDto;
+import com.youtube.videoservice.model.Comment;
 import com.youtube.videoservice.model.Video;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public interface VideoService {
@@ -12,11 +15,13 @@ public interface VideoService {
 
     public Optional<Video> getVideoByTitle(String title);
 
+    public List<Video> getAllVideos();
+
     public Optional<Video> getVideoById(String id);
 
     public Video updateVideo(VideoDto videoDto);
 
-    public String saveThumbnail(MultipartFile file, String videoId)throws IOException;
+    public String saveThumbnail(MultipartFile file, String videoId) throws IOException;
 
     public Video likeVideo(String videoId);
 
@@ -25,4 +30,8 @@ public interface VideoService {
     public Video getVideoDetails(String id);
 
     public void incrementViewCount(Video video);
+
+    public void addComment(CommentDto commentDto, String videoId);
+
+    public List<Comment> getAllComments(String videoId);
 }

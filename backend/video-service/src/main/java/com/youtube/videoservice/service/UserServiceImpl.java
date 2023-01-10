@@ -17,6 +17,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -118,5 +119,45 @@ public class UserServiceImpl implements UserService {
         repository.save(currentUser);
     }
 
+    @Override
+    public void subscribeUser(String userId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.subscribeToUser(userId);
 
+        Optional<User> userOptional = repository.findById(userId);
+        if (userOptional.isEmpty())
+            throw new ResourceNotFoundException("A user with this ID doesn't exist");
+        User user = userOptional.get();
+
+        user.incrementSubscribers(currentUser.getId());
+
+        repository.save(currentUser);
+        repository.save(user);
+    }
+
+    @Override
+    public void unsubscribeUser(String userId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.unsubscribeFromUser(userId);
+
+        Optional<User> userOptional = repository.findById(userId);
+        if (userOptional.isEmpty())
+            throw new ResourceNotFoundException("A user with this ID doesn't exist");
+        User user = userOptional.get();
+
+        user.decrementSubscribers(currentUser.getId());
+
+        repository.save(currentUser);
+        repository.save(user);
+    }
+
+    @Override
+    public Set<String> getUserHistory(String userId) {
+        Optional<User> userOptional = repository.findById(userId);
+        if (userOptional.isEmpty())
+            throw new ResourceNotFoundException("A user with this ID doesn't exist");
+        User user = userOptional.get();
+
+        return user.getVideoHistory();
+    }
 }

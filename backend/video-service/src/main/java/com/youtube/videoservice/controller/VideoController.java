@@ -1,8 +1,10 @@
 package com.youtube.videoservice.controller;
 
+import com.youtube.videoservice.dto.CommentDto;
 import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.exception.ResourceAlreadyExistsException;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.Comment;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,6 +33,14 @@ public class VideoController {
         }
         Video savedVideo = service.saveVideo(file);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedVideo);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Video>> getAllVideos() throws ResourceNotFoundException {
+        List<Video> videoList = service.getAllVideos();
+        if(videoList.isEmpty())
+            throw new ResourceNotFoundException("No videos exist in the database.");
+        return ResponseEntity.status(HttpStatus.OK).body(videoList);
     }
 
     @GetMapping("/{id}")
@@ -75,4 +86,21 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
 
+    @PostMapping("/comment/{videoId}")
+    public ResponseEntity<String> addComment(@RequestBody CommentDto commentDto, @PathVariable String videoId) {
+        Optional<Video> videoOptional = service.getVideoById(videoId);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        service.addComment(commentDto, videoId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Comment added.");
+    }
+
+    @GetMapping("/comment/{videoId}")
+    public ResponseEntity<List<Comment>> getAllComments(@PathVariable String videoId){
+        List<Comment> comments = service.getAllComments(videoId);
+        if(comments.isEmpty())
+            throw new ResourceNotFoundException("There are no comments for this video.");
+        return ResponseEntity.status(HttpStatus.OK).body(comments);
+    }
 }

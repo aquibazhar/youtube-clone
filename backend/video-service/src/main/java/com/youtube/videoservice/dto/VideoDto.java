@@ -4,6 +4,8 @@ package com.youtube.videoservice.dto;
 import lombok.*;
 
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 
 
@@ -19,4 +21,5 @@ public class VideoDto {
     private String url;
     private String videoStatus;
     private String thumbnailUrl;
+    private Date date;
 }

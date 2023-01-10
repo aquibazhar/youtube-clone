@@ -21,6 +21,12 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { AuthInterceptor } from 'angular-auth-oidc-client';
 import { WatchVideoComponent } from './components/watch-video/watch-video.component';
+import { HistoryComponent } from './components/history/history.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { LikedVideosComponent } from './components/liked-videos/liked-videos.component';
+import { ChipsBarComponent } from './components/chips-bar/chips-bar.component';
+import { ViewsPipe } from './pipes/views.pipe';
+import { RelativeTimePipe } from './pipes/relative-time.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,12 @@ import { WatchVideoComponent } from './components/watch-video/watch-video.compon
     UploadVideoComponent,
     VideoPlayerComponent,
     WatchVideoComponent,
+    HistoryComponent,
+    SubscriptionsComponent,
+    LikedVideosComponent,
+    ChipsBarComponent,
+    ViewsPipe,
+    RelativeTimePipe,
   ],
   imports: [
     BrowserModule,

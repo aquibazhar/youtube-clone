@@ -35,7 +35,7 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedVideo);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping({"", "/"})
     public ResponseEntity<List<Video>> getAllVideos() throws ResourceNotFoundException {
         List<Video> videoList = service.getAllVideos();
         if(videoList.isEmpty())

@@ -11,6 +11,7 @@ export class Video {
     public views: number,
     public thumbnailUrl: string,
     public comments: string[],
-    public url: string
+    public url: string,
+    public date: string
   ) {}
 }

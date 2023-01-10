@@ -11,6 +11,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatRippleModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 const MaterialModules = [
   MatIconModule,
@@ -25,6 +28,9 @@ const MaterialModules = [
   MatChipsModule,
   MatGridListModule,
   MatSnackBarModule,
+  MatTooltipModule,
+  MatRippleModule,
+  MatCardModule,
 ];
 
 @NgModule({

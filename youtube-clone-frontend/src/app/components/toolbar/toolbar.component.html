@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" mode="over">
+  <mat-sidenav #drawer class="sidenav" mode="side">
     <mat-toolbar>
       <button
         type="button"
@@ -18,9 +18,36 @@
         <mat-icon mat-list-icon class="">home</mat-icon>
         <span>Home</span>
       </a>
-      <a mat-list-item matTooltip="upload video" routerLink="/upload-video">
-        <mat-icon mat-list-icon class="">video_call</mat-icon>
-        <span>Upload Video</span>
+      <a mat-list-item matTooltip="Login" *ngIf="!isAuthenticated">
+        <mat-icon mat-list-icon class="">login</mat-icon>
+        <span>Sign In</span>
+      </a>
+      <a
+        mat-list-item
+        matTooltip="Subscriptions"
+        routerLink="/subscriptions"
+        *ngIf="isAuthenticated"
+      >
+        <mat-icon mat-list-icon class="">subscriptions</mat-icon>
+        <span>Subscriptions</span>
+      </a>
+      <a
+        mat-list-item
+        matTooltip="Watch History"
+        routerLink="/history"
+        *ngIf="isAuthenticated"
+      >
+        <mat-icon mat-list-icon class="">history</mat-icon>
+        <span>Watch History</span>
+      </a>
+      <a
+        mat-list-item
+        matTooltip="Liked Videos"
+        routerLink="/liked-videos"
+        *ngIf="isAuthenticated"
+      >
+        <mat-icon mat-list-icon class="">thumb_up</mat-icon>
+        <span>Liked Videos</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -42,6 +69,9 @@
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon>home</mat-icon>
       </button>
+      <button mat-icon-button routerLink="/upload-video" matTooltip="Upload">
+        <mat-icon>video_call</mat-icon>
+      </button>
       <button
         *ngIf="!isAuthenticated"
         mat-button
@@ -50,12 +80,7 @@
       >
         <span>Sign In</span>
       </button>
-      <button mat-icon-button routerLink="/upload-video" matTooltip="Upload">
-        <mat-icon>video_call</mat-icon>
-      </button>
-      <button mat-icon-button routerLink="/search" matTooltip="Search AQI">
-        <mat-icon>search</mat-icon>
-      </button>
+
       <div *ngIf="isAuthenticated">
         <button mat-button class="user-button" [matMenuTriggerFor]="menu">
           <span class="username">Hi, </span>

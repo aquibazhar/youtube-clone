@@ -1,1 +1,33 @@
-<p>home works!</p>
+<app-chips-bar></app-chips-bar>
+<div class="container" *ngFor="let video of videos">
+  <mat-card
+    class="video-card"
+    matRipple
+    matRippleColor="rgba(103, 58, 183, 0.1)"
+  >
+    <img
+      mat-card-image
+      src="{{ video.thumbnailUrl }}"
+      class="thumbnail-image"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        class="example-header-image"
+        src="{{ video.thumbnailUrl }}"
+        alt="Photo of a Shiba Inu"
+      />
+
+      <mat-card-title class="title">{{ video.title }}</mat-card-title>
+      <mat-card-subtitle class="subtitle"> Channel Name </mat-card-subtitle>
+      <mat-card-subtitle class="subtitle">
+        <span class="views">{{ video.views | views }} views</span>
+        <span class="bullet-point"> &bull;</span>
+        <span class="views">{{ video.date | relativeTime }}</span>
+        <div class="relative-time"></div>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content> </mat-card-content>
+  </mat-card>
+</div>

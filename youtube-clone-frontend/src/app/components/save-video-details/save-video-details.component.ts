@@ -16,6 +16,7 @@ export class SaveVideoDetailsComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = [];
+  currentDate: string = '';
 
   thumbnail!: File;
   thumbnailName: string = '';
@@ -96,7 +97,8 @@ export class SaveVideoDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.videoForm.value);
+    const date = new Date();
+    this.currentDate = date.toISOString().substring(0, 10);
     const videoMetaData: Video = new Video(
       this.videoId,
       this.videoForm.value.title,
@@ -109,7 +111,8 @@ export class SaveVideoDetailsComponent implements OnInit {
       0,
       this.thumbnailUrl,
       [],
-      this.videoUrl
+      this.videoUrl,
+      this.currentDate
     );
     this.videoService.saveVideoMetaData(videoMetaData).subscribe((data) => {
       console.log(data);

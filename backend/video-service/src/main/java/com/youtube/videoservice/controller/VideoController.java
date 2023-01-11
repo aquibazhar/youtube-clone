@@ -66,7 +66,7 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(thumbnailUrl);
     }
 
-    @PostMapping("/like/{videoId}")
+    @GetMapping("/like/{videoId}")
     public ResponseEntity<Video> likeVideo(@PathVariable String videoId) {
         Optional<Video> videoOptional = service.getVideoById(videoId);
         if (videoOptional.isEmpty()) {
@@ -76,7 +76,7 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
 
-    @PostMapping("/dislike/{videoId}")
+    @GetMapping("/dislike/{videoId}")
     public ResponseEntity<Video> dislikeVideo(@PathVariable String videoId) {
         Optional<Video> videoOptional = service.getVideoById(videoId);
         if (videoOptional.isEmpty()) {

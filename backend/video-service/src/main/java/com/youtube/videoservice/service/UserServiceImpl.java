@@ -49,19 +49,23 @@ public class UserServiceImpl implements UserService {
             // Here we configure that in case response body contains more fields than we expected objectMapper won't fail
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             UserDto userDto = objectMapper.readValue(body, UserDto.class);
-            User user = new User();
-            user.setFirstName(userDto.getGivenName());
-            user.setLastName(userDto.getFamilyName());
-            user.setFullName(userDto.getName());
-            user.setSub(userDto.getSub());
-            user.setEmailAddress(userDto.getEmail());
-            user.setPicture(userDto.getPicture());
-            savedUser = repository.save(user);
+            Optional<User> userOptional = repository.findBySub(userDto.getSub());
+            if (userOptional.isPresent()) {
+                return userOptional.get();
+            } else {
+                User user = new User();
+                user.setFirstName(userDto.getGivenName());
+                user.setLastName(userDto.getFamilyName());
+                user.setFullName(userDto.getName());
+                user.setSub(userDto.getSub());
+                user.setEmailAddress(userDto.getEmail());
+                user.setPicture(userDto.getPicture());
+                return repository.save(user);
+            }
+
         } catch (Exception e) {
             throw new RuntimeException("An exception occurred while registering the user.", e);
         }
-
-        return savedUser;
     }
 
     @Override

@@ -14,6 +14,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const MaterialModules = [
   MatIconModule,
@@ -31,6 +32,7 @@ const MaterialModules = [
   MatTooltipModule,
   MatRippleModule,
   MatCardModule,
+  MatButtonToggleModule,
 ];
 
 @NgModule({

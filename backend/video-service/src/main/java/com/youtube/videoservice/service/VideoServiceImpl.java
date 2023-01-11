@@ -88,6 +88,7 @@ public class VideoServiceImpl implements VideoService {
         existingVideo.setTags(videoDto.getTags());
         existingVideo.setVideoStatus(videoDto.getVideoStatus());
         existingVideo.setDate(videoDto.getDate());
+        existingVideo.setUserId(userService.getCurrentUser().getId());
 
         Video updatedVideo = repository.save(existingVideo);
         return updatedVideo;

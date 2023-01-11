@@ -47,6 +47,14 @@ export class VideoUploadService {
     return this.http.get<Video[]>(VIDEO_SERVICE_URL);
   }
 
+  likeVideo(videoId: string): Observable<Video> {
+    return this.http.get<Video>(VIDEO_SERVICE_URL + '/like/' + videoId);
+  }
+
+  dislikeVideo(videoId: string): Observable<Video> {
+    return this.http.get<Video>(VIDEO_SERVICE_URL + '/dislike/' + videoId);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

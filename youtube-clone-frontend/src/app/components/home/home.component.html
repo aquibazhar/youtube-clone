@@ -1,5 +1,9 @@
 <app-chips-bar></app-chips-bar>
-<div class="container" *ngFor="let video of videos">
+<div
+  class="container"
+  *ngFor="let video of videos"
+  routerLink="/watch-video/{{ video.id }}"
+>
   <mat-card
     class="video-card"
     matRipple
@@ -9,14 +13,14 @@
       mat-card-image
       src="{{ video.thumbnailUrl }}"
       class="thumbnail-image"
-      alt="Photo of a Shiba Inu"
+      alt="thumbnail"
     />
     <mat-card-header>
       <img
         mat-card-avatar
-        class="example-header-image"
+        class="header-image"
         src="{{ video.thumbnailUrl }}"
-        alt="Photo of a Shiba Inu"
+        alt="display-picture"
       />
 
       <mat-card-title class="title">{{ video.title }}</mat-card-title>
@@ -28,6 +32,5 @@
         <div class="relative-time"></div>
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content> </mat-card-content>
   </mat-card>
 </div>

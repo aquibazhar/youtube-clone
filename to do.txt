@@ -1,0 +1,7 @@
+- Add some service so that sidebar can have different settings for different components.
+- Play Video page
+- when saving the video also update userId.
+- enable chips component in home.
+- enable searching in home.
+- design drag and drop page
+- check subscribe with different accounts

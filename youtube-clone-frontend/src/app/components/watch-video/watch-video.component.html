@@ -1,10 +1,73 @@
 <div fxLayout="row">
-  <div fxFlex="65%" class="video-player">
-    <app-video-player
-      *ngIf="videoAvailable"
-      [videoUrl]="videoDetails.url"
-    ></app-video-player>
-    <div class="mat-title">{{ videoDetails.title }}</div>
+  <div fxFlex="65%" class="container">
+    <mat-card class="video-card">
+      <app-video-player
+        class="video-player"
+        [videoUrl]="videoDetails.url"
+        *ngIf="videoAvailable"
+      ></app-video-player>
+      <div class="video-title">{{ videoDetails.title }}</div>
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          class="header-image"
+          src="{{ videoDetails.thumbnailUrl }}"
+          alt="display-picture"
+        />
+
+        <mat-card-title class="channel-title">Channel Name</mat-card-title>
+        <mat-card-subtitle class="subtitle"
+          >{{ 1000 | views }} subscribers
+        </mat-card-subtitle>
+        <div class="actions group">
+          <button
+            mat-flat-button
+            class="subscribe-button"
+            *ngIf="!subscribed"
+            (click)="subscribed = !subscribed"
+            (click)="onSubscribe()"
+          >
+            Subscribe
+          </button>
+          <button
+            mat-flat-button
+            class="subscribed-button"
+            *ngIf="subscribed"
+            (click)="subscribed = !subscribed"
+            (click)="onUnsubscribe()"
+          >
+            Subscribed
+          </button>
+          <span class="actions-container">
+            <button mat-flat-button class="like" (click)="onLike()">
+              <mat-icon *ngIf="likeFlag" matTooltip="I like this"
+                >thumb_up</mat-icon
+              >
+              <mat-icon *ngIf="!likeFlag" matTooltip="Unlike"
+                >thumb_up_off_alt</mat-icon
+              >
+              <span class="like-count">{{ videoDetails.likes }}</span>
+            </button>
+
+            <button mat-flat-button class="dislike" (click)="onDislike()">
+              <mat-icon *ngIf="dislikeFlag" matTooltip="I dislike this"
+                >thumb_down</mat-icon
+              >
+              <mat-icon *ngIf="!dislikeFlag" matTooltip="I dislike this"
+                >thumb_down_off_alt</mat-icon
+              >
+              <span class="like-count">{{ videoDetails.dislikes }}</span>
+            </button>
+          </span>
+        </div>
+        <!-- <mat-card-subtitle class="subtitle">
+          <span class="views">{{ videoDetails.views | views }} views</span>
+          <span class="bullet-point"> &bull;</span>
+          <span class="views">{{ videoDetails.date | relativeTime }}</span>
+          <div class="relative-time"></div>
+        </mat-card-subtitle> -->
+      </mat-card-header>
+    </mat-card>
   </div>
   <div fxFlex="5%">Video</div>
   <div fxFlex="30%">Video</div>

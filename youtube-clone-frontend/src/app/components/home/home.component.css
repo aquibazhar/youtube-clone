@@ -18,7 +18,7 @@ body {
   font-size: 16px;
   text-align: left;
   line-height: 1.5em;
-  height: auto;
+  max-height: 3em;
   overflow: hidden;
 }
 
@@ -46,11 +46,6 @@ body {
   margin-bottom: 20px;
   float: left;
   justify-content: space-evenly;
-}
-
-.display-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
 }
 
 mat-card-header {

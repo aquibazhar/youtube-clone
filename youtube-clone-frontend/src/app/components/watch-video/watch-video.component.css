@@ -1,4 +1,121 @@
-.video-player {
+.container {
   margin: 2%;
   margin-left: 6%;
+  height: 493px;
+
+  box-sizing: border-box;
+}
+
+.video-card {
+  margin: 0px;
+  padding: 0px;
+  box-shadow: none;
+  border: none;
+}
+
+.video-player {
+  height: 493px;
+}
+
+.video-title {
+  margin: 20px 0px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.mat-card-header .mat-card-title {
+  margin-bottom: 8px;
+}
+
+.channel-title {
+  font-size: 1.1rem;
+  margin: 0px;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: rgb(96, 96, 96);
+  font-weight: 300;
+  margin: 0px;
+}
+
+.actions {
+  font-size: 50px;
+}
+
+.subscribe-button {
+  background-color: rgb(39, 39, 39);
+  color: white;
+  border-radius: 25px;
+  width: 100px;
+}
+
+.subscribe-button:hover {
+  background-color: rgb(51, 51, 51);
+  color: white;
+  border-radius: 25px;
+}
+
+.subscribed-button {
+  background-color: rgb(242, 242, 242);
+  color: black;
+  border-radius: 25px;
+  width: 100px;
+}
+
+.subscribed-button:hover {
+  background-color: rgb(215, 215, 215);
+  color: black;
+  border-radius: 25px;
+}
+
+.actions-container {
+  margin-left: 445px;
+}
+
+.like {
+  padding: 0px;
+  fill: none;
+  border-radius: 0px;
+  border-radius: 25px 0px 0px 25px;
+  background-color: rgb(242, 242, 242);
+}
+
+.like:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+.dislike {
+  padding: 0px;
+  border-radius: 0px;
+  border-radius: 0px 25px 25px 0px;
+  border-left: 1px solid lightgrey;
+
+  background-color: rgb(242, 242, 242);
+}
+
+.dislike:hover {
+  background-color: rgb(215, 215, 215);
+}
+
+.like-count {
+  margin-left: 5px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+}
+
+/*CLEARING FLOAT*/
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+
+.group:after {
+  clear: both;
+}
+
+.group {
+  zoom: 1;
 }

@@ -14,18 +14,10 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private oidcSecurityService: OidcSecurityService
-  ) {
-    if (this.oidcSecurityService.userData$) {
-      // Make post request
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
-      if (isAuthenticated) {
-        this.userService.registerUser();
-        this.router.navigateByUrl('/home');
-      }
-    });
+    this.userService.registerUser();
+    this.router.navigateByUrl('/home');
   }
 }

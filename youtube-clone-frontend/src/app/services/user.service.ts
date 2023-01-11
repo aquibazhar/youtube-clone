@@ -18,13 +18,11 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  private userDetails!: User;
-
   constructor(private http: HttpClient) {}
 
   registerUser() {
-    this.http.post<User>(USER_SERVICE_URL, null).subscribe((data) => {
-      this.userDetails = data;
+    return this.http.post<User>(USER_SERVICE_URL, null).subscribe((data) => {
+      localStorage.setItem('user', JSON.stringify(data));
     });
   }
 
@@ -38,10 +36,6 @@ export class UserService {
     return this.http.post(USER_SERVICE_URL + '/unsubscribe/' + userId, null, {
       responseType: 'text',
     });
-  }
-
-  getUser() {
-    return this.userDetails;
   }
 
   private handleError(error: HttpErrorResponse) {

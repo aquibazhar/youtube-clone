@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
     this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
       /*...*/
       console.log(isAuthenticated);
+      if (isAuthenticated) {
+        this.router.navigateByUrl('/register');
+      }
     });
   }
   title = 'youtube-clone-frontend';

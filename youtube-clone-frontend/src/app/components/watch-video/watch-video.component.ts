@@ -28,7 +28,9 @@ export class WatchVideoComponent implements OnInit {
     private videoService: VideoUploadService,
     private userService: UserService
   ) {
-    this.user = this.userService.getUser();
+    const userJson = localStorage.getItem('user');
+    this.user = userJson !== null ? JSON.parse(userJson) : {};
+    console.log(this.user);
     this.likeFlag = false;
     this.dislikeFlag = false;
     this.videoId = this.activatedRoute.snapshot.params['videoId'];

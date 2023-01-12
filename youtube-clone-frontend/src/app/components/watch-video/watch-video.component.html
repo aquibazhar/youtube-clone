@@ -11,7 +11,7 @@
         <img
           mat-card-avatar
           class="header-image"
-          src="{{ videoDetails.thumbnailUrl }}"
+          src="{{ user.picture }}"
           alt="display-picture"
         />
 
@@ -19,7 +19,7 @@
           {{ user.fullName }}
         </mat-card-title>
         <mat-card-subtitle class="subtitle"
-          >{{ 1000 | views }} subscribers
+          >{{ user.subscribers.length | views }} subscribers
         </mat-card-subtitle>
         <div class="actions group">
           <button
@@ -70,6 +70,36 @@
         </mat-card-subtitle> -->
       </mat-card-header>
     </mat-card>
+    <app-video-description
+      [viewCount]="videoDetails.views"
+      [date]="videoDetails.date"
+      [tags]="videoDetails.tags"
+      [description]="videoDetails.description"
+    ></app-video-description>
+    <div class="temp">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aliquam! Ea,
+      ab maxime blanditiis reiciendis omnis recusandae tenetur id corporis
+      similique incidunt illum quos corrupti officia quibusdam aut eligendi
+      architecto laborum. Eveniet possimus atque laudantium corporis beatae
+      exercitationem repellat repellendus amet aut? Quod earum perferendis
+      aperiam. Incidunt eos, ut minima ratione impedit quidem similique magni
+      quia necessitatibus quae minus nihil blanditiis obcaecati odio dolor
+      accusamus quod. Omnis laudantium ducimus aut reprehenderit eum? Architecto
+      voluptatum repudiandae dolor obcaecati sunt? Iure illo quae quod
+      perspiciatis a delectus cupiditate, eveniet nisi blanditiis? Dolore
+      repudiandae vel adipisci ad labore ipsam, eius nihil. Voluptatum rerum
+      labore dignissimos architecto commodi repellendus repudiandae culpa autem
+      sed sit magni quod, aliquid iure eligendi vel quis nam consequatur
+      assumenda at aperiam tempora nulla provident adipisci! Accusantium
+      eligendi cum, et necessitatibus explicabo facilis quisquam perferendis
+      deserunt! In assumenda laboriosam corrupti odit ad rem fuga tempore
+      consequatur rerum, esse, inventore ex amet dignissimos adipisci alias,
+      deserunt necessitatibus aliquam possimus. In esse, illo maiores numquam,
+      ipsam tenetur sed commodi molestias error maxime assumenda. Minima dolor
+      qui, asperiores porro voluptatem consequuntur illo. Dicta sequi quasi
+      quibusdam ipsum excepturi laboriosam, blanditiis at iste voluptas modi, a
+      magni sapiente quis sed quas eius odio exercitationem?
+    </div>
   </div>
   <div fxFlex="5%">Video</div>
   <div fxFlex="30%">Video</div>

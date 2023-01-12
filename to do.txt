@@ -5,3 +5,4 @@
 - enable searching in home.
 - design drag and drop page
 - check subscribe with different accounts
+- fix subscribers in html

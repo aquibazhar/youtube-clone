@@ -8,9 +8,8 @@ describe('SaveVideoDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaveVideoDetailsComponent ]
-    })
-    .compileComponents();
+      declarations: [SaveVideoDetailsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SaveVideoDetailsComponent);
     component = fixture.componentInstance;

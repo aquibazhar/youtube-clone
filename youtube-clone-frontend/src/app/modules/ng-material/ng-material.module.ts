@@ -15,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MaterialModules = [
   MatIconModule,
@@ -33,6 +34,7 @@ const MaterialModules = [
   MatRippleModule,
   MatCardModule,
   MatButtonToggleModule,
+  MatExpansionModule,
 ];
 
 @NgModule({

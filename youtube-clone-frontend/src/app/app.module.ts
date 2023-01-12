@@ -28,6 +28,7 @@ import { ChipsBarComponent } from './components/chips-bar/chips-bar.component';
 import { ViewsPipe } from './pipes/views.pipe';
 import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { RegisterComponent } from './components/register/register.component';
+import { VideoDescriptionComponent } from './components/video-description/video-description.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { RegisterComponent } from './components/register/register.component';
     ViewsPipe,
     RelativeTimePipe,
     RegisterComponent,
+    VideoDescriptionComponent,
   ],
   imports: [
     BrowserModule,

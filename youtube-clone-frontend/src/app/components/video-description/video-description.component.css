@@ -1,0 +1,60 @@
+.container {
+  box-sizing: border-box;
+  margin: 20px 0px;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(242, 242, 242);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 15px;
+}
+
+.hide-content {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.show-content {
+  height: auto;
+}
+
+.header {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: rgb(39, 39, 39);
+}
+
+.header-child {
+  padding-right: 8px;
+}
+
+.tags {
+  color: rgb(103, 103, 103);
+}
+
+.description {
+  font-weight: 400;
+  display: inline;
+}
+
+.show-more {
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  background: none;
+}
+
+.show-less {
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  background: none;
+}
+
+.description-and-header {
+  padding-bottom: 5px;
+}

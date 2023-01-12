@@ -1,0 +1,42 @@
+<div class="container">
+  <div
+    [ngClass]="expanded ? 'show-content' : 'hide-content'"
+    (click)="expanded = true"
+    class="description-and-header"
+  >
+    <div class="header">
+      <span class="views header-child" *ngIf="!expanded"
+        >{{ viewCount | views }} views</span
+      >
+      <span class="views header-child" *ngIf="expanded"
+        >{{ viewCount }} views</span
+      >
+      <span class="relativeTime header-child" *ngIf="!expanded">{{
+        date | relativeTime
+      }}</span>
+      <span class="relativeTime header-child" *ngIf="expanded">{{
+        date | date : "MMM d, y"
+      }}</span>
+      <span class="tags header-child">
+        <span *ngFor="let tag of tags">#{{ tag }} </span>
+      </span>
+    </div>
+    <div class="description">
+      {{ description }}
+    </div>
+  </div>
+  <button
+    class="toggle-btns show-less"
+    *ngIf="expanded"
+    (click)="expanded = !expanded"
+  >
+    Show less
+  </button>
+  <button
+    class="toggle-btns show-more"
+    *ngIf="!expanded"
+    (click)="expanded = !expanded"
+  >
+    Show more
+  </button>
+</div>

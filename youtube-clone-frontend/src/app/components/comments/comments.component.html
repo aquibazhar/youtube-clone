@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="comment-header">
+    <span class="comment-count">{{ 50000 | number : "2." }} Comments</span>
+  </div>
+  <div class="add-comment">
+    <div class="avatar header-element">
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          class="header-image"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+          alt="display-picture"
+        />
+      </mat-card-header>
+    </div>
+
+    <div class="comment header-element">
+      <form (ngSubmit)="onComment()" [formGroup]="commentForm">
+        <mat-form-field appearance="fill" class="comment-field">
+          <mat-label>Add a comment...</mat-label>
+          <input
+            matInput
+            class="comment-input"
+            (focus)="inputIsFocussed = true"
+            formControlName="comment"
+          />
+        </mat-form-field>
+        <div class="buttons">
+          <button
+            *ngIf="inputIsFocussed"
+            mat-flat-button
+            class="cancel-btn"
+            (click)="inputIsFocussed = false"
+            type="reset"
+            (click)="onCancel()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            *ngIf="inputIsFocussed"
+            mat-flat-button
+            class="comment-btn"
+            [disabled]="!commentForm.get('comment')?.value"
+          >
+            Comment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="display-comments">
+    <div class="author-image">
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          class="comennt-image"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+          alt="display-picture"
+        />
+      </mat-card-header>
+    </div>
+    <div class="other-details">
+      <div class="author-details">
+        <span>Author name </span>
+        <span>2 years ago</span>
+      </div>
+      <div class="comment-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
+        deleniti. Sunt aperiam quae nobis, maiores obcaecati saepe tot commodi.
+        Temporibus.
+      </div>
+      <div class="actions">Some Action butttons</div>
+    </div>
+  </div>
+</div>

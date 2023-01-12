@@ -21,5 +21,5 @@ public class VideoDto {
     private String url;
     private String videoStatus;
     private String thumbnailUrl;
-    private Date date;
+    private Date publishedAt;
 }

@@ -30,8 +30,4 @@ public interface VideoService {
     public Video getVideoDetails(String id);
 
     public void incrementViewCount(Video video);
-
-    public void addComment(CommentDto commentDto, String videoId);
-
-    public List<Comment> getAllComments(String videoId);
 }

@@ -9,7 +9,7 @@
         >{{ viewCount | views }} views</span
       >
       <span class="views header-child" *ngIf="expanded"
-        >{{ viewCount }} views</span
+        >{{ viewCount | number : "2." }} views</span
       >
       <span class="relativeTime header-child" *ngIf="!expanded">{{
         date | relativeTime

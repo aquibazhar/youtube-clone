@@ -12,6 +12,6 @@ export class Video {
     public thumbnailUrl: string,
     public comments: string[],
     public url: string,
-    public date: string
+    public publishedAt: string
   ) {}
 }

@@ -29,6 +29,7 @@ import { ViewsPipe } from './pipes/views.pipe';
 import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { VideoDescriptionComponent } from './components/video-description/video-description.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { VideoDescriptionComponent } from './components/video-description/video-
     RelativeTimePipe,
     RegisterComponent,
     VideoDescriptionComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

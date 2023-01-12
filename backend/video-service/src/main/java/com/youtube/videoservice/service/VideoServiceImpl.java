@@ -87,7 +87,7 @@ public class VideoServiceImpl implements VideoService {
         existingVideo.setDescription(videoDto.getDescription());
         existingVideo.setTags(videoDto.getTags());
         existingVideo.setVideoStatus(videoDto.getVideoStatus());
-        existingVideo.setDate(videoDto.getDate());
+        existingVideo.setPublishedAt(videoDto.getPublishedAt());
         existingVideo.setUserId(userService.getCurrentUser().getId());
 
         Video updatedVideo = repository.save(existingVideo);
@@ -158,29 +158,6 @@ public class VideoServiceImpl implements VideoService {
 
         Video updatedVideo = repository.save(video);
         return updatedVideo;
-    }
-
-    @Override
-    public void addComment(CommentDto commentDto, String videoId) {
-        Optional<Video> videoOptional = repository.findById(videoId);
-        if (videoOptional.isEmpty())
-            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
-        Video video = videoOptional.get();
-
-        Comment comment = new Comment();
-        comment.setText(commentDto.getText());
-        comment.setAuthorId(commentDto.getAuthorId());
-
-        video.addComment(comment);
-    }
-
-    @Override
-    public List<Comment> getAllComments(String videoId) {
-        Optional<Video> videoOptional = repository.findById(videoId);
-        if (videoOptional.isEmpty())
-            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
-        Video video = videoOptional.get();
-        return video.getComments();
     }
 
 

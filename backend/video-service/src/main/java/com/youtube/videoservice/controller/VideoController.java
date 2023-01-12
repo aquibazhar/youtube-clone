@@ -85,22 +85,4 @@ public class VideoController {
         Video updatedVideo = service.dislikeVideo(videoId);
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
-
-    @PostMapping("/comment/{videoId}")
-    public ResponseEntity<String> addComment(@RequestBody CommentDto commentDto, @PathVariable String videoId) {
-        Optional<Video> videoOptional = service.getVideoById(videoId);
-        if (videoOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
-        }
-        service.addComment(commentDto, videoId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Comment added.");
-    }
-
-    @GetMapping("/comment/{videoId}")
-    public ResponseEntity<List<Comment>> getAllComments(@PathVariable String videoId){
-        List<Comment> comments = service.getAllComments(videoId);
-        if(comments.isEmpty())
-            throw new ResourceNotFoundException("There are no comments for this video.");
-        return ResponseEntity.status(HttpStatus.OK).body(comments);
-    }
 }

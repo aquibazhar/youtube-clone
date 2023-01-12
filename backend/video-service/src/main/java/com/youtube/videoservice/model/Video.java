@@ -37,7 +37,7 @@ public class Video {
     private List<Comment> comments = new CopyOnWriteArrayList<>();
     private String url;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private Date publishedAt;
 
     public void incrementLikes() {
         likes.incrementAndGet();

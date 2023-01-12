@@ -11,7 +11,7 @@
         <img
           mat-card-avatar
           class="header-image"
-          src="{{ user.picture }}"
+          src="{{ videoDetails.thumbnailUrl }}"
           alt="display-picture"
         />
 
@@ -72,10 +72,11 @@
     </mat-card>
     <app-video-description
       [viewCount]="videoDetails.views"
-      [date]="videoDetails.date"
+      [date]="videoDetails.publishedAt"
       [tags]="videoDetails.tags"
       [description]="videoDetails.description"
     ></app-video-description>
+    <app-comments></app-comments>
     <div class="temp">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aliquam! Ea,
       ab maxime blanditiis reiciendis omnis recusandae tenetur id corporis

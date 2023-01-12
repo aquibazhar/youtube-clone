@@ -1,0 +1,102 @@
+.container {
+  box-sizing: border-box;
+  margin: 20px 0px;
+  box-shadow: none;
+  border: none;
+  padding: 15px 0px;
+  font-size: 15px;
+}
+
+.comment-count {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.comment-header {
+  margin-bottom: 20px;
+}
+
+.add-comment {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.display-comment {
+  margin-bottom: 10px;
+}
+
+.mat-form-field {
+  display: block;
+  width: auto;
+  padding: 0px;
+}
+
+.avatar {
+  padding: 0;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.comment {
+  margin: 0px 10px;
+  padding: 0px;
+  flex: 1;
+}
+
+.header-element {
+  float: left;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0em !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: transparent !important;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-btn {
+  background-color: #065fd4;
+  color: white;
+  border-radius: 25px;
+  width: auto;
+}
+
+.comment-btn :hover {
+  background-color: rgb(6, 95, 212);
+  color: white;
+  border-radius: 25px;
+}
+
+.cancel-btn {
+  border-radius: 25px;
+  width: auto;
+  margin-right: 5px;
+}
+
+.cancel-btn :hover {
+  background-color: #e5e5e5;
+}
+
+.mat-card-header {
+  width: 40px;
+}
+
+.display-comments {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.author-image {
+  flex: 0 0 auto;
+}
+
+.actions {
+  flex: 1;
+}

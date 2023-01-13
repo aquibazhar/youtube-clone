@@ -30,6 +30,7 @@ import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { VideoDescriptionComponent } from './components/video-description/video-description.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CommentsComponent } from './components/comments/comments.component';
     RegisterComponent,
     VideoDescriptionComponent,
     CommentsComponent,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,

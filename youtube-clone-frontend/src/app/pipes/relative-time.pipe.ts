@@ -5,6 +5,8 @@ import * as moment from 'moment';
 })
 export class RelativeTimePipe implements PipeTransform {
   transform(value: string): string {
-    return moment(value).fromNow();
+    // because I'm using toISOString for date its storing date in UTC format therefore I can't use moment(value) because it gets time in IST
+    // and compares with stored UTC time. Therefore moment.utc(value)
+    return moment.utc(value).local().fromNow();
   }
 }

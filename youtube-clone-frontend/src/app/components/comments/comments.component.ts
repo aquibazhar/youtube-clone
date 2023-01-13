@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
+import { UserService } from 'src/app/services/user.service';
+import { CommentAuthor } from 'src/app/models/comment-author';
 
 @Component({
   selector: 'app-comments',
@@ -11,20 +13,22 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class CommentsComponent implements OnInit {
   @Input() videoId: string = '';
-  @Input() dpUrl: string = '';
+  @Input() currentUser: User = {} as User;
   comments: Comment[] = [];
   inputIsFocussed: boolean = false;
   commentForm: FormGroup;
   currentDate: string = '';
-  user: User;
   commentAuthorId: string = '';
+  combinedCommentAuthor: CommentAuthor[] = [];
 
-  constructor(private fb: FormBuilder, private commentService: CommentService) {
+  constructor(
+    private fb: FormBuilder,
+    private commentService: CommentService,
+    private userService: UserService
+  ) {
     this.commentForm = this.fb.group({
       comment: [''],
     });
-    const userJson = localStorage.getItem('user');
-    this.user = userJson !== null ? JSON.parse(userJson) : {};
   }
 
   ngOnInit(): void {
@@ -34,14 +38,15 @@ export class CommentsComponent implements OnInit {
   onComment() {
     console.log(this.videoId);
     const date = new Date();
-    this.currentDate = date.toISOString().substring(0, 10);
+    this.currentDate = date.toISOString();
     const comment = new Comment(
       this.commentForm.value.comment,
-      this.user.id,
+      this.currentUser.id,
       0,
       0,
       this.currentDate
     );
+    console.log(comment);
     this.commentService.addComment(comment, this.videoId).subscribe((data) => {
       this.getComments();
       this.onCancel();
@@ -56,6 +61,26 @@ export class CommentsComponent implements OnInit {
   getComments() {
     this.commentService.getAllComments(this.videoId).subscribe((data) => {
       this.comments = data;
+      this.getAllCommentAuthors();
+      console.log(this.combinedCommentAuthor);
+    });
+  }
+
+  getAllCommentAuthors() {
+    this.combinedCommentAuthor = [];
+    this.comments.forEach((comment) => {
+      this.userService.getUserById(comment.authorId).subscribe((data) => {
+        this.combinedCommentAuthor.push(new CommentAuthor(comment, data));
+        this.sortCombinedArray();
+      });
+    });
+  }
+
+  sortCombinedArray() {
+    this.combinedCommentAuthor.sort((a, b) => {
+      let date1 = Date.parse(a.comment.publishedAt);
+      let date2 = Date.parse(b.comment.publishedAt);
+      return date2 - date1;
     });
   }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -21,6 +22,5 @@ public class Comment {
     private String authorId;
     private Integer likes;
     private Integer dislikes;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date publishedAt;
+    private LocalDateTime publishedAt;
 }

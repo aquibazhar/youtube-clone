@@ -22,7 +22,7 @@ export class UserService {
 
   registerUser() {
     return this.http.post<User>(USER_SERVICE_URL, null).subscribe((data) => {
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('userId', data.id);
     });
   }
 

@@ -22,19 +22,22 @@ export class WatchVideoComponent implements OnInit {
 
   videoDetails = {} as Video;
 
-  currentUser: User;
+  currentUser: User = {} as User;
 
   videoAuthor: User = {} as User;
+
+  currentUserId: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoUploadService,
     private userService: UserService
   ) {
-    const userJson = localStorage.getItem('user');
-    this.currentUser = userJson !== null ? JSON.parse(userJson) : {};
-
-    this.getUserById();
+    const userId = localStorage.getItem('userId');
+    this.currentUserId = userId !== null ? userId : '';
+    this.userService.getUserById(this.currentUserId).subscribe((data) => {
+      this.currentUser = data;
+    });
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
     this.getVideoById();
   }

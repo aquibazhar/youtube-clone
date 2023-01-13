@@ -9,7 +9,7 @@
           <img
             mat-card-avatar
             class="header-image"
-            src="{{ dpUrl }}"
+            src="{{ currentUser.picture }}"
             alt="display-picture"
             referrerpolicy="no-referrer"
           />
@@ -53,14 +53,14 @@
     </div>
   </div>
 
-  <div class="comment-card" *ngFor="let comment of comments.reverse()">
+  <div class="comment-card" *ngFor="let commentAuthor of combinedCommentAuthor">
     <div class="display-comments">
       <div class="author-image">
         <mat-card-header>
           <img
             mat-card-avatar
             class="comennt-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+            src="{{ commentAuthor.author.picture }}"
             alt="display-picture"
             referrerpolicy="no-referrer"
           />
@@ -68,12 +68,12 @@
       </div>
       <div class="other-details">
         <div class="author-details">
-          <span class="author-name">Author name</span>
+          <span class="author-name">{{ commentAuthor.author.fullName }}</span>
           <span class="published-at">
-            {{ comment.publishedAt | relativeTime }}
+            {{ commentAuthor.comment.publishedAt | relativeTime }}
           </span>
         </div>
-        <div class="comment-content">{{ comment.text }}</div>
+        <div class="comment-content">{{ commentAuthor.comment.text }}</div>
         <div class="actions">
           <button mat-mini-fab class="action-buttons like-btn">
             <mat-icon matTooltip="like">thumb_up_off_alt</mat-icon>

@@ -13,15 +13,18 @@ import { VideoUploadService } from 'src/app/services/video-upload.service';
 export class WatchVideoComponent implements OnInit {
   videoId: string = '';
   subscribed: boolean = false;
+  videoSubscribers: number = 0;
 
-  likeFlag: boolean;
-  dislikeFlag: boolean;
+  likeFlag: boolean = false;
+  dislikeFlag: boolean = false;
 
   videoAvailable: boolean = false;
 
   videoDetails = {} as Video;
 
-  user: User;
+  currentUser: User;
+
+  videoAuthor: User = {} as User;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,56 +32,81 @@ export class WatchVideoComponent implements OnInit {
     private userService: UserService
   ) {
     const userJson = localStorage.getItem('user');
-    this.user = userJson !== null ? JSON.parse(userJson) : {};
-    console.log(this.user);
-    this.likeFlag = false;
-    this.dislikeFlag = false;
+    this.currentUser = userJson !== null ? JSON.parse(userJson) : {};
+
+    this.getUserById();
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
-    this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
-      this.videoDetails = data;
-      this.videoAvailable = true;
-    });
+    this.getVideoById();
   }
 
   ngOnInit(): void {}
 
   onLike() {
-    if (this.likeFlag && !this.dislikeFlag) {
-      this.likeFlag = false;
-    } else if (!this.likeFlag && this.dislikeFlag) {
-      this.likeFlag = true;
-      this.dislikeFlag = false;
-    } else {
-      this.likeFlag = !this.likeFlag;
-    }
     this.videoService.likeVideo(this.videoId).subscribe((data) => {
-      this.videoDetails = data;
+      this.getVideoById();
+      this.getUserById();
     });
   }
 
   onDislike() {
-    if (!this.likeFlag && this.dislikeFlag) {
-      this.dislikeFlag = false;
-    } else if (this.likeFlag && !this.dislikeFlag) {
-      this.likeFlag = false;
-      this.dislikeFlag = true;
-    } else {
-      this.dislikeFlag = !this.dislikeFlag;
-    }
     this.videoService.dislikeVideo(this.videoId).subscribe((data) => {
-      this.videoDetails = data;
+      this.getVideoById();
+      this.getUserById();
     });
   }
 
   onSubscribe() {
     this.userService
       .subscribeToUser(this.videoDetails.userId)
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        this.getVideoAuthorDetails();
+      });
   }
 
   onUnsubscribe() {
     this.userService
       .unsubscribeFromuser(this.videoDetails.userId)
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        this.getVideoAuthorDetails();
+      });
+  }
+
+  getVideoById() {
+    this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
+      this.videoDetails = data;
+      this.videoAvailable = true;
+      this.getVideoAuthorDetails();
+    });
+  }
+
+  getVideoAuthorDetails() {
+    this.userService.getUserById(this.videoDetails.userId).subscribe((data) => {
+      this.videoAuthor = data;
+      this.videoSubscribers = this.videoAuthor.subscribers.length;
+      this.checkIfUserIsSubscribed();
+    });
+  }
+
+  getUserById() {
+    this.userService.getUserById(this.currentUser.id).subscribe((data) => {
+      this.currentUser = data;
+      this.checkIfCurrentUserLiked();
+      this.checkIfCurrentUserDisliked();
+    });
+  }
+
+  checkIfCurrentUserLiked() {
+    this.likeFlag = this.currentUser.likedVideos.includes(this.videoId);
+  }
+
+  checkIfCurrentUserDisliked() {
+    this.dislikeFlag = this.dislikeFlag =
+      this.currentUser.dislikedVideos.includes(this.videoId);
+  }
+
+  checkIfUserIsSubscribed() {
+    this.subscribed = this.videoAuthor.subscribers.includes(
+      this.currentUser.id
+    );
   }
 }

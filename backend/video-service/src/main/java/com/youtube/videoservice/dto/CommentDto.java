@@ -14,5 +14,7 @@ import java.util.Date;
 public class CommentDto {
     private String text;
     private String authorId;
+    private Integer likes;
+    private Integer dislikes;
     private Date publishedAt;
 }

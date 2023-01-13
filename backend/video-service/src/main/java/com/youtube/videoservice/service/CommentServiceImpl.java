@@ -26,8 +26,12 @@ public class CommentServiceImpl implements CommentService{
         Comment comment = new Comment();
         comment.setText(commentDto.getText());
         comment.setAuthorId(commentDto.getAuthorId());
+        comment.setLikes(commentDto.getLikes());
+        comment.setDislikes(commentDto.getDislikes());
+        comment.setPublishedAt(commentDto.getPublishedAt());
 
         video.addComment(comment);
+        videoRepository.save(video);
     }
 
     @Override

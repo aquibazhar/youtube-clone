@@ -1,5 +1,6 @@
 package com.youtube.videoservice.controller;
 
+import com.youtube.videoservice.exception.ResourceNotFoundException;
 import com.youtube.videoservice.model.User;
 import com.youtube.videoservice.repository.UserRepository;
 import com.youtube.videoservice.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -44,5 +46,13 @@ public class UserController {
     public ResponseEntity<Set<String>> getUserHistory(@PathVariable String userId){
         Set<String> userHistory = service.getUserHistory(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(userHistory);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable String userId){
+        Optional<User> userOptional = service.getUserById(userId);
+        if(userOptional.isEmpty())
+            throw new ResourceNotFoundException("User with this ID doesn't exist.");
+        return ResponseEntity.status(HttpStatus.OK).body(userOptional.get());
     }
 }

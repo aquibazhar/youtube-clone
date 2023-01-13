@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 const USER_SERVICE_URL = 'http://localhost:8080/api/v1/user';
@@ -36,6 +36,10 @@ export class UserService {
     return this.http.post(USER_SERVICE_URL + '/unsubscribe/' + userId, null, {
       responseType: 'text',
     });
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(USER_SERVICE_URL + '/' + userId);
   }
 
   private handleError(error: HttpErrorResponse) {

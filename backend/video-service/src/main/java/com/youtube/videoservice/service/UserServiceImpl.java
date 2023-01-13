@@ -164,4 +164,9 @@ public class UserServiceImpl implements UserService {
 
         return user.getVideoHistory();
     }
+
+    @Override
+    public Optional<User> getUserById(String userId) {
+        return repository.findById(userId);
+    }
 }

@@ -8,3 +8,4 @@
 - fix subscribers in html
 - some user specific apis to get user info for the video.
 - Auth guard
+- hover on description and also on comment cancel button

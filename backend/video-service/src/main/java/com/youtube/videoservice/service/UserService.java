@@ -2,6 +2,7 @@ package com.youtube.videoservice.service;
 
 import com.youtube.videoservice.model.User;
 
+import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
@@ -28,4 +29,6 @@ public interface UserService {
     public void unsubscribeUser(String userId);
 
     public Set<String> getUserHistory(String userId);
+
+    public Optional<User> getUserById(String userId);
 }

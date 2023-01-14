@@ -61,12 +61,6 @@
             </button>
           </span>
         </div>
-        <!-- <mat-card-subtitle class="subtitle">
-          <span class="views">{{ videoDetails.views | views }} views</span>
-          <span class="bullet-point"> &bull;</span>
-          <span class="views">{{ videoDetails.date | relativeTime }}</span>
-          <div class="relative-time"></div>
-        </mat-card-subtitle> -->
       </mat-card-header>
     </mat-card>
     <app-video-description
@@ -80,6 +74,8 @@
       [currentUser]="currentUser"
     ></app-comments>
   </div>
-  <div fxFlex="5%">Video</div>
-  <div fxFlex="30%">Video</div>
+  <div fxFlex="30%">
+    <app-suggestions></app-suggestions>
+  </div>
+  <div fxFlex="5%"></div>
 </div>

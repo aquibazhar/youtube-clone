@@ -1,12 +1,10 @@
 - Add some service so that sidebar can have different settings for different components.
-- Play Video page
-- when saving the video also update userId.
 - enable chips component in home.
 - enable searching in home.
 - design drag and drop page
-- check subscribe with different accounts
-- fix subscribers in html
-- some user specific apis to get user info for the video.
 - Auth guard
 - hover on description and also on comment cancel button
 - change Date to LocalDateTime in Video too.
+- add sorting in comments.
+- add watch-time on video cards
+- add scnackbars to every place needed.

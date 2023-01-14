@@ -64,7 +64,9 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span *ngIf="titleFlag" class="app-heading">YouTube</span>
+      <span *ngIf="titleFlag" class="app-heading" routerLink="/home"
+        >YouTube</span
+      >
       <span class="menu-spacer"></span>
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon>home</mat-icon>

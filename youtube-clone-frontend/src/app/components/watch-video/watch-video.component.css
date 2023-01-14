@@ -1,6 +1,7 @@
 .container {
-  margin: 2%;
-  margin-left: 6%;
+  margin: 30px;
+  margin-left: 100px;
+  margin-right: 25px;
   height: 493px;
 
   box-sizing: border-box;
@@ -103,6 +104,10 @@
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1;
+}
+
+.white-space {
+  background-color: black;
 }
 
 /*CLEARING FLOAT*/

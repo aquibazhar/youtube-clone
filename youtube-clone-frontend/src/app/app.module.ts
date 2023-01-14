@@ -31,6 +31,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { VideoDescriptionComponent } from './components/video-description/video-description.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     VideoDescriptionComponent,
     CommentsComponent,
     OrderByPipe,
+    SuggestionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,8 @@
 <app-chips-bar></app-chips-bar>
 <div
   class="container"
-  *ngFor="let video of videos"
-  routerLink="/watch-video/{{ video.id }}"
+  *ngFor="let videoAuthor of combinedVideoAuthor"
+  routerLink="/watch-video/{{ videoAuthor.video.id }}"
 >
   <mat-card
     class="video-card"
@@ -11,7 +11,7 @@
   >
     <img
       mat-card-image
-      src="{{ video.thumbnailUrl }}"
+      src="{{ videoAuthor.video.thumbnailUrl }}"
       class="thumbnail-image"
       alt="thumbnail"
     />
@@ -19,17 +19,23 @@
       <img
         mat-card-avatar
         class="header-image"
-        src="{{ video.thumbnailUrl }}"
+        src="{{ videoAuthor.author.picture }}"
         alt="display-picture"
+        referrerpolicy="no-referrer"
       />
 
-      <mat-card-title class="title">{{ video.title }}</mat-card-title>
-      <mat-card-subtitle class="subtitle"> Channel Name </mat-card-subtitle>
+      <mat-card-title class="title">{{
+        videoAuthor.video.title
+      }}</mat-card-title>
       <mat-card-subtitle class="subtitle">
-        <span class="views">{{ video.views | views }} views</span>
+        {{ videoAuthor.author.fullName }}
+      </mat-card-subtitle>
+      <mat-card-subtitle class="subtitle">
+        <span class="views">{{ videoAuthor.video.views | views }} views</span>
         <span class="bullet-point"> &bull;</span>
-        <span class="views">{{ video.publishedAt | relativeTime }}</span>
-        <div class="relative-time"></div>
+        <span class="relative-time">{{
+          videoAuthor.video.publishedAt | relativeTime
+        }}</span>
       </mat-card-subtitle>
     </mat-card-header>
   </mat-card>

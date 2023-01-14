@@ -5,11 +5,11 @@ import { UserService } from 'src/app/services/user.service';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-suggestions',
+  templateUrl: './suggestions.component.html',
+  styleUrls: ['./suggestions.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class SuggestionsComponent implements OnInit {
   videos: Video[] = [];
   combinedVideoAuthor: VideoAuthor[] = [];
 

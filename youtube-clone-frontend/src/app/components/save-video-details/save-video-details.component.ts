@@ -98,7 +98,7 @@ export class SaveVideoDetailsComponent implements OnInit {
 
   onSubmit() {
     const date = new Date();
-    this.currentDate = date.toISOString().substring(0, 10);
+    this.currentDate = date.toISOString();
     const videoMetaData: Video = new Video(
       this.videoId,
       this.videoForm.value.title,

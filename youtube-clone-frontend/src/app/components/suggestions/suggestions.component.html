@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-card class="video-card" *ngFor="let videoAuthor of combinedVideoAuthor">
+    <div class="thumbnail">
+      <img
+        mat-card-image
+        src="{{ videoAuthor.video.thumbnailUrl }}"
+        alt="Photo of a Shiba Inu"
+        class="thumbnail-image"
+      />
+    </div>
+
+    <mat-card-header class="video-details">
+      <mat-card-title class="title">
+        {{ videoAuthor.video.title }}
+      </mat-card-title>
+      <mat-card-subtitle class="channel-name">
+        {{ videoAuthor.author.fullName }}
+      </mat-card-subtitle>
+      <mat-card-subtitle class="views-time"
+        ><span class="views">{{ videoAuthor.video.views | views }} views</span>
+        <span class="bullet-point"> &bull;</span>
+        <span class="relative-time">{{
+          videoAuthor.video.publishedAt | relativeTime
+        }}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</div>

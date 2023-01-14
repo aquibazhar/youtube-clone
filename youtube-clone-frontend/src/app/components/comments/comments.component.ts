@@ -49,19 +49,26 @@ export class CommentsComponent implements OnInit {
       this.currentDate,
       this.videoId
     );
-    this.commentService.addComment(comment).subscribe((data) => {
-      this.getComments();
-      // this.comments.push(data);
-      // this.userService.getUserById(comment.authorId).subscribe((data) => {
-      //   this.commentService.hasUserLiked(comment.id).subscribe((data) => {
-      //     comment.likeFlag = data;
-      //   });
-      //   this.commentService.hasUserDisliked(comment.id).subscribe((data) => {
-      //     comment.dislikeFlag = data;
-      //   });
-      //   this.combinedCommentAuthor.push(new CommentAuthor(comment, data));
-      //   this.sortCombinedArray();
-      // });
+    this.commentService.addComment(comment).subscribe((returnedComment) => {
+      this.commentService.hasUserLiked(returnedComment.id).subscribe((data) => {
+        returnedComment.likeFlag = data;
+      });
+
+      this.commentService
+        .hasUserDisliked(returnedComment.id)
+        .subscribe((data) => {
+          returnedComment.dislikeFlag = data;
+        });
+
+      this.userService
+        .getUserById(returnedComment.authorId)
+        .subscribe((data) => {
+          this.combinedCommentAuthor.push(
+            new CommentAuthor(returnedComment, data)
+          );
+
+          this.sortCombinedArray();
+        });
       this.onCancel();
     });
   }

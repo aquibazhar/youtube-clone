@@ -66,7 +66,7 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(thumbnailUrl);
     }
 
-    @GetMapping("/like/{videoId}")
+    @PostMapping("/like/{videoId}")
     public ResponseEntity<Video> likeVideo(@PathVariable String videoId) {
         Optional<Video> videoOptional = service.getVideoById(videoId);
         if (videoOptional.isEmpty()) {
@@ -76,7 +76,7 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
     }
 
-    @GetMapping("/dislike/{videoId}")
+    @PostMapping("/dislike/{videoId}")
     public ResponseEntity<Video> dislikeVideo(@PathVariable String videoId) {
         Optional<Video> videoOptional = service.getVideoById(videoId);
         if (videoOptional.isEmpty()) {
@@ -84,5 +84,25 @@ public class VideoController {
         }
         Video updatedVideo = service.dislikeVideo(videoId);
         return ResponseEntity.status(HttpStatus.OK).body(updatedVideo);
+    }
+
+    @GetMapping("/like/{videoId}")
+    public ResponseEntity<Boolean> hasUserLiked(@PathVariable String videoId) {
+        Optional<Video> videoOptional = service.getVideoById(videoId);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        Boolean userLiked = service.userLiked(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body(userLiked);
+    }
+
+    @GetMapping("/dislike/{videoId}")
+    public ResponseEntity<Boolean> hasUserDisliked(@PathVariable String videoId) {
+        Optional<Video> videoOptional = service.getVideoById(videoId);
+        if (videoOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Video with this ID doesn't exist.");
+        }
+        Boolean userDisliked = service.userDisliked(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body(userDisliked);
     }
 }

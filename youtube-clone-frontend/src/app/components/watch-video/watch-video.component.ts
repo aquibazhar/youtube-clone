@@ -40,21 +40,25 @@ export class WatchVideoComponent implements OnInit {
     });
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
     this.getVideoById();
+    this.checkIfCurrentUserLiked();
+    this.checkIfCurrentUserDisliked();
   }
 
   ngOnInit(): void {}
 
   onLike() {
     this.videoService.likeVideo(this.videoId).subscribe((data) => {
-      this.getVideoById();
-      this.getUserById();
+      this.videoDetails = data;
+      this.checkIfCurrentUserLiked();
+      this.checkIfCurrentUserDisliked();
     });
   }
 
   onDislike() {
     this.videoService.dislikeVideo(this.videoId).subscribe((data) => {
-      this.getVideoById();
-      this.getUserById();
+      this.videoDetails = data;
+      this.checkIfCurrentUserLiked();
+      this.checkIfCurrentUserDisliked();
     });
   }
 
@@ -62,7 +66,7 @@ export class WatchVideoComponent implements OnInit {
     this.userService
       .subscribeToUser(this.videoDetails.userId)
       .subscribe((data) => {
-        this.getVideoAuthorDetails();
+        this.getVideoAuthorDetails(this.videoDetails.userId);
       });
   }
 
@@ -70,7 +74,7 @@ export class WatchVideoComponent implements OnInit {
     this.userService
       .unsubscribeFromuser(this.videoDetails.userId)
       .subscribe((data) => {
-        this.getVideoAuthorDetails();
+        this.getVideoAuthorDetails(this.videoDetails.userId);
       });
   }
 
@@ -78,12 +82,12 @@ export class WatchVideoComponent implements OnInit {
     this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
       this.videoDetails = data;
       this.videoAvailable = true;
-      this.getVideoAuthorDetails();
+      this.getVideoAuthorDetails(data.userId);
     });
   }
 
-  getVideoAuthorDetails() {
-    this.userService.getUserById(this.videoDetails.userId).subscribe((data) => {
+  getVideoAuthorDetails(userId: string) {
+    this.userService.getUserById(userId).subscribe((data) => {
       this.videoAuthor = data;
       this.videoSubscribers = this.videoAuthor.subscribers.length;
       this.checkIfUserIsSubscribed();
@@ -93,18 +97,19 @@ export class WatchVideoComponent implements OnInit {
   getUserById() {
     this.userService.getUserById(this.currentUser.id).subscribe((data) => {
       this.currentUser = data;
-      this.checkIfCurrentUserLiked();
-      this.checkIfCurrentUserDisliked();
     });
   }
 
   checkIfCurrentUserLiked() {
-    this.likeFlag = this.currentUser.likedVideos.includes(this.videoId);
+    this.videoService.hasUserLiked(this.videoId).subscribe((data) => {
+      this.likeFlag = data;
+    });
   }
 
   checkIfCurrentUserDisliked() {
-    this.dislikeFlag = this.dislikeFlag =
-      this.currentUser.dislikedVideos.includes(this.videoId);
+    this.videoService.hasUserDisliked(this.videoId).subscribe((data) => {
+      this.dislikeFlag = data;
+    });
   }
 
   checkIfUserIsSubscribed() {

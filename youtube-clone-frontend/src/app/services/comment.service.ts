@@ -20,14 +20,35 @@ const httpOptions = {
 export class CommentService {
   constructor(private http: HttpClient) {}
 
-  addComment(comment: Comment, videoId: string) {
-    return this.http.post(COMMENT_SERVICE_URL + '/' + videoId, comment, {
-      responseType: 'text',
-    });
+  addComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(COMMENT_SERVICE_URL, comment);
   }
 
   getAllComments(videoId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(COMMENT_SERVICE_URL + '/' + videoId);
+  }
+
+  likeComment(commentId: string): Observable<Comment> {
+    return this.http.post<Comment>(
+      COMMENT_SERVICE_URL + '/like/' + commentId,
+      null
+    );
+  }
+
+  dislikeComment(commentId: string): Observable<Comment> {
+    return this.http.post<Comment>(
+      COMMENT_SERVICE_URL + '/dislike/' + commentId,
+      null
+    );
+  }
+  hasUserLiked(commentId: string): Observable<boolean> {
+    return this.http.get<boolean>(COMMENT_SERVICE_URL + '/like/' + commentId);
+  }
+
+  hasUserDisliked(commentId: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      COMMENT_SERVICE_URL + '/dislike/' + commentId
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

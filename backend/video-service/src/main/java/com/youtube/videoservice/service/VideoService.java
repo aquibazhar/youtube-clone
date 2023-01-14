@@ -30,4 +30,8 @@ public interface VideoService {
     public Video getVideoDetails(String id);
 
     public void incrementViewCount(Video video);
+
+    public Boolean userLiked(String videoId);
+
+    public Boolean userDisliked(String videoId);
 }

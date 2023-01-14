@@ -73,7 +73,6 @@ public class VideoServiceImpl implements VideoService {
     }
 
 
-
     @Override
     public Video updateVideo(VideoDto videoDto) {
         Optional<Video> existingVideoOptional = this.getVideoById(videoDto.getId());
@@ -160,5 +159,14 @@ public class VideoServiceImpl implements VideoService {
         return updatedVideo;
     }
 
+    @Override
+    public Boolean userLiked(String videoId) {
+        return userService.ifLikedVideo(videoId);
+    }
+
+    @Override
+    public Boolean userDisliked(String videoId) {
+        return userService.ifDislikedVideo(videoId);
+    }
 
 }

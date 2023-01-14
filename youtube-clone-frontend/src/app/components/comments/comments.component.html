@@ -75,14 +75,40 @@
         </div>
         <div class="comment-content">{{ commentAuthor.comment.text }}</div>
         <div class="actions">
-          <button mat-mini-fab class="action-buttons like-btn">
-            <mat-icon matTooltip="like">thumb_up_off_alt</mat-icon>
+          <button
+            mat-mini-fab
+            class="action-buttons like-btn"
+            (click)="onLike(commentAuthor.comment.id)"
+          >
+            <mat-icon matTooltip="like" *ngIf="commentAuthor.comment.likeFlag"
+              >thumb_up</mat-icon
+            >
+            <mat-icon matTooltip="like" *ngIf="!commentAuthor.comment.likeFlag"
+              >thumb_up_off_alt</mat-icon
+            >
           </button>
-          <span class="like-count">{{ 100 | views }}</span>
-          <button mat-mini-fab class="action-buttons dislike-btn">
-            <mat-icon matTooltip="dislike">thumb_down_off_alt</mat-icon>
+          <span class="like-count">{{
+            commentAuthor.comment.likes | views
+          }}</span>
+          <button
+            mat-mini-fab
+            class="action-buttons dislike-btn"
+            (click)="onDislike(commentAuthor.comment.id)"
+          >
+            <mat-icon
+              matTooltip="dislike"
+              *ngIf="commentAuthor.comment.dislikeFlag"
+              >thumb_down</mat-icon
+            >
+            <mat-icon
+              matTooltip="dislike"
+              *ngIf="!commentAuthor.comment.dislikeFlag"
+              >thumb_down_off_alt</mat-icon
+            >
           </button>
-          <span class="dislike-count">{{ 100 | views }}</span>
+          <span class="dislike-count">{{
+            commentAuthor.comment.dislikes | views
+          }}</span>
         </div>
       </div>
     </div>

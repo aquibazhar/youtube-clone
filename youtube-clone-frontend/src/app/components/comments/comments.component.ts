@@ -36,19 +36,32 @@ export class CommentsComponent implements OnInit {
   }
 
   onComment() {
-    console.log(this.videoId);
     const date = new Date();
     this.currentDate = date.toISOString();
     const comment = new Comment(
+      '',
       this.commentForm.value.comment,
       this.currentUser.id,
       0,
       0,
-      this.currentDate
+      false,
+      false,
+      this.currentDate,
+      this.videoId
     );
-    console.log(comment);
-    this.commentService.addComment(comment, this.videoId).subscribe((data) => {
+    this.commentService.addComment(comment).subscribe((data) => {
       this.getComments();
+      // this.comments.push(data);
+      // this.userService.getUserById(comment.authorId).subscribe((data) => {
+      //   this.commentService.hasUserLiked(comment.id).subscribe((data) => {
+      //     comment.likeFlag = data;
+      //   });
+      //   this.commentService.hasUserDisliked(comment.id).subscribe((data) => {
+      //     comment.dislikeFlag = data;
+      //   });
+      //   this.combinedCommentAuthor.push(new CommentAuthor(comment, data));
+      //   this.sortCombinedArray();
+      // });
       this.onCancel();
     });
   }
@@ -61,6 +74,14 @@ export class CommentsComponent implements OnInit {
   getComments() {
     this.commentService.getAllComments(this.videoId).subscribe((data) => {
       this.comments = data;
+      this.comments.forEach((comment) => {
+        this.commentService.hasUserLiked(comment.id).subscribe((data) => {
+          comment.likeFlag = data;
+        });
+        this.commentService.hasUserDisliked(comment.id).subscribe((data) => {
+          comment.dislikeFlag = data;
+        });
+      });
       this.getAllCommentAuthors();
       console.log(this.combinedCommentAuthor);
     });
@@ -81,6 +102,49 @@ export class CommentsComponent implements OnInit {
       let date1 = Date.parse(a.comment.publishedAt);
       let date2 = Date.parse(b.comment.publishedAt);
       return date2 - date1;
+    });
+  }
+
+  // LIKE DISLIKE
+  onLike(commentId: string) {
+    this.commentService.likeComment(commentId).subscribe((data) => {
+      this.combinedCommentAuthor.forEach((commentAuthor) => {
+        if (commentAuthor.comment.id === commentId) {
+          commentAuthor.comment = data;
+          this.commentService
+            .hasUserLiked(commentAuthor.comment.id)
+            .subscribe((data) => {
+              commentAuthor.comment.likeFlag = data;
+            });
+
+          this.commentService
+            .hasUserDisliked(commentAuthor.comment.id)
+            .subscribe((data) => {
+              commentAuthor.comment.dislikeFlag = data;
+            });
+        }
+      });
+    });
+  }
+
+  onDislike(commentId: string) {
+    this.commentService.dislikeComment(commentId).subscribe((data) => {
+      this.combinedCommentAuthor.forEach((commentAuthor) => {
+        if (commentAuthor.comment.id === commentId) {
+          commentAuthor.comment = data;
+          this.commentService
+            .hasUserLiked(commentAuthor.comment.id)
+            .subscribe((data) => {
+              commentAuthor.comment.likeFlag = data;
+            });
+
+          this.commentService
+            .hasUserDisliked(commentAuthor.comment.id)
+            .subscribe((data) => {
+              commentAuthor.comment.dislikeFlag = data;
+            });
+        }
+      });
     });
   }
 }

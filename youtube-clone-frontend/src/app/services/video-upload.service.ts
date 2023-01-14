@@ -48,11 +48,22 @@ export class VideoUploadService {
   }
 
   likeVideo(videoId: string): Observable<Video> {
-    return this.http.get<Video>(VIDEO_SERVICE_URL + '/like/' + videoId);
+    return this.http.post<Video>(VIDEO_SERVICE_URL + '/like/' + videoId, null);
   }
 
   dislikeVideo(videoId: string): Observable<Video> {
-    return this.http.get<Video>(VIDEO_SERVICE_URL + '/dislike/' + videoId);
+    return this.http.post<Video>(
+      VIDEO_SERVICE_URL + '/dislike/' + videoId,
+      null
+    );
+  }
+
+  hasUserLiked(videoId: string): Observable<boolean> {
+    return this.http.get<boolean>(VIDEO_SERVICE_URL + '/like/' + videoId);
+  }
+
+  hasUserDisliked(videoId: string): Observable<boolean> {
+    return this.http.get<boolean>(VIDEO_SERVICE_URL + '/dislike/' + videoId);
   }
 
   private handleError(error: HttpErrorResponse) {

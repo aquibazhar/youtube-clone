@@ -22,6 +22,18 @@ public interface UserService {
 
     public boolean ifDislikedVideo(String videoId);
 
+    public void addToLikedComments(String commentId);
+
+    public void removeFromLikedComments(String commentId);
+
+    public void addToDislikedComments(String commentId);
+
+    public void removeFromDislikedComments(String commentId);
+
+    public boolean ifLikedComment(String commentId);
+
+    public boolean ifDislikedComment(String commentId);
+
     public void addToHistory(String videoId);
 
     public void subscribeUser(String userId);

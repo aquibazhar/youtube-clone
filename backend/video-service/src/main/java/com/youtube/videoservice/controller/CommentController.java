@@ -24,21 +24,59 @@ public class CommentController {
     @Autowired
     private VideoService videoService;
 
-    @PostMapping("/{videoId}")
-    public ResponseEntity<String> addComment(@RequestBody CommentDto commentDto, @PathVariable String videoId) {
-        Optional<Video> videoOptional = videoService.getVideoById(videoId);
+    @PostMapping({"", "/"})
+    public ResponseEntity<Comment> addComment(@RequestBody CommentDto commentDto) {
+        Optional<Video> videoOptional = videoService.getVideoById(commentDto.getVideoId());
         if (videoOptional.isEmpty()) {
             throw new ResourceNotFoundException("Video with this ID doesn't exist.");
         }
-        service.addComment(commentDto, videoId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Comment added.");
+        Comment savedComment = service.addComment(commentDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedComment);
     }
 
     @GetMapping("/{videoId}")
-    public ResponseEntity<List<Comment>> getAllComments(@PathVariable String videoId){
+    public ResponseEntity<List<Comment>> getAllComments(@PathVariable String videoId) {
         List<Comment> comments = service.getAllComments(videoId);
-        if(comments.isEmpty())
+        if (comments.isEmpty())
             throw new ResourceNotFoundException("There are no comments for this video.");
         return ResponseEntity.status(HttpStatus.OK).body(comments);
+    }
+
+    @PostMapping("/like/{commentId}")
+    public ResponseEntity<Comment> likeComment(@PathVariable String commentId) {
+        Optional<Comment> commentOptional = service.getCommentById(commentId);
+        if(commentOptional.isEmpty())
+            throw new ResourceNotFoundException("Comment with this ID doesn't exist.");
+        Comment updatedComment = service.likeComment(commentId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedComment);
+    }
+
+    @PostMapping("/dislike/{commentId}")
+    public ResponseEntity<Comment> dislikeComment(@PathVariable String commentId) {
+        Optional<Comment> commentOptional = service.getCommentById(commentId);
+        if(commentOptional.isEmpty())
+            throw new ResourceNotFoundException("Comment with this ID doesn't exist.");
+        Comment updatedComment = service.dislikeComment(commentId);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedComment);
+    }
+
+    @GetMapping("/like/{commentId}")
+    public ResponseEntity<Boolean> hasUserLiked(@PathVariable String commentId) {
+        Optional<Comment> commentOptional = service.getCommentById(commentId);
+        if(commentOptional.isEmpty())
+            throw new ResourceNotFoundException("Comment with this ID doesn't exist.");
+
+        Boolean userLiked = service.userLiked(commentId);
+        return ResponseEntity.status(HttpStatus.OK).body(userLiked);
+    }
+
+    @GetMapping("/dislike/{commentId}")
+    public ResponseEntity<Boolean> hasUserDisliked(@PathVariable String commentId) {
+        Optional<Comment> commentOptional = service.getCommentById(commentId);
+        if(commentOptional.isEmpty())
+            throw new ResourceNotFoundException("Comment with this ID doesn't exist.");
+
+        Boolean userLiked = service.userDisliked(commentId);
+        return ResponseEntity.status(HttpStatus.OK).body(userLiked);
     }
 }

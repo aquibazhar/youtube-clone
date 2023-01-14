@@ -169,4 +169,45 @@ public class UserServiceImpl implements UserService {
     public Optional<User> getUserById(String userId) {
         return repository.findById(userId);
     }
+
+    // COMMENTS
+
+    @Override
+    public void addToLikedComments(String commentId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.addToLikedComments(commentId);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public void removeFromLikedComments(String commentId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.removeFromLikedComments(commentId);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public void addToDislikedComments(String commentId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.addToDislikedComments(commentId);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public void removeFromDislikedComments(String commentId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.removeFromDislikedComments(commentId);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public boolean ifLikedComment(String commentId) {
+        User currentUser = this.getCurrentUser();
+        return this.getCurrentUser().getLikedComments().stream().anyMatch((likedComment) -> likedComment.equals(commentId));
+    }
+
+    @Override
+    public boolean ifDislikedComment(String commentId) {
+        return this.getCurrentUser().getDislikedComments().stream().anyMatch((dislikedComment) -> dislikedComment.equals(commentId));
+    }
 }

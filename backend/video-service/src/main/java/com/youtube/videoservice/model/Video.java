@@ -34,7 +34,7 @@ public class Video {
     private String videoStatus;
     private AtomicInteger views = new AtomicInteger(0);
     private String thumbnailUrl;
-    private List<Comment> comments = new CopyOnWriteArrayList<>();
+    private List<String> comments = new CopyOnWriteArrayList<>();
     private String url;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date publishedAt;
@@ -59,7 +59,7 @@ public class Video {
         views.incrementAndGet();
     }
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
+    public void addComment(String commentId) {
+        comments.add(commentId);
     }
 }

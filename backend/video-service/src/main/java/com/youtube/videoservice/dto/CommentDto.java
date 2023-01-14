@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +16,8 @@ import java.util.Date;
 public class CommentDto {
     private String text;
     private String authorId;
-    private Integer likes;
-    private Integer dislikes;
+    private AtomicInteger likes;
+    private AtomicInteger dislikes;
     private LocalDateTime publishedAt;
+    private String videoId;
 }

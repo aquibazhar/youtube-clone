@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Video } from 'src/app/models/video';
+import { MatDialog } from '@angular/material/dialog';
+import { UploadVideoComponent } from '../upload-video/upload-video.component';
 
 @Component({
   selector: 'app-save-video-details',
@@ -36,8 +38,10 @@ export class SaveVideoDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private videoService: VideoUploadService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
+    this.dialog.closeAll();
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
     this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
       console.log(data);

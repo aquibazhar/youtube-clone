@@ -1,35 +1,51 @@
-<div class="center">
-  <ngx-file-drop
-    dropZoneLabel="Drop files here"
-    (onFileDrop)="dropped($event)"
-    (onFileOver)="fileOver($event)"
-    (onFileLeave)="fileLeave($event)"
-  >
-    <ng-template
-      ngx-file-drop-content-tmp
-      let-openFileSelector="openFileSelector"
-    >
-      Drop your video here or use
-      <button type="button" (click)="openFileSelector()">Browse Files</button>
-    </ng-template>
-  </ngx-file-drop>
-  <div class="upload-table">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody class="upload-name-style">
-        <tr *ngFor="let item of files; let i = index">
-          <td>
-            <strong>{{ item.relativePath }}</strong>
-          </td>
-        </tr>
-      </tbody>
-      <button mat-button *ngIf="fileUploaded" (click)="onUpload()">
-        upload
+<div class="container">
+  <div mat-dialog-title class="heading">
+    <span class="upload-heading">Upload videos</span>
+    <span class="header-spacer"></span>
+    <span class="close">
+      <button mat-icon-button mat-dialog-close class="close-btn" tabindex="-1">
+        <mat-icon class="close-icon">close</mat-icon>
       </button>
-    </table>
+    </span>
+  </div>
+  <div class="center">
+    <ngx-file-drop
+      (onFileDrop)="dropped($event)"
+      (onFileOver)="fileOver($event)"
+      (onFileLeave)="fileLeave($event)"
+      dropZoneClassName="drop-zone"
+      contentClassName="drop-files-here"
+      class="drop-zone"
+    >
+      <ng-template
+        ngx-file-drop-content-tmp
+        let-openFileSelector="openFileSelector"
+      >
+        <div class="avatar">
+          <div class="upload-avatar" mat-card-avatar>
+            <mat-icon class="upload-icon"> upload </mat-icon>
+          </div>
+        </div>
+        <div class="drop-text">Drag and drop video files to upload</div>
+        <div class="button">
+          <button
+            type="button"
+            (click)="openFileSelector()"
+            class="select-button"
+            mat-flat-button
+            color="primary"
+          >
+            SELECT FILES
+          </button>
+        </div>
+        <div class="spinner">
+          <mat-spinner
+            class="spinner-icon"
+            [diameter]="50"
+            *ngIf="fileUploaded"
+          ></mat-spinner>
+        </div>
+      </ng-template>
+    </ngx-file-drop>
   </div>
 </div>

@@ -24,13 +24,16 @@ export class UploadVideoComponent implements OnInit {
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
+    this.fileUploaded = true;
+    console.log(this.fileUploaded);
     for (const droppedFile of files) {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         this.videoData = droppedFile.fileEntry as FileSystemFileEntry;
         this.videoData.file((file: File) => {
-          console.log(droppedFile.relativePath, file);
-          this.fileUploaded = true;
+          this.videoService.uploadVideo(file).subscribe((data) => {
+            this.router.navigateByUrl('/save-video/' + data.id);
+          });
         });
       }
     }
@@ -42,19 +45,5 @@ export class UploadVideoComponent implements OnInit {
 
   public fileLeave(event: any) {
     console.log(event);
-  }
-
-  onUpload() {
-    if (this.videoData !== undefined) {
-      this.videoData.file((video) => {
-        this.video = video;
-        this.videoService.uploadVideo(video).subscribe((data) => {
-          console.log(data);
-          this.router.navigateByUrl('/save-video/' + data.id);
-        });
-      });
-    } else {
-      console.log('something went wrong');
-    }
   }
 }

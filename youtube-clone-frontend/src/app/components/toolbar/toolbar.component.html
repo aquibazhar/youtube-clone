@@ -71,7 +71,7 @@
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon>home</mat-icon>
       </button>
-      <button mat-icon-button routerLink="/upload-video" matTooltip="Upload">
+      <button mat-icon-button (click)="openDialog()" matTooltip="Upload">
         <mat-icon>video_call</mat-icon>
       </button>
       <button

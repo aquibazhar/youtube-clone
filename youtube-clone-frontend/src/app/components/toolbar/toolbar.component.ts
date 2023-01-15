@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { UploadVideoComponent } from '../upload-video/upload-video.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,7 +11,10 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 export class ToolbarComponent implements OnInit {
   titleFlag: boolean = true;
   isAuthenticated: boolean = false;
-  constructor(private oidcSecurityService: OidcSecurityService) {}
+  constructor(
+    private oidcSecurityService: OidcSecurityService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.oidcSecurityService.isAuthenticated$.subscribe(
@@ -28,5 +33,13 @@ export class ToolbarComponent implements OnInit {
 
   logout() {
     this.oidcSecurityService.logoffAndRevokeTokens();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(UploadVideoComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

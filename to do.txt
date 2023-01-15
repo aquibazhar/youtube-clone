@@ -1,10 +1,11 @@
-- Add some service so that sidebar can have different settings for different components.
+- Add some service so that sidebar can have different settings 
+  for different components. ( I can use services for this )
 - enable chips component in home.
 - enable searching in home.
 - design drag and drop page
 - Auth guard
 - hover on description and also on comment cancel button
-- change Date to LocalDateTime in Video too.
 - add sorting in comments.
 - add watch-time on video cards
 - add scnackbars to every place needed.
+- history, liked videos, subscriptions yet to be implemented

@@ -9,3 +9,4 @@
 - add watch-time on video cards
 - add scnackbars to every place needed.
 - history, liked videos, subscriptions yet to be implemented
+- have to fix refresh after video is uploaded successfully.

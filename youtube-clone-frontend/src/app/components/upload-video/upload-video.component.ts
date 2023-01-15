@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
+import { SaveVideoDetailsComponent } from '../save-video-details/save-video-details.component';
 
 @Component({
   selector: 'app-upload-video',
@@ -15,7 +17,8 @@ export class UploadVideoComponent implements OnInit {
 
   constructor(
     private videoService: VideoUploadService,
-    private router: Router
+
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -31,8 +34,13 @@ export class UploadVideoComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         this.videoData = droppedFile.fileEntry as FileSystemFileEntry;
         this.videoData.file((file: File) => {
-          this.videoService.uploadVideo(file).subscribe((data) => {
-            this.router.navigateByUrl('/save-video/' + data.id);
+          this.videoService.uploadVideo(file).subscribe((savedVideo) => {
+            this.dialog.closeAll();
+            this.dialog.open(SaveVideoDetailsComponent, {
+              data: {
+                videoId: savedVideo.id,
+              },
+            });
           });
         });
       }

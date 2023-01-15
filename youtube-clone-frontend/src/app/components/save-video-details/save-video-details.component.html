@@ -1,92 +1,130 @@
-<div fxLayout="row wrap">
-  <div fxFlex="20%">20%</div>
-  <div fxFlex="30%" class="save-video-form">
-    <div class="mat-title">Enter Video Details</div>
-    <form action="" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Title</mat-label>
-        <input
-          matInput
-          formControlName="title"
-          placeholder="Enter a Video Title."
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <input
-          matInput
-          matInput
-          formControlName="description"
-          placeholder="Enter the Video Description."
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Select</mat-label>
-        <mat-select matInput formControlName="videoStatus">
-          <mat-option value="PUBLIC">PUBLIC</mat-option>
-          <mat-option value="PRIVATE">PRIVATE</mat-option>
-          <mat-option value="UNLISTED">UNLISTED</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="tag-chip-list" appearance="outline">
-        <mat-label>Tags</mat-label>
-        <mat-chip-list #chipList aria-label="Fruit selection">
-          <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
-            {{ tag }}
-            <button matChipRemove>
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip>
-          <input
-            placeholder="New tag..."
-            [matChipInputFor]="chipList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-          />
-        </mat-chip-list>
-      </mat-form-field>
-      <div class="upload-thumbnail">
-        <mat-label>Upload a Thumbnail</mat-label>
-        <div class="thumbnail-file">
-          <input (change)="onFileSelected($event)" type="file" />
-        </div>
-        <div class="show-upload" *ngIf="thumbnailSelected">
-          <div class="selected-file">
-            <p>{{ thumbnailName }}</p>
-          </div>
-          <div class="upload">
-            <button
-              type="submit"
-              color="primary"
-              mat-raised-button
-              class="upload-button"
-              (click)="onUpload()"
-            >
-              <mat-icon>upload</mat-icon>
-              Upload
-            </button>
-          </div>
-        </div>
-      </div>
-      <button
-        type="submit"
-        color="primary"
-        mat-raised-button
-        class="save-button"
-      >
-        <mat-icon>save</mat-icon>
-        Save
+<div class="container">
+  <div mat-dialog-title class="heading">
+    <span class="upload-heading">Enter Video Details</span>
+    <span class="header-spacer"></span>
+    <span class="close">
+      <button mat-icon-button mat-dialog-close class="close-btn" tabindex="-1">
+        <mat-icon class="close-icon">close</mat-icon>
       </button>
-    </form>
+    </span>
   </div>
-  <div fxFlex="30%">
-    <app-video-player
-      *ngIf="videoAvailable"
-      [videoUrl]="videoUrl"
-    ></app-video-player>
+  <div class="top">
+    <div class="details-heading">Details</div>
   </div>
-  <div fxFlex="20%">20%</div>
+  <div class="bottom">
+    <div class="center">
+      <div class="save-video-form">
+        <form action="" [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input
+              matInput
+              formControlName="title"
+              placeholder="Add a title that describes your video."
+              type="text"
+              class="title"
+            />
+            <mat-error *ngIf="videoForm.get('title')?.hasError('required')">
+              A Video Title is required
+            </mat-error>
+            <mat-error *ngIf="videoForm.get('title')?.hasError('maxlength')">
+              Video Title can be maximum of 100 characters
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="custom-height">
+            <mat-label>Description</mat-label>
+            <input
+              matInput
+              formControlName="description"
+              placeholder="Tell viewers about your video."
+              type="textarea"
+              class="description"
+            />
+            <mat-error
+              *ngIf="videoForm.get('description')?.hasError('maxlength')"
+            >
+              Video Description can be maximum of 5000 characters
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Select</mat-label>
+            <mat-select matInput formControlName="videoStatus">
+              <mat-option value="PUBLIC">PUBLIC</mat-option>
+              <mat-option value="PRIVATE">PRIVATE</mat-option>
+              <mat-option value="UNLISTED">UNLISTED</mat-option>
+            </mat-select>
+            <mat-error *ngIf="videoForm.get('title')?.hasError('required')">
+              Please select a visibility for the vide0.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="tag-chip-list" appearance="outline">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+                {{ tag }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input
+                placeholder="New tag..."
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-list>
+          </mat-form-field>
+          <div class="upload-thumbnail">
+            <div class="thumbnail-heading">Thumbnail</div>
+            <div class="thumbnail-description">
+              Select or upload a picture that shows what's in your video.
+            </div>
+            <div class="thumbnail-file" *ngIf="!thumbnailSelected">
+              <button
+                (click)="fileInput.click()"
+                type="button"
+                class="thumbnail-upload"
+              >
+                <div class="icons">
+                  <div class="icon">
+                    <mat-icon> add_photo_alternate </mat-icon>
+                  </div>
+                  <div class="upload-text">Upload thumbnail</div>
+                </div>
+              </button>
+              <input
+                #fileInput
+                (change)="onFileSelected($event)"
+                type="file"
+                id="file-upload-button"
+                required
+              />
+            </div>
+            <div class="show-thumbnail" *ngIf="thumbnailSelected">
+              <img src="{{ thumbnailUrl }}" class="thumbnail-image" alt="" />
+            </div>
+          </div>
+          <button
+            type="submit"
+            color="primary"
+            mat-raised-button
+            class="save-button"
+            [disabled]="!videoForm.valid || !thumbnailSelected"
+          >
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+        </form>
+      </div>
+      <div class="video-player">
+        <app-video-player
+          *ngIf="videoAvailable"
+          [videoUrl]="videoUrl"
+          [hideControl]="true"
+        ></app-video-player>
+      </div>
+    </div>
+  </div>
 </div>

@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class VideoPlayerComponent implements OnInit {
   @Input() videoUrl: string = '';
+  @Input() hideControl: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}

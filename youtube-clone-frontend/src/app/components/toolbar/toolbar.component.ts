@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { SaveVideoDetailsComponent } from '../save-video-details/save-video-details.component';
 import { UploadVideoComponent } from '../upload-video/upload-video.component';
 
 @Component({

@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'subscriptions', component: SubscriptionsComponent },
   { path: 'liked-videos', component: LikedVideosComponent },
   { path: 'upload-video', component: UploadVideoComponent },
-  { path: 'save-video/:videoId', component: SaveVideoDetailsComponent },
+  { path: 'save-video', component: SaveVideoDetailsComponent },
   { path: 'watch-video/:videoId', component: WatchVideoComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

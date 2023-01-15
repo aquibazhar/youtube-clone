@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Video } from 'src/app/models/video';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadVideoComponent } from '../upload-video/upload-video.component';
 
 @Component({
@@ -36,22 +36,23 @@ export class SaveVideoDetailsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private videoService: VideoUploadService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: { videoId: string }
   ) {
     this.dialog.closeAll();
-    this.videoId = this.activatedRoute.snapshot.params['videoId'];
+    this.videoId = data.videoId;
     this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
       console.log(data);
       this.videoUrl = data.url;
       this.videoAvailable = true;
     });
     this.videoForm = this.fb.group({
-      title: [''],
-      description: [''],
-      videoStatus: [''],
+      title: ['', [Validators.required, Validators.maxLength(100)]],
+      description: ['', [Validators.maxLength(5000)]],
+      videoStatus: ['', [Validators.required]],
       tagList: [this.tags],
     });
   }
@@ -81,7 +82,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     // @ts-ignore
     this.thumbnail = event.target.files[0];
     this.thumbnailName = this.thumbnail.name;
-    this.thumbnailSelected = true;
+    this.onUpload();
   }
 
   onUpload() {
@@ -89,6 +90,7 @@ export class SaveVideoDetailsComponent implements OnInit {
       .uploadThumbnail(this.thumbnail, this.videoId)
       .subscribe((data) => {
         this.thumbnailUrl = data;
+        this.thumbnailSelected = true;
         this.openSnackBar('Thumbnail uploaded successfully!', 'OK');
       });
   }
@@ -121,6 +123,8 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService.saveVideoMetaData(videoMetaData).subscribe((data) => {
       console.log(data);
       this.openSnackBar('Video MetaData updated successfully', 'OK');
+      this.dialog.closeAll();
+      this.router.navigateByUrl('/home');
     });
   }
 }

@@ -6,21 +6,29 @@
     <vg-play-pause></vg-play-pause>
     <vg-playback-button></vg-playback-button>
 
-    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+    <vg-time-display
+      vgProperty="current"
+      vgFormat="mm:ss"
+      *ngIf="!hideControl"
+    ></vg-time-display>
 
-    <vg-scrub-bar>
+    <vg-scrub-bar *ngIf="!hideControl">
       <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
       <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
     </vg-scrub-bar>
 
     <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+    <vg-time-display
+      vgProperty="total"
+      vgFormat="mm:ss"
+      *ngIf="!hideControl"
+    ></vg-time-display>
 
-    <vg-track-selector></vg-track-selector>
+    <vg-track-selector *ngIf="!hideControl"></vg-track-selector>
     <vg-mute></vg-mute>
     <vg-volume></vg-volume>
 
-    <vg-fullscreen></vg-fullscreen>
+    <vg-fullscreen *ngIf="!hideControl"></vg-fullscreen>
   </vg-controls>
 
   <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto">

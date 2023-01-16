@@ -1,28 +1,32 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" [mode]="mode" [opened]="homePage">
-    <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="titleFlag = !titleFlag"
-        class="hide-in-mobile"
-        (click)="drawer.toggle()"
-        *ngIf="!homePage"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="titleFlag = !titleFlag"
-        class="hide-in-mobile"
-        *ngIf="homePage"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>YouTube</span>
+    <mat-toolbar [ngClass]="homePage ? 'home-component' : 'other-component'">
+      <div class="burger-btn" *ngIf="!homePage">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="titleFlag = !titleFlag"
+          class="hide-in-mobile"
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>YouTube</span>
+      </div>
+      <div class="youtube-btn" *ngIf="homePage">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="titleFlag = !titleFlag"
+          class="hide-in-mobile"
+          class="youtube-icon-btn"
+        >
+          <mat-icon class="youtube-icon">smart_display</mat-icon>
+        </button>
+        <span>YouTube</span>
+      </div>
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/home" matTooltip="Home">
@@ -73,7 +77,9 @@
         (click)="titleFlag = !titleFlag"
         *ngIf="!homePage && titleFlag"
       >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon" class="toolbar-icons"
+          >menu</mat-icon
+        >
       </button>
       <span
         *ngIf="!homePage && titleFlag"
@@ -82,17 +88,51 @@
         >YouTube</span
       >
       <span class="menu-spacer"></span>
+      <div class="search-bar">
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+          <div class="outer-search">
+            <mat-form-field appearance="outline" class="search-input group">
+              <mat-icon class="prefix-icon" *ngIf="activeFlag">
+                search
+              </mat-icon>
+              <button
+                mat-icon-button
+                class="suffix-btn"
+                type="reset"
+                (click)="onReset()"
+                *ngIf="searchForm.value.input !== ''"
+              >
+                <mat-icon class="suffix-icon">close</mat-icon>
+              </button>
+              <input
+                matInput
+                placeholder="Search"
+                (focusin)="activeFlag = true"
+                (focusout)="activeFlag = false"
+                formControlName="input"
+              />
+            </mat-form-field>
+            <div class="search-btn-div">
+              <button mat-flat-button class="search-btn" type="submit">
+                <mat-icon class="search-icon">search</mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <span class="menu-spacer"></span>
       <button mat-icon-button routerLink="/home" matTooltip="Home">
-        <mat-icon>home</mat-icon>
+        <mat-icon class="toolbar-icons">home</mat-icon>
       </button>
       <button mat-icon-button (click)="openDialog()" matTooltip="Upload">
-        <mat-icon>video_call</mat-icon>
+        <mat-icon class="toolbar-icons">video_call</mat-icon>
       </button>
       <button
         *ngIf="!isAuthenticated"
         mat-button
         matTooltip="login"
         (click)="login()"
+        class="toolbar-icons"
       >
         <span>Sign In</span>
       </button>

@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NavbarToggleService {
-  private homePageSubject = new BehaviorSubject<boolean>(false);
+  private homePageSubject = new BehaviorSubject<boolean>(true);
   homePage = this.homePageSubject.asObservable();
 
-  private modeSubject = new BehaviorSubject<MatDrawerMode>('over');
+  private modeSubject = new BehaviorSubject<MatDrawerMode>('side');
   mode = this.modeSubject.asObservable();
 
   updateData(homePage: boolean, mode: MatDrawerMode) {

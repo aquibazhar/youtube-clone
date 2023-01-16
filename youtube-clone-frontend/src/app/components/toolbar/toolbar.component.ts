@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
@@ -19,13 +20,19 @@ export class ToolbarComponent implements OnInit {
   homePage: boolean = false;
   currentUserId: string;
   currentUser: User = {} as User;
+  activeFlag: boolean = false;
   mode: MatDrawerMode = 'over';
+  searchForm: FormGroup;
   constructor(
     private oidcSecurityService: OidcSecurityService,
     public dialog: MatDialog,
     private userService: UserService,
-    private navbarService: NavbarToggleService
+    private navbarService: NavbarToggleService,
+    private fb: FormBuilder
   ) {
+    this.searchForm = this.fb.group({
+      input: [''],
+    });
     const userId = localStorage.getItem('userId');
     this.currentUserId = userId !== null ? userId : '';
     this.navbarService.homePage.subscribe(
@@ -62,5 +69,14 @@ export class ToolbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  onSearch() {
+    console.log(this.searchForm.value);
+  }
+
+  onReset() {
+    this.searchForm.reset();
+    this.searchForm.controls['input'].setValue('');
   }
 }

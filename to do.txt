@@ -10,3 +10,4 @@
 - add scnackbars to every place needed.
 - history, liked videos, subscriptions yet to be implemented
 - have to fix refresh after video is uploaded successfully.
+- have to implement watch later functionality in backend and frontend.

@@ -1,13 +1,24 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" mode="side" opened="titleFlag">
+  <mat-sidenav #drawer class="sidenav" [mode]="mode" [opened]="homePage">
     <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
         (click)="titleFlag = !titleFlag"
         class="hide-in-mobile"
+        (click)="drawer.toggle()"
+        *ngIf="!homePage"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="titleFlag = !titleFlag"
+        class="hide-in-mobile"
+        *ngIf="homePage"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -60,11 +71,14 @@
         mat-icon-button
         (click)="drawer.toggle()"
         (click)="titleFlag = !titleFlag"
-        *ngIf="titleFlag"
+        *ngIf="!homePage && titleFlag"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span *ngIf="titleFlag" class="app-heading" routerLink="/home"
+      <span
+        *ngIf="!homePage && titleFlag"
+        class="app-heading"
+        routerLink="/home"
         >YouTube</span
       >
       <span class="menu-spacer"></span>

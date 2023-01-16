@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
+import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
 import { UserService } from 'src/app/services/user.service';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 
@@ -31,7 +32,8 @@ export class WatchVideoComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoUploadService,
-    private userService: UserService
+    private userService: UserService,
+    private navbarService: NavbarToggleService
   ) {
     const userId = localStorage.getItem('userId');
     this.currentUserId = userId !== null ? userId : '';
@@ -42,6 +44,7 @@ export class WatchVideoComponent implements OnInit {
     this.getVideoById();
     this.checkIfCurrentUserLiked();
     this.checkIfCurrentUserDisliked();
+    this.navbarService.updateData(false, 'over');
   }
 
   ngOnInit(): void {}

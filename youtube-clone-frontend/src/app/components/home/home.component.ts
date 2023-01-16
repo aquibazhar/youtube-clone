@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Video } from 'src/app/models/video';
 import { VideoAuthor } from 'src/app/models/video-author';
+import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
 import { UserService } from 'src/app/services/user.service';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 
@@ -15,8 +16,11 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private videoService: VideoUploadService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private navbarService: NavbarToggleService
+  ) {
+    this.navbarService.updateData(true, 'side');
+  }
 
   ngOnInit(): void {
     this.getAllVideos();

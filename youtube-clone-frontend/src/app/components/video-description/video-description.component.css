@@ -3,15 +3,22 @@
   margin: 20px 0px;
   box-shadow: none;
   border: none;
-  background-color: rgb(242, 242, 242);
+  background-color: #f2f2f2;
   border-radius: 10px;
   padding: 15px;
   font-size: 15px;
 }
 
+.container:hover {
+  background-color: #e5e5e5;
+}
+
 .hide-content {
-  max-height: 100px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .show-content {
@@ -34,27 +41,30 @@
 
 .description {
   font-weight: 400;
-  display: inline;
 }
 
 .show-more {
   font-size: 15px;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
+
   border: none;
   padding: 0px;
   margin: 0px;
   background: none;
+  color: rgb(39, 39, 39);
 }
 
 .show-less {
   font-size: 15px;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   border: none;
   padding: 0px;
   margin: 0px;
   background: none;
+  color: rgb(39, 39, 39);
 }
 
 .description-and-header {
-  padding-bottom: 5px;
 }

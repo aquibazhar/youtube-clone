@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" mode="side">
+  <mat-sidenav #drawer class="sidenav" mode="side" opened="titleFlag">
     <mat-toolbar>
       <button
         type="button"
@@ -15,12 +15,12 @@
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/home" matTooltip="Home">
-        <mat-icon mat-list-icon class="">home</mat-icon>
-        <span>Home</span>
+        <mat-icon mat-list-icon class="sidenav-icons">home</mat-icon>
+        <span class="sidenav-item">Home</span>
       </a>
       <a mat-list-item matTooltip="Login" *ngIf="!isAuthenticated">
-        <mat-icon mat-list-icon class="">login</mat-icon>
-        <span>Sign In</span>
+        <mat-icon mat-list-icon class="sidenav-icons">login</mat-icon>
+        <span class="sidenav-item">Sign In</span>
       </a>
       <a
         mat-list-item
@@ -28,8 +28,8 @@
         routerLink="/subscriptions"
         *ngIf="isAuthenticated"
       >
-        <mat-icon mat-list-icon class="">subscriptions</mat-icon>
-        <span>Subscriptions</span>
+        <mat-icon mat-list-icon class="sidenav-icons">subscriptions</mat-icon>
+        <span class="sidenav-item">Subscriptions</span>
       </a>
       <a
         mat-list-item
@@ -37,8 +37,8 @@
         routerLink="/history"
         *ngIf="isAuthenticated"
       >
-        <mat-icon mat-list-icon class="">history</mat-icon>
-        <span>Watch History</span>
+        <mat-icon mat-list-icon class="sidenav-icons">history</mat-icon>
+        <span class="sidenav-item">Watch History</span>
       </a>
       <a
         mat-list-item
@@ -46,8 +46,8 @@
         routerLink="/liked-videos"
         *ngIf="isAuthenticated"
       >
-        <mat-icon mat-list-icon class="">thumb_up</mat-icon>
-        <span>Liked Videos</span>
+        <mat-icon mat-list-icon class="sidenav-icons">thumb_up</mat-icon>
+        <span class="sidenav-item">Liked Videos</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -84,16 +84,20 @@
       </button>
 
       <div *ngIf="isAuthenticated">
-        <button mat-button class="user-button" [matMenuTriggerFor]="menu">
-          <span class="username">Hi, </span>
-
-          <mat-icon class="arrow-icon">arrow_drop_down</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button routerLink="/accounts/profile" mat-menu-item>
-            User Profile
+        <div class="avatar-parent">
+          <button mat-button class="user-button" [matMenuTriggerFor]="menu">
+            <img
+              mat-card-avatar
+              class="avatar-image"
+              src="{{ currentUser.picture }}"
+              alt="display-picture"
+            />
           </button>
-
+        </div>
+        <mat-menu #menu="matMenu">
+          <!-- <div class="hello-user" mat-menu-item disabled>
+            Hello, {{ currentUser.firstName }}
+          </div> -->
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </div>

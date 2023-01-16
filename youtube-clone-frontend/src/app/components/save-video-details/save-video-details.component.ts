@@ -123,8 +123,8 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService.saveVideoMetaData(videoMetaData).subscribe((data) => {
       console.log(data);
       this.openSnackBar('Video MetaData updated successfully', 'OK');
+      this.router.navigateByUrl('/watch-video/' + this.videoId);
       this.dialog.closeAll();
-      this.router.navigateByUrl('/home');
     });
   }
 }

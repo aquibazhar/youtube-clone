@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LikedVideosComponent } from './components/liked-videos/liked-videos.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SaveVideoDetailsComponent } from './components/save-video-details/save-video-details.component';
+import { SearchVideosComponent } from './components/search-videos/search-videos.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { UploadVideoComponent } from './components/upload-video/upload-video.component';
 import { WatchVideoComponent } from './components/watch-video/watch-video.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'save-video', component: SaveVideoDetailsComponent },
   { path: 'watch-video/:videoId', component: WatchVideoComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'search/:searchInput', component: SearchVideosComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

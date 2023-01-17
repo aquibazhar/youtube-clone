@@ -15,7 +15,6 @@ import { UploadVideoComponent } from '../upload-video/upload-video.component';
   styleUrls: ['./toolbar.component.css'],
 })
 export class ToolbarComponent implements OnInit {
-  titleFlag: boolean = true;
   isAuthenticated: boolean = false;
   homePage: boolean = false;
   currentUserId: string;
@@ -68,6 +67,13 @@ export class ToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
+    });
+  }
+  openSaveVideo() {
+    const dialogRef = this.dialog.open(SaveVideoDetailsComponent, {
+      data: {
+        videoId: 'hello',
+      },
     });
   }
 

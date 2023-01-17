@@ -1,0 +1,100 @@
+.container {
+  margin-top: 30px;
+  width: 85%;
+  margin-left: 150px;
+  margin-bottom: 125px;
+  display: block;
+}
+
+.video-card {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  padding: 0px;
+  max-height: 100px;
+  box-shadow: none;
+  background-color: transparent;
+  margin-bottom: 15px;
+}
+
+.thumbnail {
+  align-self: flex-start;
+  width: 32%;
+}
+
+.video-details {
+  width: 55%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 5px;
+}
+
+.thumbnail-image {
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.title {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.channel-name {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0px;
+  margin-bottom: 20px;
+  color: rgb(100, 100, 100);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.channel-avatar {
+  height: 25px;
+  width: 25px;
+}
+
+.channel-avatar-img {
+  height: 25px;
+  width: 25px;
+}
+
+.views-time {
+  color: rgb(96, 96, 96);
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 1px;
+  margin-bottom: 15px;
+}
+
+.mat-card-header-text {
+  margin: 0px;
+}
+
+.bullet-point {
+  margin: 4px;
+}
+
+.video-description {
+  color: rgb(96, 96, 96);
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

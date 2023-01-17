@@ -32,6 +32,7 @@ import { VideoDescriptionComponent } from './components/video-description/video-
 import { CommentsComponent } from './components/comments/comments.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
+import { SearchVideosComponent } from './components/search-videos/search-videos.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
     CommentsComponent,
     OrderByPipe,
     SuggestionsComponent,
+    SearchVideosComponent,
   ],
   imports: [
     BrowserModule,

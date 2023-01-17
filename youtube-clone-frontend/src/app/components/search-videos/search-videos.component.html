@@ -1,0 +1,51 @@
+<div class="container" *ngFor="let videoAuthor of combinedVideoAuthor">
+  <mat-card class="video-card">
+    <div class="thumbnail">
+      <img
+        mat-card-image
+        src="{{ videoAuthor.video.thumbnailUrl }}"
+        alt="Photo of a Shiba Inu"
+        class="thumbnail-image"
+      />
+    </div>
+
+    <mat-card-header class="video-details">
+      <mat-card-title class="title">
+        Hello, {{ videoAuthor.video.title }} Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Numquam, quos! Quisquam quam esse suscipit
+        eveniet delectus minus, reiciendis dicta perferendis!
+      </mat-card-title>
+      <mat-card-subtitle class="views-time"
+        ><span class="views">{{ videoAuthor.video.views | views }} views</span>
+        <span class="bullet-point"> &bull;</span>
+        <span class="relative-time">{{
+          videoAuthor.video.publishedAt | relativeTime
+        }}</span>
+      </mat-card-subtitle>
+      <mat-card-subtitle class="channel-name">
+        <div class="channel-avatar">
+          <img
+            mat-card-avatar
+            src="{{ videoAuthor.author.picture }}"
+            alt=""
+            class="channel-avatar-img"
+          />
+        </div>
+        <div class="full-name">
+          {{ videoAuthor.author.fullName }}
+        </div>
+      </mat-card-subtitle>
+      <mat-card-subtitle class="video-description">
+        <div class="channel-description">
+          {{ videoAuthor.video.description }} Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Tenetur doloribus et voluptate quisquam
+          architecto odit impedit sed, iste nesciunt soluta molestiae libero
+          reiciendis itaque repudiandae. Sint quidem facilis quos veniam non ut
+          at repellendus vero optio temporibus dolore officiis perferendis, esse
+          facere obcaecati ea, dolores fuga voluptatibus expedita voluptate
+          porro.
+        </div>
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</div>

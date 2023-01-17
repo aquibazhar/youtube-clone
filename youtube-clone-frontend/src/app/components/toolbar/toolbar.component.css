@@ -70,7 +70,7 @@
   align-items: center;
 }
 
-:host ::ng-deep .home-component {
+:host :host ::ng-deep .home-component {
   background-color: #ffffff;
 }
 
@@ -99,12 +99,12 @@
   align-items: center;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
   padding: 0;
   margin: 0;
 }
 
-::ng-deep .mat-form-field-wrapper {
+:host ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 0;
 }
 
@@ -114,21 +114,21 @@
 }
 
 /* input */
-::ng-deep .mat-form-field-infix {
+:host ::ng-deep .mat-form-field-infix {
   border-top: 5px solid transparent;
   font-size: 17px;
 }
 
-::ng-deep .mat-toolbar .mat-input-element {
+:host ::ng-deep .mat-toolbar .mat-input-element {
   height: 43px;
 }
 
-::ng-deep .mat-form-field-outline-start {
+:host ::ng-deep .mat-form-field-outline-start {
   border-radius: 40px 0 0 40px !important;
   min-width: 40px !important;
 }
 
-::ng-deep .mat-form-field-outline-end {
+:host ::ng-deep .mat-form-field-outline-end {
   border-radius: 0 0px 0px 0 !important;
 }
 
@@ -160,15 +160,18 @@
   color: rgba(6, 95, 212, 0.6);
 }
 
-::ng-deep
+:host
+  ::ng-deep
   .mat-form-field-appearance-outline
   .mat-form-field-outline-thick
   .mat-form-field-outline-start,
-::ng-deep
+:host
+  ::ng-deep
   .mat-form-field-appearance-outline
   .mat-form-field-outline-thick
   .mat-form-field-outline-end,
-::ng-deep.mat-form-field-appearance-outline
+:host
+  ::ng-deep.mat-form-field-appearance-outline
   .mat-form-field-outline-thick
   .mat-form-field-outline-gap {
   border-width: 1px !important;
@@ -189,9 +192,36 @@
 
 .suffix-icon {
   font-size: 27px;
+  background-color: transparent;
+}
+
+.mat-input-field {
+  background-color: transparent !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  border: none;
 }
 
 /* SEARCH */
+
+/*AVATAR*/
+
+.mat-card {
+  background: transparent;
+  box-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 5px;
+}
+.mat-card-header {
+  background: none;
+  box-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  width: 40px;
+}
+
+/*AVATAR*/
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

@@ -18,6 +18,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MaterialModules = [
   MatIconModule,
@@ -39,6 +40,7 @@ const MaterialModules = [
   MatExpansionModule,
   MatDialogModule,
   MatProgressSpinnerModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

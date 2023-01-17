@@ -6,7 +6,6 @@
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="titleFlag = !titleFlag"
           class="hide-in-mobile"
           (click)="drawer.toggle()"
         >
@@ -19,13 +18,12 @@
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="titleFlag = !titleFlag"
           class="hide-in-mobile"
           class="youtube-icon-btn"
         >
           <mat-icon class="youtube-icon">smart_display</mat-icon>
         </button>
-        <span>YouTube</span>
+        <span routerLink="/home">YouTube</span>
       </div>
     </mat-toolbar>
     <mat-nav-list>
@@ -74,17 +72,13 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        (click)="titleFlag = !titleFlag"
-        *ngIf="!homePage && titleFlag"
+        *ngIf="!homePage"
       >
         <mat-icon aria-label="Side nav toggle icon" class="toolbar-icons"
           >menu</mat-icon
         >
       </button>
-      <span
-        *ngIf="!homePage && titleFlag"
-        class="app-heading"
-        routerLink="/home"
+      <span *ngIf="!homePage" class="app-heading" routerLink="/home"
         >YouTube</span
       >
       <span class="menu-spacer"></span>
@@ -110,7 +104,10 @@
                 (focusin)="activeFlag = true"
                 (focusout)="activeFlag = false"
                 formControlName="input"
+                [matAutocomplete]="auto"
               />
+              <mat-autocomplete #auto="matAutocomplete" disabled="true">
+              </mat-autocomplete>
             </mat-form-field>
             <div class="search-btn-div">
               <button mat-flat-button class="search-btn" type="submit">
@@ -140,12 +137,16 @@
       <div *ngIf="isAuthenticated">
         <div class="avatar-parent">
           <button mat-button class="user-button" [matMenuTriggerFor]="menu">
-            <img
-              mat-card-avatar
-              class="avatar-image"
-              src="{{ currentUser.picture }}"
-              alt="display-picture"
-            />
+            <mat-card>
+              <mat-card-header>
+                <img
+                  mat-card-avatar
+                  class="avatar-image"
+                  src="{{ currentUser.picture }}"
+                  alt="display-picture"
+                />
+              </mat-card-header>
+            </mat-card>
           </button>
         </div>
         <mat-menu #menu="matMenu">
@@ -153,6 +154,7 @@
             Hello, {{ currentUser.firstName }}
           </div> -->
           <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item (click)="openSaveVideo()">save</button>
         </mat-menu>
       </div>
     </mat-toolbar>

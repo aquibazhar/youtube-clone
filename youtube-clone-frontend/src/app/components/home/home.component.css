@@ -2,6 +2,11 @@ body {
   box-sizing: border-box;
 }
 
+.outer-container {
+  margin-left: 30px;
+  width: 96%;
+}
+
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1, "wght" 100, "GRAD" -25, "opsz" 20;
 }
@@ -29,23 +34,24 @@ body {
   color: rgb(0, 0, 0, 0.5);
 }
 
+.container {
+  margin-top: 35px;
+  margin-left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+}
+
 .video-card {
   max-width: 300px;
-
   /* 350 */
-  position: relative;
+  /* position: relative; */
   padding: 0;
   border: none;
   box-shadow: none;
-}
-
-.container {
-  box-sizing: border-box;
-  height: 350px;
-  margin: 20px;
-  margin-bottom: 20px;
-  float: left;
-  justify-content: space-evenly;
+  margin-bottom: 16px;
+  /* height: 400px; */
 }
 
 mat-card-header {

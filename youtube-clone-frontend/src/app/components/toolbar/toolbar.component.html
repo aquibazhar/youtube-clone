@@ -27,11 +27,21 @@
       </div>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/home" matTooltip="Home">
+      <a
+        mat-list-item
+        routerLink="/home"
+        matTooltip="Home"
+        class="sidenav-list-item"
+      >
         <mat-icon mat-list-icon class="sidenav-icons">home</mat-icon>
         <span class="sidenav-item">Home</span>
       </a>
-      <a mat-list-item matTooltip="Login" *ngIf="!isAuthenticated">
+      <a
+        mat-list-item
+        matTooltip="Login"
+        *ngIf="!isAuthenticated"
+        class="sidenav-list-item"
+      >
         <mat-icon mat-list-icon class="sidenav-icons">login</mat-icon>
         <span class="sidenav-item">Sign In</span>
       </a>
@@ -40,6 +50,7 @@
         matTooltip="Subscriptions"
         routerLink="/subscriptions"
         *ngIf="isAuthenticated"
+        class="sidenav-list-item"
       >
         <mat-icon mat-list-icon class="sidenav-icons">subscriptions</mat-icon>
         <span class="sidenav-item">Subscriptions</span>
@@ -49,6 +60,7 @@
         matTooltip="Watch History"
         routerLink="/history"
         *ngIf="isAuthenticated"
+        class="sidenav-list-item"
       >
         <mat-icon mat-list-icon class="sidenav-icons">history</mat-icon>
         <span class="sidenav-item">Watch History</span>
@@ -58,6 +70,7 @@
         matTooltip="Liked Videos"
         routerLink="/liked-videos"
         *ngIf="isAuthenticated"
+        class="sidenav-list-item"
       >
         <mat-icon mat-list-icon class="sidenav-icons">thumb_up</mat-icon>
         <span class="sidenav-item">Liked Videos</span>
@@ -110,7 +123,12 @@
               </mat-autocomplete>
             </mat-form-field>
             <div class="search-btn-div">
-              <button mat-flat-button class="search-btn" type="submit">
+              <button
+                mat-flat-button
+                class="search-btn"
+                type="submit"
+                [disabled]="searchForm.value.input === ''"
+              >
                 <mat-icon class="search-icon">search</mat-icon>
               </button>
             </div>

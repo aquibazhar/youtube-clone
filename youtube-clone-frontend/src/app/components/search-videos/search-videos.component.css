@@ -1,17 +1,14 @@
-.container {
-  margin-top: 30px;
+.outer-container {
+  margin-top: 25px;
   width: 85%;
-  margin-left: 150px;
-  margin-bottom: 125px;
+  margin-left: 130px;
   display: block;
 }
 
 .video-card {
-  margin-top: 10px;
   display: flex;
   align-items: flex-start;
   padding: 0px;
-  max-height: 100px;
   box-shadow: none;
   background-color: transparent;
   margin-bottom: 15px;
@@ -19,7 +16,7 @@
 
 .thumbnail {
   align-self: flex-start;
-  width: 32%;
+  width: 31%;
 }
 
 .video-details {
@@ -27,7 +24,6 @@
   height: 100%;
   padding: 0px;
   margin: 0px;
-  margin-top: 5px;
 }
 
 .thumbnail-image {
@@ -39,15 +35,16 @@
 
 .title {
   width: 100%;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   margin: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  line-height: 25px;
 }
 
 .channel-name {

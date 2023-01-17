@@ -1,42 +1,42 @@
-<app-chips-bar></app-chips-bar>
-<div
-  class="container"
-  *ngFor="let videoAuthor of combinedVideoAuthor"
-  routerLink="/watch-video/{{ videoAuthor.video.id }}"
->
-  <mat-card
-    class="video-card"
-    matRipple
-    matRippleColor="rgba(103, 58, 183, 0.1)"
-  >
-    <img
-      mat-card-image
-      src="{{ videoAuthor.video.thumbnailUrl }}"
-      class="thumbnail-image"
-      alt="thumbnail"
-    />
-    <mat-card-header>
+<div class="outer-container">
+  <app-chips-bar></app-chips-bar>
+  <div class="container">
+    <mat-card
+      *ngFor="let videoAuthor of combinedVideoAuthor"
+      routerLink="/watch-video/{{ videoAuthor.video.id }}"
+      class="video-card"
+      matRipple
+      matRippleColor="rgba(103, 58, 183, 0.1)"
+    >
       <img
-        mat-card-avatar
-        class="header-image"
-        src="{{ videoAuthor.author.picture }}"
-        alt="display-picture"
-        referrerpolicy="no-referrer"
+        mat-card-image
+        src="{{ videoAuthor.video.thumbnailUrl }}"
+        class="thumbnail-image"
+        alt="thumbnail"
       />
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          class="header-image"
+          src="{{ videoAuthor.author.picture }}"
+          alt="display-picture"
+          referrerpolicy="no-referrer"
+        />
 
-      <mat-card-title class="title">{{
-        videoAuthor.video.title
-      }}</mat-card-title>
-      <mat-card-subtitle class="subtitle">
-        {{ videoAuthor.author.fullName }}
-      </mat-card-subtitle>
-      <mat-card-subtitle class="subtitle">
-        <span class="views">{{ videoAuthor.video.views | views }} views</span>
-        <span class="bullet-point"> &bull;</span>
-        <span class="relative-time">{{
-          videoAuthor.video.publishedAt | relativeTime
-        }}</span>
-      </mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
+        <mat-card-title class="title">{{
+          videoAuthor.video.title
+        }}</mat-card-title>
+        <mat-card-subtitle class="subtitle">
+          {{ videoAuthor.author.fullName }}
+        </mat-card-subtitle>
+        <mat-card-subtitle class="subtitle">
+          <span class="views">{{ videoAuthor.video.views | views }} views</span>
+          <span class="bullet-point"> &bull;</span>
+          <span class="relative-time">{{
+            videoAuthor.video.publishedAt | relativeTime
+          }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
 </div>

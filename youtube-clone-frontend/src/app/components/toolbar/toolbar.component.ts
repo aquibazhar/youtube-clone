@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawerMode } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { User } from 'src/app/models/user';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
@@ -27,7 +28,8 @@ export class ToolbarComponent implements OnInit {
     public dialog: MatDialog,
     private userService: UserService,
     private navbarService: NavbarToggleService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.searchForm = this.fb.group({
       input: [''],
@@ -79,6 +81,7 @@ export class ToolbarComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchForm.value);
+    this.router.navigateByUrl('/search/' + this.searchForm.value.input);
   }
 
   onReset() {

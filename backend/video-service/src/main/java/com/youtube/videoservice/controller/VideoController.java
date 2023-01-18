@@ -105,4 +105,13 @@ public class VideoController {
         Boolean userDisliked = service.userDisliked(videoId);
         return ResponseEntity.status(HttpStatus.OK).body(userDisliked);
     }
+
+//    @PostMapping("/playlist")
+//    public ResponseEntity<List<Video>> getVideosById(@RequestBody List<String> videoIds) {
+//        List<Video> videoList = service.getVideosById(videoIds);
+//        if (videoList.isEmpty()) {
+//            throw new ResourceNotFoundException("No Videos present in the playlist.");
+//        }
+//        return ResponseEntity.status(HttpStatus.OK).body(videoList);
+//    }
 }

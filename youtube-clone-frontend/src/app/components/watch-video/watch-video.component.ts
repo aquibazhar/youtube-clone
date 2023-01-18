@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
@@ -27,14 +28,21 @@ export class WatchVideoComponent implements OnInit {
 
   videoAuthor: User = {} as User;
 
+  subscription!: Subscription;
+
   currentUserId: string;
+
+  videoIdAvailable: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoUploadService,
     private userService: UserService,
-    private navbarService: NavbarToggleService
+    private navbarService: NavbarToggleService,
+    private router: Router
   ) {
+    this.videoIdAvailable = false;
+    this.videoAvailable = false;
     const userId = localStorage.getItem('userId');
     this.currentUserId = userId !== null ? userId : '';
     this.userService.getUserById(this.currentUserId).subscribe((data) => {
@@ -46,8 +54,26 @@ export class WatchVideoComponent implements OnInit {
     this.checkIfCurrentUserDisliked();
     this.navbarService.updateData(false, 'over');
   }
+  // ngOnDestroy(): void {
+  //   this.subscription.unsubscribe();
+  // }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.videoId =
+          this.activatedRoute.snapshot.params['videoId'].toLowerCase();
+        this.getVideoById();
+        this.checkIfCurrentUserLiked();
+        this.checkIfCurrentUserDisliked();
+      }
+    });
+  }
+
+  onUrlChange(newVideoId: string) {
+    this.videoAvailable = false;
+    this.router.navigateByUrl('/watch-video/' + newVideoId);
+  }
 
   onLike() {
     this.videoService.likeVideo(this.videoId).subscribe((data) => {

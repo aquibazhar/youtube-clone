@@ -66,6 +66,10 @@ export class VideoUploadService {
     return this.http.get<boolean>(VIDEO_SERVICE_URL + '/dislike/' + videoId);
   }
 
+  getVideosByIds(videoIds: string[]): Observable<Video[]> {
+    return this.http.post<Video[]>(VIDEO_SERVICE_URL + '/playlist', videoIds);
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

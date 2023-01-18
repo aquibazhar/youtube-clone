@@ -7,15 +7,15 @@
         </div>
         <div class="other-details">
           <div class="playlist-title">Liked videos</div>
-          <div class="current-user-name">Aquib Azhar</div>
+          <div class="current-user-name">{{ currentUserName }}</div>
           <div class="count">1000 videos</div>
           <div class="action-buttons">
-            <button mat-flat-button class="shuffle-btn">
+            <button mat-flat-button class="shuffle-btn" (click)="onClear()">
               <mat-icon class="button-icon">delete</mat-icon>
 
               <span class="button-text">Clear</span>
             </button>
-            <button mat-flat-button class="clear-btn">
+            <button mat-flat-button class="clear-btn" (click)="onShuffle()">
               <mat-icon class="button-icon clear-btn-icon">shuffle</mat-icon>
               <span class="button-text clear-btn-text">Shuffle</span>
             </button>
@@ -37,12 +37,16 @@
     </div>
     <div class="right">
       <div class="right-container">
-        <mat-card class="video-card">
-          <div class="serial-number">1</div>
+        <mat-card
+          class="video-card"
+          *ngFor="let videoAuthor of combinedVideoAuthor; let i = index"
+          routerLink="/watch-video/{{ videoAuthor.video.id }}"
+        >
+          <div class="serial-number">{{ i + 1 }}</div>
           <div class="thumbnail">
             <img
               mat-card-image
-              src="{{ imageUrl }}"
+              src="{{ videoAuthor.video.thumbnailUrl }}"
               alt="Photo of a Shiba Inu"
               class="thumbnail-image"
             />
@@ -50,23 +54,45 @@
 
           <mat-card-header class="video-details">
             <mat-card-title class="title">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-              et maxime rerum numquam magni enim repudiandae, vitae autem
-              commodi obcaecati.
+              {{ videoAuthor.video.title }}
             </mat-card-title>
 
             <mat-card-subtitle class="views-time">
-              <span class="channel-name" matTooltip="Aquib Azhar"
-                >Aquib Azhar</span
+              <span
+                class="channel-name"
+                matTooltip=" {{ videoAuthor.author.fullName }}"
+              >
+                {{ videoAuthor.author.fullName }}</span
               >
               <span class="bullet-point"> &bull;</span>
-              <span class="views">{{ 100 | views }} views</span>
+              <span class="views"
+                >{{ videoAuthor.video.views | views }} views</span
+              >
               <span class="bullet-point"> &bull;</span>
               <span class="relative-time">{{
-                "2023-01-16T01:43:18.382+00:00" | relativeTime
+                videoAuthor.video.publishedAt | relativeTime
               }}</span>
             </mat-card-subtitle>
           </mat-card-header>
+          <div
+            class="options-button"
+            [matMenuTriggerFor]="menu"
+            (click)="stopOuterEvent($event)"
+          >
+            <button mat-icon-button class="option-btn">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                class="options-menu"
+                (click)="onDelete(videoAuthor.video.id)"
+              >
+                <mat-icon class="delete-menu-icon">delete</mat-icon>
+                <span class="delete-menu-item">Remove from Liked videos</span>
+              </button>
+            </mat-menu>
+          </div>
         </mat-card>
       </div>
     </div>

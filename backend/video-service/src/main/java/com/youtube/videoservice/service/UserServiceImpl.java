@@ -170,6 +170,7 @@ public class UserServiceImpl implements UserService {
         return repository.findById(userId);
     }
 
+
     // COMMENTS
 
     @Override
@@ -210,4 +211,8 @@ public class UserServiceImpl implements UserService {
     public boolean ifDislikedComment(String commentId) {
         return this.getCurrentUser().getDislikedComments().stream().anyMatch((dislikedComment) -> dislikedComment.equals(commentId));
     }
+
+
+
+
 }

@@ -43,4 +43,5 @@ public interface UserService {
     public Set<String> getUserHistory(String userId);
 
     public Optional<User> getUserById(String userId);
+
 }

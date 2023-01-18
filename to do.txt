@@ -13,3 +13,5 @@
 - have to implement watch later functionality in backend and frontend.
 - fix home page for that horizontal scroll bar
 - show subscriptions on the left side
+- fix suggestion route
+- fix bug in comment form

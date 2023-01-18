@@ -1,1 +1,5 @@
-<app-playlist-view></app-playlist-view>
+<app-playlist-view
+  *ngIf="dataFetched"
+  [currentUserName]="currentUser.fullName"
+  [videoIds]="likedVideos"
+></app-playlist-view>

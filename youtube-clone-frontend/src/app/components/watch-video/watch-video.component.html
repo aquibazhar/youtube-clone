@@ -64,18 +64,20 @@
       </mat-card-header>
     </mat-card>
     <app-video-description
+      *ngIf="videoAvailable"
       [viewCount]="videoDetails.views"
       [date]="videoDetails.publishedAt"
       [tags]="videoDetails.tags"
       [description]="videoDetails.description"
     ></app-video-description>
     <app-comments
-      [videoId]="videoId"
+      *ngIf="videoAvailable"
+      [videoId]="videoDetails.id"
       [currentUser]="currentUser"
     ></app-comments>
   </div>
   <div fxFlex="30%">
-    <app-suggestions></app-suggestions>
+    <app-suggestions (urlChange)="onUrlChange($event)"></app-suggestions>
   </div>
   <div fxFlex="5%"></div>
 </div>

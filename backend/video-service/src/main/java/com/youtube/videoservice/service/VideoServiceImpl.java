@@ -169,4 +169,9 @@ public class VideoServiceImpl implements VideoService {
         return userService.ifDislikedVideo(videoId);
     }
 
+    @Override
+    public List<Video> getVideosById(List<String> videoIds) {
+        return repository.findAllByIdIn(videoIds);
+    }
+
 }

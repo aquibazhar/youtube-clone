@@ -1,5 +1,9 @@
 <div class="container">
-  <mat-card class="video-card" *ngFor="let videoAuthor of combinedVideoAuthor">
+  <mat-card
+    class="video-card"
+    *ngFor="let videoAuthor of combinedVideoAuthor"
+    (click)="onClick(videoAuthor.video.id)"
+  >
     <div class="thumbnail">
       <img
         mat-card-image

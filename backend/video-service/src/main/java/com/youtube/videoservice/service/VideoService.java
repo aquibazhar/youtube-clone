@@ -34,4 +34,6 @@ public interface VideoService {
     public Boolean userLiked(String videoId);
 
     public Boolean userDisliked(String videoId);
+
+    public List<Video> getVideosById(List<String> videoIds);
 }

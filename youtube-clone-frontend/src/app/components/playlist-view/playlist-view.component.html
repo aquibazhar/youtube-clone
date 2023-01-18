@@ -1,1 +1,74 @@
-<p>playlist-view works!</p>
+<div class="outer-container">
+  <div class="container">
+    <div class="left">
+      <div class="playlist-card">
+        <div class="playlist-image">
+          <img src="{{ imageUrl }}" alt="Photo of a Shiba Inu" class="image" />
+        </div>
+        <div class="other-details">
+          <div class="playlist-title">Liked videos</div>
+          <div class="current-user-name">Aquib Azhar</div>
+          <div class="count">1000 videos</div>
+          <div class="action-buttons">
+            <button mat-flat-button class="shuffle-btn">
+              <mat-icon class="button-icon">delete</mat-icon>
+
+              <span class="button-text">Clear</span>
+            </button>
+            <button mat-flat-button class="clear-btn">
+              <mat-icon class="button-icon clear-btn-icon">shuffle</mat-icon>
+              <span class="button-text clear-btn-text">Shuffle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="overlay-1"
+        [ngStyle]="{
+          'background-image': 'url(' + imageUrl + ')'
+        }"
+      ></div>
+      <div
+        class="overlay-2"
+        [ngStyle]="{
+          'background-image': 'url(' + imageUrl + ')'
+        }"
+      ></div>
+    </div>
+    <div class="right">
+      <div class="right-container">
+        <mat-card class="video-card">
+          <div class="serial-number">1</div>
+          <div class="thumbnail">
+            <img
+              mat-card-image
+              src="{{ imageUrl }}"
+              alt="Photo of a Shiba Inu"
+              class="thumbnail-image"
+            />
+          </div>
+
+          <mat-card-header class="video-details">
+            <mat-card-title class="title">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
+              et maxime rerum numquam magni enim repudiandae, vitae autem
+              commodi obcaecati.
+            </mat-card-title>
+
+            <mat-card-subtitle class="views-time">
+              <span class="channel-name" matTooltip="Aquib Azhar"
+                >Aquib Azhar</span
+              >
+              <span class="bullet-point"> &bull;</span>
+              <span class="views">{{ 100 | views }} views</span>
+              <span class="bullet-point"> &bull;</span>
+              <span class="relative-time">{{
+                "2023-01-16T01:43:18.382+00:00" | relativeTime
+              }}</span>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

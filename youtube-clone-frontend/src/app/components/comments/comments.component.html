@@ -19,7 +19,9 @@
       <div class="comment header-element">
         <form (ngSubmit)="onComment()" [formGroup]="commentForm">
           <mat-form-field appearance="legacy" class="comment-field">
-            <mat-label>Add a comment...</mat-label>
+            <mat-label class="comment-placeholder" *ngIf="!inputIsFocussed"
+              >Add a comment...</mat-label
+            >
             <input
               matInput
               class="comment-input"

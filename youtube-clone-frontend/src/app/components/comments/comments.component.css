@@ -13,7 +13,7 @@
 }
 
 .comment-header {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .add-comment {
@@ -26,7 +26,7 @@
   margin-bottom: 10px;
 }
 
-.mat-form-field {
+:host .mat-form-field {
   display: block;
   width: auto;
   padding: 0px;
@@ -48,11 +48,11 @@
   float: left;
 }
 
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
   padding: 0em !important;
 }
 
-::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: transparent !important;
 }
 
@@ -119,9 +119,6 @@
   margin-bottom: 5px;
 }
 
-.comment-content {
-}
-
 .like-btn {
   padding: 0px;
   background-color: transparent;
@@ -150,4 +147,36 @@
 
 .comment-card {
   margin-bottom: 15px;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0px;
+}
+
+.comment-placeholder {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+:host ::ng-deep input.mat-input-element {
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+
+.comment-field {
+  margin-bottom: 0px;
+  display: block;
+}
+
+:host ::ng-deep .mat-form-field-label-wrapper {
+  top: -25px;
+  padding-top: 0.84375em;
+}
+
+.comment-input {
+  font-size: 14px;
+}
+
+.comment-form {
+  margin-bottom: 25px;
 }

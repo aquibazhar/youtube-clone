@@ -54,9 +54,6 @@ export class WatchVideoComponent implements OnInit {
     this.checkIfCurrentUserDisliked();
     this.navbarService.updateData(false, 'over');
   }
-  // ngOnDestroy(): void {
-  //   this.subscription.unsubscribe();
-  // }
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -71,8 +68,10 @@ export class WatchVideoComponent implements OnInit {
   }
 
   onUrlChange(newVideoId: string) {
-    this.videoAvailable = false;
-    this.router.navigateByUrl('/watch-video/' + newVideoId);
+    if (newVideoId !== this.videoId) {
+      this.videoAvailable = false;
+      this.router.navigateByUrl('/watch-video/' + newVideoId);
+    }
   }
 
   onLike() {

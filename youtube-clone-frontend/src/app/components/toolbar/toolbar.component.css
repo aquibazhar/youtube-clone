@@ -127,7 +127,7 @@
 
 /* SEARCH */
 
-.outer-search {
+:host .outer-search {
   display: flex;
   align-items: center;
 }
@@ -142,7 +142,7 @@
 }
 
 /* form-field */
-.mat-form-field {
+:host .mat-form-field {
   width: 600px;
 }
 
@@ -165,7 +165,7 @@
   border-radius: 0 0px 0px 0 !important;
 }
 
-.search-btn {
+:host .search-btn {
   border-radius: 0px 40px 40px 0px;
   background-color: #f8f8f8;
   height: 42px;
@@ -192,9 +192,6 @@
 
 .search-btn:disabled .search-icon {
   color: black;
-}
-
-:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
 }
 
 :host
@@ -239,7 +236,7 @@
   background-color: transparent;
 }
 
-.mat-input-field {
+:host .mat-input-field {
   background-color: transparent !important;
   margin: 0px !important;
   padding: 0px !important;

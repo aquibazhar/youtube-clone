@@ -1,5 +1,7 @@
-<app-playlist-view
-  *ngIf="dataFetched"
-  [currentUserName]="currentUser.fullName"
+<app-liked-playlist-view
+  [currentUser]="currentUser"
   [videoIds]="likedVideos"
-></app-playlist-view>
+  (playlistCleared)="onPlaylistCleared($event)"
+  *ngIf="dataFetched"
+></app-liked-playlist-view>
+<app-empty-playlist *ngIf="!dataFetched"></app-empty-playlist>

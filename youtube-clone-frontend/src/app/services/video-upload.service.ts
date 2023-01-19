@@ -70,6 +70,12 @@ export class VideoUploadService {
     return this.http.post<Video[]>(VIDEO_SERVICE_URL + '/playlist', videoIds);
   }
 
+  removeAllFromLikedVideos(userId: string): Observable<string> {
+    return this.http.delete(VIDEO_SERVICE_URL + '/playlist/' + userId, {
+      responseType: 'text',
+    });
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

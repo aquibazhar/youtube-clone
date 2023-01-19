@@ -36,4 +36,6 @@ public interface VideoService {
     public Boolean userDisliked(String videoId);
 
     public List<Video> getVideosById(List<String> videoIds);
+
+    public void removeAllLikedVideos(String userId);
 }

@@ -1,9 +1,8 @@
 package com.youtube.videoservice.service;
 
-import com.youtube.videoservice.dto.CommentDto;
 import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
-import com.youtube.videoservice.model.Comment;
+import com.youtube.videoservice.model.User;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -172,6 +172,22 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<Video> getVideosById(List<String> videoIds) {
         return repository.findAllByIdIn(videoIds);
+    }
+
+    @Override
+    public void removeAllLikedVideos(String userId) {
+        Optional<User> userOptional = userService.getUserById(userId);
+        if (userOptional.isEmpty())
+            throw new ResourceNotFoundException("User with this ID doesn't exist.");
+        User currentUser = userOptional.get();
+
+        List<String> likedVideos = new ArrayList<>(currentUser.getLikedVideos());
+        // 1) Run likeVideo for every videoId in getLikedVideos()
+        //    because they are already liked, this will remove them from liked videos and decrement likes as well.
+
+        for(String videoId: likedVideos){
+            this.likeVideo(videoId);
+        }
     }
 
 }

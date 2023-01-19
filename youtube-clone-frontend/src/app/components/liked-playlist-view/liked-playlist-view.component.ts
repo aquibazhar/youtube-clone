@@ -8,20 +8,18 @@ import { UserService } from 'src/app/services/user.service';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
 
 @Component({
-  selector: 'app-playlist-view',
-  templateUrl: './playlist-view.component.html',
-  styleUrls: ['./playlist-view.component.css'],
+  selector: 'app-liked-playlist-view',
+  templateUrl: './liked-playlist-view.component.html',
+  styleUrls: ['./liked-playlist-view.component.css'],
 })
-export class PlaylistViewComponent implements OnInit {
-  dominant!: string;
-
-  // imageUrl: string ='https://material.angular.io/assets/img/examples/shiba2.jpg';
+export class LikedPlaylistViewComponent implements OnInit {
   imageUrl: string = 'assets/tenz.jpg';
-  @Input() currentUserName: string = '';
+  @Input() currentUser: User = {} as User;
   @Input() userSubscriptions: string[] = [];
   @Input() videoIds: string[] = [];
   videos: Video[] = [];
   combinedVideoAuthor: VideoAuthor[] = [];
+  @Output() playlistCleared: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private navbarService: NavbarToggleService,
@@ -61,11 +59,13 @@ export class PlaylistViewComponent implements OnInit {
   }
 
   onClear() {
-    // this.videoIds.forEach((videoId) => {
-    //   this.videoService.likeVideo(videoId).subscribe((data) => {
-    //     console.log(1);
-    //   });
-    // });
+    this.videoService
+      .removeAllFromLikedVideos(this.currentUser.id)
+      .subscribe((data) => {
+        console.log(data);
+        this.combinedVideoAuthor = [];
+        this.playlistCleared.emit(data);
+      });
   }
 
   stopOuterEvent(event: any) {

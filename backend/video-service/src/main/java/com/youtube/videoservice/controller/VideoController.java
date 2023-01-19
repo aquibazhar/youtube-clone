@@ -106,12 +106,18 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(userDisliked);
     }
 
-//    @PostMapping("/playlist")
-//    public ResponseEntity<List<Video>> getVideosById(@RequestBody List<String> videoIds) {
-//        List<Video> videoList = service.getVideosById(videoIds);
-//        if (videoList.isEmpty()) {
-//            throw new ResourceNotFoundException("No Videos present in the playlist.");
-//        }
-//        return ResponseEntity.status(HttpStatus.OK).body(videoList);
-//    }
+    @PostMapping("/playlist")
+    public ResponseEntity<List<Video>> getVideosById(@RequestBody List<String> videoIds) {
+        List<Video> videoList = service.getVideosById(videoIds);
+        if (videoList.isEmpty()) {
+            throw new ResourceNotFoundException("No Videos present in the playlist.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(videoList);
+    }
+
+    @DeleteMapping("/playlist/{userId}")
+    public ResponseEntity<String> removeAllFromLikedVideos(@PathVariable String userId) {
+        service.removeAllLikedVideos(userId);
+        return ResponseEntity.status(HttpStatus.OK).body("Everything from the Liked Videos playlist removed successfully!!!");
+    }
 }

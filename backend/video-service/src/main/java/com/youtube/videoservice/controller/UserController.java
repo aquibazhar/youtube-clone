@@ -56,9 +56,5 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userOptional.get());
     }
 
-    @DeleteMapping("/likedVideos/{videoId}")
-    public ResponseEntity<User> removeFromLikedVideos(@PathVariable String videoId){
-        service.deleteFromLikedVideos(videoId);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
+
 }

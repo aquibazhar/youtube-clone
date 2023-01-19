@@ -19,9 +19,14 @@ export class LikedVideosComponent implements OnInit {
     this.userService.getUserById(this.currentUserId).subscribe((data) => {
       this.currentUser = data;
       this.likedVideos = data.likedVideos;
-      this.dataFetched = true;
+      if (this.likedVideos.length !== 0) this.dataFetched = true;
+      else this.dataFetched = false;
     });
   }
 
   ngOnInit(): void {}
+
+  onPlaylistCleared(message: string) {
+    this.dataFetched = false;
+  }
 }

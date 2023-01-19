@@ -88,4 +88,8 @@ public class User {
     public void decrementSubscribers(String userId) {
         subscribers.remove(userId);
     }
+
+    public void removeAllFromLikedVideos(){
+        likedVideos.clear();
+    }
 }

@@ -3,11 +3,15 @@
     <div class="left">
       <div class="playlist-card">
         <div class="playlist-image">
-          <img src="{{ imageUrl }}" alt="Photo of a Shiba Inu" class="image" />
+          <img
+            src="{{ combinedVideoAuthor[0].video.thumbnailUrl }}"
+            alt="thumbnail"
+            class="image"
+          />
         </div>
         <div class="other-details">
           <div class="playlist-title">Liked videos</div>
-          <div class="current-user-name">{{ currentUserName }}</div>
+          <div class="current-user-name">{{ currentUser.fullName }}</div>
           <div class="count">1000 videos</div>
           <div class="action-buttons">
             <button mat-flat-button class="shuffle-btn" (click)="onClear()">
@@ -25,13 +29,15 @@
       <div
         class="overlay-1"
         [ngStyle]="{
-          'background-image': 'url(' + imageUrl + ')'
+          'background-image':
+            'url(' + combinedVideoAuthor[0].video.thumbnailUrl + ')'
         }"
       ></div>
       <div
         class="overlay-2"
         [ngStyle]="{
-          'background-image': 'url(' + imageUrl + ')'
+          'background-image':
+            'url(' + combinedVideoAuthor[0].video.thumbnailUrl + ')'
         }"
       ></div>
     </div>
@@ -47,7 +53,7 @@
             <img
               mat-card-image
               src="{{ videoAuthor.video.thumbnailUrl }}"
-              alt="Photo of a Shiba Inu"
+              alt="thumbnail"
               class="thumbnail-image"
             />
           </div>

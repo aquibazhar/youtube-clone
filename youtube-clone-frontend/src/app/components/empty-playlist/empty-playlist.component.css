@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+}
+
+.outer-container {
+  margin-top: 20px;
+  margin-left: 46px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.left {
+  position: fixed;
+  width: 365px;
+  height: 620px;
+  /* border: 1px solid black; */
+  overflow: hidden;
+  border-radius: 15px;
+}
+.right {
+  width: 70%;
+  position: absolute;
+  right: 0;
+}
+
+.playlist-card {
+  width: 365px;
+  height: 650px;
+  overflow: hidden;
+  /* background-color: red; */
+  border-radius: 15px;
+}
+
+.other-details {
+  padding: 25px;
+  z-index: 1;
+}
+
+.playlist-title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: black;
+  letter-spacing: 1px;
+}
+
+.current-user-name {
+  font-weight: 500;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.count {
+  font-size: 13px;
+  opacity: 100%;
+  color: black;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+/* RIGHT */
+
+.empty-playlist {
+  text-align: center;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* RIGHT */

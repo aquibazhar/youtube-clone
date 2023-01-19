@@ -1,0 +1,6 @@
+<div class="outer-container" *ngFor="let date of uniqueDates">
+  <div class="page-heading">Watch history</div>
+  <div class="day-heading">{{ date | dateAndDay }}</div>
+  <app-history-card></app-history-card>
+  <mat-divider></mat-divider>
+</div>

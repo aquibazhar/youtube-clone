@@ -1,5 +1,6 @@
 package com.youtube.videoservice.service;
 
+import com.youtube.videoservice.model.History;
 import com.youtube.videoservice.model.User;
 
 import java.util.Optional;
@@ -34,13 +35,13 @@ public interface UserService {
 
     public boolean ifDislikedComment(String commentId);
 
-    public void addToHistory(String videoId);
+    public void addToHistory(History history);
 
     public void subscribeUser(String userId);
 
     public void unsubscribeUser(String userId);
 
-    public Set<String> getUserHistory(String userId);
+    public Set<History> getUserHistory(String userId);
 
     public Optional<User> getUserById(String userId);
 

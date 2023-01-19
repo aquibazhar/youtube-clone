@@ -1,6 +1,7 @@
 package com.youtube.videoservice.controller;
 
 import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.History;
 import com.youtube.videoservice.model.User;
 import com.youtube.videoservice.repository.UserRepository;
 import com.youtube.videoservice.service.UserService;
@@ -43,8 +44,8 @@ public class UserController {
     }
 
     @GetMapping("/history/{userId}")
-    public ResponseEntity<Set<String>> getUserHistory(@PathVariable String userId){
-        Set<String> userHistory = service.getUserHistory(userId);
+    public ResponseEntity<Set<History>> getUserHistory(@PathVariable String userId){
+        Set<History> userHistory = service.getUserHistory(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(userHistory);
     }
 

@@ -29,7 +29,7 @@ public class User {
     ;
     private Set<String> subscribers = ConcurrentHashMap.newKeySet();
     ;
-    private Set<String> videoHistory = ConcurrentHashMap.newKeySet();
+    private Set<History> videoHistory = ConcurrentHashMap.newKeySet();
     // To keep it thread safe we used ConcurrentHashMap.newKeySet();
     private Set<String> likedVideos = ConcurrentHashMap.newKeySet();
     private Set<String> dislikedVideos = ConcurrentHashMap.newKeySet();
@@ -69,8 +69,18 @@ public class User {
         dislikedComments.remove(commentId);
     }
 
-    public void addToHistory(String videoId) {
-        videoHistory.add(videoId);
+    public void addToHistory(History history) {
+        boolean videoIdPresent = false;
+
+        for(History h: videoHistory){
+            if(h.getVideoId().equals(history.getVideoId())){
+                videoIdPresent=true;
+                break;
+            }
+        }
+
+        if(!videoIdPresent)
+            videoHistory.add(history);
     }
 
     public void subscribeToUser(String userId) {

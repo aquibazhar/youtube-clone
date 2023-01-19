@@ -1,0 +1,14 @@
+.outer-container {
+  display: flex;
+  margin-left: 150px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.left {
+  width: 60%;
+}
+
+.right {
+  width: 40%;
+}

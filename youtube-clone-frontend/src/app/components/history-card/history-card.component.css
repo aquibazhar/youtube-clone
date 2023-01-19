@@ -1,0 +1,92 @@
+.container {
+  width: 100%;
+}
+
+.history-card {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.thumbnail {
+  width: 35%;
+  height: 100%;
+}
+
+.thumbnail-image {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.other-details {
+  width: 50%;
+  height: 100%;
+}
+
+.top-details {
+  display: flex;
+  align-items: start;
+  margin-bottom: 2px;
+}
+
+.video-title {
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 70%;
+  line-height: 25px;
+}
+
+.buttons {
+  display: none;
+}
+
+.title-spacer {
+  flex: 1 1 auto;
+}
+
+.metrics {
+  font-size: 13px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.channel-name {
+  font-weight: 400;
+  color: rgb(100, 100, 100);
+}
+
+.view-count {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(96, 96, 96);
+}
+
+.description {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(96, 96, 96);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.history-card:hover .buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.delete-btn .mat-icon {
+  font-weight: lighter;
+}

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youtube.videoservice.dto.UserDto;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.History;
 import com.youtube.videoservice.model.User;
 import com.youtube.videoservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,9 +120,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addToHistory(String videoId) {
+    public void addToHistory(History history) {
         User currentUser = this.getCurrentUser();
-        currentUser.addToHistory(videoId);
+        currentUser.addToHistory(history);
         repository.save(currentUser);
     }
 
@@ -158,7 +159,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<String> getUserHistory(String userId) {
+    public Set<History> getUserHistory(String userId) {
         Optional<User> userOptional = repository.findById(userId);
         if (userOptional.isEmpty())
             throw new ResourceNotFoundException("A user with this ID doesn't exist");

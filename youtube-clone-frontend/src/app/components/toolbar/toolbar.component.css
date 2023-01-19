@@ -95,7 +95,8 @@
 .youtube-btn {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
+  margin-left: 7px;
 }
 
 .burger-btn {

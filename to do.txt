@@ -1,17 +1,10 @@
-- Add some service so that sidebar can have different settings 
-  for different components. ( I can use services for this )
 - enable chips component in home.
-- enable searching in home.
-- design drag and drop page
 - Auth guard
-- hover on description and also on comment cancel button
+- hover on comment cancel button
 - add sorting in comments.
 - add watch-time on video cards
 - add scnackbars to every place needed.
-- history, liked videos, subscriptions yet to be implemented
-- have to fix refresh after video is uploaded successfully.
+- history, subscriptions yet to be implemented
 - have to implement watch later functionality in backend and frontend.
-- fix home page for that horizontal scroll bar
 - show subscriptions on the left side
-- fix suggestion route
-- fix bug in comment form
+

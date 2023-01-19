@@ -1,3 +1,5 @@
+import { VideoHistory } from './video-history';
+
 export class User {
   constructor(
     public id: string,
@@ -9,7 +11,7 @@ export class User {
     public sub: string,
     public subscribedToUsers: string[],
     public subscribers: string[],
-    public videoHistory: string[],
+    public videoHistory: VideoHistory[],
     public likedVideos: string[],
     public dislikedVideos: string[]
   ) {}

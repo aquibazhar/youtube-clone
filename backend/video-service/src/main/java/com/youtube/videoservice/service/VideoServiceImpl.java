@@ -2,6 +2,7 @@ package com.youtube.videoservice.service;
 
 import com.youtube.videoservice.dto.VideoDto;
 import com.youtube.videoservice.exception.ResourceNotFoundException;
+import com.youtube.videoservice.model.History;
 import com.youtube.videoservice.model.User;
 import com.youtube.videoservice.model.Video;
 import com.youtube.videoservice.repository.VideoRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +64,10 @@ public class VideoServiceImpl implements VideoService {
         Video video = videoOptional.get();
 
         this.incrementViewCount(video);
-        userService.addToHistory(id);
+        History history = new History();
+        history.setVideoId(id);
+        history.setAddedOn(LocalDate.now());
+        userService.addToHistory(history);
 
         return video;
     }

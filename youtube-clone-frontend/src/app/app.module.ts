@@ -36,6 +36,10 @@ import { SearchVideosComponent } from './components/search-videos/search-videos.
 import { SearchComparePipe } from './pipes/search-compare.pipe';
 import { EmptyPlaylistComponent } from './components/empty-playlist/empty-playlist.component';
 import { LikedPlaylistViewComponent } from './components/liked-playlist-view/liked-playlist-view.component';
+import { HistoryCardViewComponent } from './components/history-card-view/history-card-view.component';
+import { HistoryManagementComponent } from './components/history-management/history-management.component';
+import { HistoryCardComponent } from './components/history-card/history-card.component';
+import { DateAndDayPipe } from './pipes/date-and-day.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { LikedPlaylistViewComponent } from './components/liked-playlist-view/lik
     SearchComparePipe,
     EmptyPlaylistComponent,
     LikedPlaylistViewComponent,
+    HistoryCardViewComponent,
+    HistoryManagementComponent,
+    HistoryCardComponent,
+    DateAndDayPipe,
   ],
   imports: [
     BrowserModule,

@@ -173,7 +173,12 @@ public class UserServiceImpl implements UserService {
         return repository.findById(userId);
     }
 
-
+    @Override
+    public void removeFromWatchHistory(String videoId) {
+        User user = this.getCurrentUser();
+        user.removeFromWatchHistory(videoId);
+        repository.save(user);
+    }
 
 
     // COMMENTS

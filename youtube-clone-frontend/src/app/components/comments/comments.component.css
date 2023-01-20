@@ -19,7 +19,8 @@
 .add-comment {
   margin-bottom: 10px;
   display: flex;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
+  /* align-items: flex-start; */
 }
 
 .display-comment {
@@ -40,6 +41,7 @@
 
 .comment {
   margin: 0px 10px;
+  margin-bottom: 0px;
   padding: 0px;
   flex: 1;
 }
@@ -160,21 +162,21 @@
 
 :host ::ng-deep input.mat-input-element {
   margin-top: 0px;
-  margin-bottom: 25px;
 }
 
 .comment-field {
-  margin-bottom: 0px;
+  /* margin-bottom: 10px; */
   display: block;
 }
 
 :host ::ng-deep .mat-form-field-label-wrapper {
-  top: -25px;
-  padding-top: 0.84375em;
+  top: -24px;
+  padding-bottom: 20px;
 }
 
 .comment-input {
   font-size: 14px;
+  padding-bottom: 5px;
 }
 
 .comment-form {

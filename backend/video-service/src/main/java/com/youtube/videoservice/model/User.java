@@ -75,6 +75,7 @@ public class User {
         for(History h: videoHistory){
             if(h.getVideoId().equals(history.getVideoId())){
                 videoIdPresent=true;
+                h.setAddedOn(history.getAddedOn());
                 break;
             }
         }
@@ -101,5 +102,14 @@ public class User {
 
     public void removeAllFromLikedVideos(){
         likedVideos.clear();
+    }
+
+    public void removeFromWatchHistory(String videoId) {
+        for (History h: videoHistory){
+            if(h.getVideoId().equals(videoId)){
+                videoHistory.remove(h);
+                break;
+            }
+        }
     }
 }

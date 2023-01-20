@@ -1,6 +1,9 @@
-<div class="outer-container" *ngFor="let date of uniqueDates">
-  <div class="page-heading">Watch history</div>
-  <div class="day-heading">{{ date | dateAndDay }}</div>
-  <app-history-card></app-history-card>
-  <mat-divider></mat-divider>
+<div class="page-heading">Watch history</div>
+<div class="outer-container" *ngFor="let dateAndDateTime of combinedDateTime">
+  <div class="day-heading">{{ dateAndDateTime.date | dateAndDay }}</div>
+  <app-history-card
+    [addedOn]="dateAndDateTime.dateAndTime"
+    *ngIf="dataFetched"
+    (videoRemoved)="videoRemoved($event)"
+  ></app-history-card>
 </div>

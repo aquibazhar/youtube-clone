@@ -57,5 +57,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userOptional.get());
     }
 
-
+    @DeleteMapping("/history/{videoId}")
+    public ResponseEntity<String> removeVideoFromWatchHistory(@PathVariable String videoId){
+        service.removeFromWatchHistory(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body("Video removed from history successfully!!!");
+    }
 }

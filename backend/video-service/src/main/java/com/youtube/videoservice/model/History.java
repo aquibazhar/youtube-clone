@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,5 +13,5 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class History {
     private String videoId;
-        private LocalDate addedOn;
+    private LocalDateTime addedOn;
 }

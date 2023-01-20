@@ -138,7 +138,7 @@
   margin: 0;
 }
 
-:host ::ng-deep .mat-form-field-wrapper {
+:host ::ng-deep .search-input .mat-form-field-wrapper {
   padding-bottom: 0;
 }
 

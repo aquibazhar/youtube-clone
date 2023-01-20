@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -66,7 +67,7 @@ public class VideoServiceImpl implements VideoService {
         this.incrementViewCount(video);
         History history = new History();
         history.setVideoId(id);
-        history.setAddedOn(LocalDate.now());
+        history.setAddedOn(LocalDateTime.now());
         userService.addToHistory(history);
 
         return video;
@@ -176,7 +177,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> getVideosById(List<String> videoIds) {
+    public List<Video> getVideosByIds(List<String> videoIds) {
         return repository.findAllByIdIn(videoIds);
     }
 
@@ -195,5 +196,20 @@ public class VideoServiceImpl implements VideoService {
             this.likeVideo(videoId);
         }
     }
+
+    @Override
+    public List<Video> getVideosByDate(LocalDateTime addedOn) {
+        Set<History> videoHistory = userService.getCurrentUser().getVideoHistory();
+        List<String> videoIds = new ArrayList<>();
+        for(History h: videoHistory) {
+            LocalDate addedOnDate = h.getAddedOn().toLocalDate();
+            if (addedOnDate.isEqual(addedOn.toLocalDate())) {
+                videoIds.add(h.getVideoId());
+            }
+        }
+        return this.getVideosByIds(videoIds);
+    }
+
+
 
 }

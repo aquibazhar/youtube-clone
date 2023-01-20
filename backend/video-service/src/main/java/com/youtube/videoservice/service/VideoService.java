@@ -7,6 +7,8 @@ import com.youtube.videoservice.model.Video;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,10 @@ public interface VideoService {
 
     public Boolean userDisliked(String videoId);
 
-    public List<Video> getVideosById(List<String> videoIds);
+    public List<Video> getVideosByIds(List<String> videoIds);
 
     public void removeAllLikedVideos(String userId);
+
+   public List<Video> getVideosByDate(LocalDateTime addedOn);
+
 }

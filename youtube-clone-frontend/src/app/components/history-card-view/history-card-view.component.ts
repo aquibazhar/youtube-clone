@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CombinedDateTime } from 'src/app/models/combined-date-time';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
 import { VideoAuthor } from 'src/app/models/video-author';
@@ -15,9 +16,11 @@ export class HistoryCardViewComponent implements OnInit {
   currentUser: User = {} as User;
   currentUserId: string;
   videoHistory: VideoHistory[] = [];
-  videoIds: string[] = [];
+
   videos: Video[] = [];
   uniqueDates: string[] = [];
+  dataFetched: boolean;
+  combinedDateTime: CombinedDateTime[] = [];
 
   // combinedVideoAuthor: VideoAuthor[] = [];
 
@@ -25,36 +28,62 @@ export class HistoryCardViewComponent implements OnInit {
     private userService: UserService,
     private videoService: VideoUploadService
   ) {
+    this.dataFetched = false;
     const userId = localStorage.getItem('userId');
     this.currentUserId = userId !== null ? userId : '';
+    this.getUserHistory();
+  }
+
+  ngOnInit(): void {}
+
+  getUserHistory() {
     this.userService.getUserById(this.currentUserId).subscribe((data) => {
       this.currentUser = data;
       this.videoHistory = data.videoHistory;
       console.log(this.videoHistory);
-      this.videoHistory.forEach((videoHistory) => {
-        this.videoIds.push(videoHistory.videoId);
-      });
 
       // we extract each addedOn property from videoHistory
       // then make a set from all the values which remove the duplicates
       // then finally convert it back to an array using ...(the spread operator)
       this.uniqueDates = [
         ...new Set(
-          this.videoHistory.map((videoHistory) => videoHistory.addedOn)
+          this.videoHistory.map((videoHistory) =>
+            videoHistory.addedOn.slice(0, 10)
+          )
         ),
       ];
 
-      console.log(this.uniqueDates.length);
+      this.uniqueDates.sort(function (a, b) {
+        return new Date(b).getTime() - new Date(a).getTime();
+      });
 
-      this.getVideosByIds();
+      console.log(this.uniqueDates);
+
+      this.uniqueDates.forEach((uniqueDate) => {
+        let dateAndTime: VideoHistory[] = [];
+        this.videoHistory.forEach((history) => {
+          if (uniqueDate.includes(history.addedOn.slice(0, 10))) {
+            dateAndTime.push(history);
+          }
+        });
+        this.combinedDateTime.push(
+          new CombinedDateTime(uniqueDate, dateAndTime)
+        );
+      });
+
+      this.dataFetched = true;
     });
   }
 
-  ngOnInit(): void {}
-
-  getVideosByIds() {
-    this.videoService.getVideosByIds(this.videoIds).subscribe((data) => {
-      this.videos = data;
+  videoRemoved(videoId: string) {
+    this.userService.removeVideoFromHistory(videoId).subscribe((data) => {
+      console.log(data);
+      this.dataFetched = false;
+      this.videoHistory = [];
+      this.combinedDateTime = [];
+      this.uniqueDates = [];
+      this.videoHistory = [];
+      this.getUserHistory();
     });
   }
 }

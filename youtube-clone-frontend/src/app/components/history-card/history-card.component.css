@@ -6,6 +6,7 @@
   display: flex;
   gap: 16px;
   margin-bottom: 18px;
+  position: relative;
 }
 
 .thumbnail {
@@ -84,6 +85,9 @@
 
 .history-card:hover .buttons {
   display: flex;
+  position: absolute;
+  right: 100px;
+  top: -10px;
   gap: 5px;
 }
 

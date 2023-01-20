@@ -42,6 +42,12 @@ export class UserService {
     return this.http.get<User>(USER_SERVICE_URL + '/' + userId);
   }
 
+  removeVideoFromHistory(videoId: string): Observable<string> {
+    return this.http.delete(USER_SERVICE_URL + '/history/' + videoId, {
+      responseType: 'text',
+    });
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

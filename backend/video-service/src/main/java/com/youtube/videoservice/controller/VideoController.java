@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,7 +110,7 @@ public class VideoController {
 
     @PostMapping("/playlist")
     public ResponseEntity<List<Video>> getVideosById(@RequestBody List<String> videoIds) {
-        List<Video> videoList = service.getVideosById(videoIds);
+        List<Video> videoList = service.getVideosByIds(videoIds);
         if (videoList.isEmpty()) {
             throw new ResourceNotFoundException("No Videos present in the playlist.");
         }
@@ -120,4 +122,16 @@ public class VideoController {
         service.removeAllLikedVideos(userId);
         return ResponseEntity.status(HttpStatus.OK).body("Everything from the Liked Videos playlist removed successfully!!!");
     }
+
+    @GetMapping("/history/{date}")
+    public ResponseEntity<List<Video>> getVideosFromDate(@PathVariable String date) {
+        LocalDateTime addedOn = LocalDateTime.parse(date);
+        List<Video> videoList = service.getVideosByDate(addedOn);
+        if (videoList.isEmpty()) {
+            throw new ResourceNotFoundException("No Videos were watched on this date.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(videoList);
+    }
+
+
 }

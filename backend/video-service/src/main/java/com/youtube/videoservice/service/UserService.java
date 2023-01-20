@@ -46,4 +46,5 @@ public interface UserService {
     public Optional<User> getUserById(String userId);
 
 
+    public void removeFromWatchHistory(String videoId);
 }

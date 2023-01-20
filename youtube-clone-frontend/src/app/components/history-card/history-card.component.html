@@ -1,41 +1,45 @@
 <div class="container">
-  <div class="history-card" *ngFor="let videoAuthor of combinedVideoAuthor">
-    <div class="thumbnail">
-      <img
-        src="{{ videoAuthor.video.thumbnailUrl }}"
-        alt="thumbnail"
-        class="thumbnail-image"
-      />
-    </div>
-    <div class="other-details">
-      <div class="top-details">
-        <div class="video-title">
-          {{ videoAuthor.video.title }}
-        </div>
-        <div class="title-spacer"></div>
-        <div class="buttons">
-          <div class="delete">
-            <button
-              mat-icon-button
-              class="delete-btn"
-              (click)="removeFromHistory(videoAuthor.video.id)"
-            >
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
-          <div class="options">
-            <button mat-icon-button class="options-btn">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-          </div>
-        </div>
+  <div class="inner-container" *ngFor="let videoAuthor of combinedVideoAuthor">
+    <div class="history-card" *ngIf="videoAuthor | searchCompare : searchInput">
+      <div class="thumbnail">
+        <img
+          src="{{ videoAuthor.video.thumbnailUrl }}"
+          alt="thumbnail"
+          class="thumbnail-image"
+        />
       </div>
-      <div class="metrics">
-        <div class="channel-name">{{ videoAuthor.author.fullName }}</div>
-        <span class="bullet-point"> &bull;</span>
-        <div class="view-count">{{ videoAuthor.video.views | views }}</div>
+      <div class="other-details">
+        <div class="top-details">
+          <div class="video-title">
+            {{ videoAuthor.video.title }}
+          </div>
+          <div class="title-spacer"></div>
+          <div class="buttons">
+            <div class="delete">
+              <button
+                mat-icon-button
+                class="delete-btn"
+                (click)="removeFromHistory(videoAuthor.video.id)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div class="options">
+              <button mat-icon-button class="options-btn">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="channel-name">{{ videoAuthor.author.fullName }}</div>
+          <span class="bullet-point"> &bull;</span>
+          <div class="view-count">
+            {{ videoAuthor.video.views | views }} views
+          </div>
+        </div>
+        <div class="description">{{ videoAuthor.video.description }}</div>
       </div>
-      <div class="description">{{ videoAuthor.video.description }}</div>
     </div>
   </div>
 </div>

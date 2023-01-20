@@ -1,6 +1,7 @@
 import {
   HttpClient,
   HttpErrorResponse,
+  HttpEvent,
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -44,6 +45,16 @@ export class UserService {
 
   removeVideoFromHistory(videoId: string): Observable<string> {
     return this.http.delete(USER_SERVICE_URL + '/history/' + videoId, {
+      responseType: 'text',
+    });
+  }
+
+  togglePauseHistory(): Observable<User> {
+    return this.http.put<User>(USER_SERVICE_URL + '/history', null);
+  }
+
+  clearWatchHistory(): Observable<string> {
+    return this.http.delete(USER_SERVICE_URL + '/history', {
       responseType: 'text',
     });
   }

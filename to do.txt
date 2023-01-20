@@ -4,7 +4,10 @@
 - add sorting in comments.
 - add watch-time on video cards
 - add scnackbars to every place needed.
-- history, subscriptions yet to be implemented
+- subscriptions yet to be implemented
 - have to implement watch later functionality in backend and frontend.
 - show subscriptions on the left side
+- there is a bug in home page where I click any card the cards in second row
+  get disturbed
+- on clicking the cards on history you should be navigated to watch video
 

@@ -182,3 +182,18 @@
 .comment-form {
   margin-bottom: 25px;
 }
+
+::ng-deep .comment-form .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+}
+
+::ng-deep .comment-form .mat-form-field-underline {
+  /*change color of underline*/
+  background-color: black !important;
+}
+
+::ng-deep .comment-form .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: black !important;
+}

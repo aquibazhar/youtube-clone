@@ -62,4 +62,16 @@ public class UserController {
         service.removeFromWatchHistory(videoId);
         return ResponseEntity.status(HttpStatus.OK).body("Video removed from history successfully!!!");
     }
+
+    @PutMapping("/history")
+    public ResponseEntity<User> pauseWatchHistory(){
+        User updatedUser =service.togglePauseHistory();
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
+    }
+
+    @DeleteMapping("/history")
+    public ResponseEntity<String> clearWatchHistory(){
+       service.clearWatchHistory();
+        return ResponseEntity.status(HttpStatus.OK).body("Watch History cleared successfully!!!");
+    }
 }

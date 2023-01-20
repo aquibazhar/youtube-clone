@@ -1,0 +1,148 @@
+.container {
+  width: 415px;
+}
+
+.search-history {
+  margin-left: 10px;
+}
+
+.history-search-field {
+  width: 250px;
+}
+
+.history-search-btn {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.history-search-icon {
+  font-size: 27px !important;
+}
+
+.history-close-btn {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.history-close-icon {
+  font-size: 27px !important;
+}
+
+::ng-deep .search-history .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: black !important;
+}
+
+::ng-deep .search-history .mat-form-field-label {
+  font-size: 15px !important;
+  top: 25px;
+}
+::ng-deep .search-history .mat-form-field-underline {
+  /*change color of underline*/
+  background-color: black !important;
+}
+
+::ng-deep .search-history .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: black !important;
+}
+
+.history-search-input {
+  font-size: 15px;
+}
+
+.history-search-btn:disabled {
+  color: white;
+}
+
+.history-search-btn:hover {
+  background-color: rgb(229, 229, 229);
+}
+
+.history-close-btn:hover {
+  background-color: rgb(229, 229, 229);
+}
+
+.history-search-btn:disabled {
+  color: black !important;
+}
+
+.history-heading {
+  margin: 20px 0px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.actions {
+  margin-left: 0px;
+}
+
+.delete {
+  padding-right: 10px;
+  display: flex;
+  gap: 0px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+}
+
+.delete:hover {
+  background-color: rgb(229, 229, 229);
+  width: fit-content;
+}
+
+.delete-desc {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.delete-btn:disabled + .delete-desc {
+  color: rgb(170, 170, 170);
+}
+
+.pause {
+  padding-right: 10px;
+  display: flex;
+  gap: 0px;
+  align-items: center;
+
+  border-radius: 25px;
+}
+
+.pause-desc {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pause:hover {
+  background-color: rgb(229, 229, 229);
+  width: fit-content;
+}
+
+.play {
+  padding-right: 10px;
+  display: flex;
+  gap: 0px;
+  align-items: center;
+
+  border-radius: 25px;
+}
+
+.play-desc {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.play:hover {
+  background-color: rgb(229, 229, 229);
+  width: fit-content;
+}
+
+.delete-hover {
+  background-color: white !important;
+}

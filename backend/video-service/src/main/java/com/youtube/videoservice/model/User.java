@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +24,7 @@ public class User {
     private String emailAddress;
     private String picture;
     private String sub;
+    private boolean pauseHistory;
     private Set<String> subscribedToUsers = ConcurrentHashMap.newKeySet();
     ;
     private Set<String> subscribers = ConcurrentHashMap.newKeySet();
@@ -111,5 +111,9 @@ public class User {
                 break;
             }
         }
+    }
+
+    public void clearWatchHistory() {
+        videoHistory.clear();
     }
 }

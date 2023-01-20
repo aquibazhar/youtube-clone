@@ -1,11 +1,68 @@
 <div class="container">
   <div class="search-history">
-    <form>
-      <mat-form-field appearance="legacy">
-        <mat-label>Search watch history</mat-label>
-        <input matInput placeholder="Placeholder" />
-        <mat-icon matPrefix>search</mat-icon>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+      <mat-form-field appearance="legacy" class="history-search-field">
+        <button
+          mat-icon-button
+          matPrefix
+          class="history-search-btn"
+          type="submit"
+          [disabled]="searchForm.value.searchInput == ''"
+        >
+          <mat-icon class="history-search-icon">search</mat-icon>
+        </button>
+
+        <mat-label class="history-search-label" *ngIf="!isFocussed"
+          >Search watch history</mat-label
+        >
+        <input
+          (focus)="isFocussed = true"
+          class="history-search-input"
+          matInput
+          formControlName="searchInput"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          class="history-close-btn"
+          *ngIf="isFocussed"
+          (click)="isFocussed = false"
+          (click)="onCancel($event)"
+          type="reset"
+        >
+          <mat-icon class="history-close-icon">close</mat-icon>
+        </button>
       </mat-form-field>
     </form>
+  </div>
+  <div class="history-heading">Watch history</div>
+  <mat-divider></mat-divider>
+  <div class="actions">
+    <div
+      class="delete"
+      [ngClass]="{
+        'delete-hover': isHovered && emptyHistory
+      }"
+      (mouseenter)="isHovered = true"
+      (mouseleave)="isHovered = false"
+      (click)="onClear()"
+    >
+      <button mat-icon-button class="delete-btn" [disabled]="emptyHistory">
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </button>
+      <div class="delete-desc">Clear all watch history</div>
+    </div>
+    <div class="pause" *ngIf="!currentUser.pauseHistory" (click)="onPause()">
+      <button mat-icon-button class="pause-btn">
+        <mat-icon class="pause-icon">pause_circle</mat-icon>
+      </button>
+      <div class="pause-desc">Pause watch history</div>
+    </div>
+    <div class="play" *ngIf="currentUser.pauseHistory" (click)="onPause()">
+      <button mat-icon-button class="play-btn">
+        <mat-icon class="play-icon">play_circle</mat-icon>
+      </button>
+      <div class="play-desc">Turn on watch history</div>
+    </div>
   </div>
 </div>

@@ -122,8 +122,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addToHistory(History history) {
         User currentUser = this.getCurrentUser();
-        currentUser.addToHistory(history);
-        repository.save(currentUser);
+        if (!currentUser.isPauseHistory()) {
+            currentUser.addToHistory(history);
+            repository.save(currentUser);
+        }
     }
 
     @Override
@@ -175,9 +177,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeFromWatchHistory(String videoId) {
-        User user = this.getCurrentUser();
-        user.removeFromWatchHistory(videoId);
-        repository.save(user);
+        User currentUser = this.getCurrentUser();
+        currentUser.removeFromWatchHistory(videoId);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public User togglePauseHistory() {
+        User currentUser = this.getCurrentUser();
+        currentUser.setPauseHistory(!currentUser.isPauseHistory());
+        return repository.save(currentUser);
+    }
+
+    @Override
+    public void clearWatchHistory() {
+        User currentUser = this.getCurrentUser();
+        currentUser.clearWatchHistory();
+        repository.save(currentUser);
     }
 
 
@@ -221,8 +237,6 @@ public class UserServiceImpl implements UserService {
     public boolean ifDislikedComment(String commentId) {
         return this.getCurrentUser().getDislikedComments().stream().anyMatch((dislikedComment) -> dislikedComment.equals(commentId));
     }
-
-
 
 
 }

@@ -9,6 +9,7 @@ export class User {
     public email: string,
     public picture: string,
     public sub: string,
+    public pauseHistory: boolean,
     public subscribedToUsers: string[],
     public subscribers: string[],
     public videoHistory: VideoHistory[],

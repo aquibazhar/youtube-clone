@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CombinedDateTime } from 'src/app/models/combined-date-time';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
@@ -13,6 +13,7 @@ import { VideoUploadService } from 'src/app/services/video-upload.service';
   styleUrls: ['./history-card-view.component.css'],
 })
 export class HistoryCardViewComponent implements OnInit {
+  @Input() searchInput: string = '';
   currentUser: User = {} as User;
   currentUserId: string;
   videoHistory: VideoHistory[] = [];

@@ -1,8 +1,20 @@
 <div class="outer-container">
   <div class="left">
-    <app-history-card-view></app-history-card-view>
+    <app-history-card-view
+      [searchInput]="searchInput"
+      *ngIf="!emptyHistory"
+    ></app-history-card-view>
+    <div class="empty-list" *ngIf="emptyHistory">
+      <div class="page-heading">Watch history</div>
+      <div class="empty-text">This list has no videos.</div>
+    </div>
   </div>
   <div class="right">
-    <app-history-management></app-history-management>
+    <app-history-management
+      (searchTriggered)="onSearch($event)"
+      (searchCancelled)="onCancel()"
+      (clearHistory)="onClearHistory()"
+      [emptyHistory]="emptyHistory"
+    ></app-history-management>
   </div>
 </div>

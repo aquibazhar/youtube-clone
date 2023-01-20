@@ -12,3 +12,20 @@
 .right {
   width: 40%;
 }
+
+.page-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.day-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.empty-text {
+  text-align: center;
+  font-weight: 400;
+}

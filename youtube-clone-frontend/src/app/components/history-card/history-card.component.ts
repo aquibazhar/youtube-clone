@@ -12,6 +12,7 @@ import { VideoUploadService } from 'src/app/services/video-upload.service';
 })
 export class HistoryCardComponent implements OnInit {
   @Input() addedOn: VideoHistory[] = [];
+  @Input() searchInput: string = '';
   videos: Video[] = [];
   combinedVideoAuthor: VideoAuthor[] = [];
   @Output() videoRemoved: EventEmitter<string> = new EventEmitter<string>();

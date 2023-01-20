@@ -47,4 +47,8 @@ public interface UserService {
 
 
     public void removeFromWatchHistory(String videoId);
+
+    public User togglePauseHistory();
+
+    public void clearWatchHistory();
 }

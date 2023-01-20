@@ -1,8 +1,11 @@
 <div class="page-heading">Watch history</div>
 <div class="outer-container" *ngFor="let dateAndDateTime of combinedDateTime">
-  <div class="day-heading">{{ dateAndDateTime.date | dateAndDay }}</div>
+  <div class="day-heading" *ngIf="dataFetched">
+    {{ dateAndDateTime.date | dateAndDay }}
+  </div>
   <app-history-card
     [addedOn]="dateAndDateTime.dateAndTime"
+    [searchInput]="searchInput"
     *ngIf="dataFetched"
     (videoRemoved)="videoRemoved($event)"
   ></app-history-card>

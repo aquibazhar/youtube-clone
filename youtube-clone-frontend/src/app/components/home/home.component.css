@@ -50,8 +50,7 @@ body {
   padding: 0;
   border: none;
   box-shadow: none;
-  margin-bottom: 16px;
-  /* height: 400px; */
+  margin-bottom: 24px;
 }
 
 mat-card-header {

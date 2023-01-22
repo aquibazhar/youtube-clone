@@ -1,34 +1,96 @@
 <div class="outer-container">
   <app-chips-bar></app-chips-bar>
   <div class="container">
-    <mat-card
+    <div
       *ngFor="let videoAuthor of combinedVideoAuthor"
       routerLink="/watch-video/{{ videoAuthor.video.id }}"
       class="video-card"
     >
-      <div class="inner" matRipple matRippleColor="#e5e5e5;">
+      <div class="inner" class="inner" matRipple matRippleColor="#e5e5e5;">
+        <div class="thumbnail">
+          <img
+            mat-card-image
+            src="{{ videoAuthor.video.thumbnailUrl }}"
+            class="thumbnail-image"
+            alt="thumbnail"
+          />
+        </div>
+        <div class="top">
+          <div class="header-image">
+            <mat-card-header class="header"
+              ><img
+                mat-card-avatar
+                class="header-image"
+                src="{{ videoAuthor.author.picture }}"
+                alt="display-picture"
+                referrerpolicy="no-referrer"
+            /></mat-card-header>
+          </div>
+          <div class="middle">
+            <div class="title">
+              {{ videoAuthor.video.title }}
+            </div>
+            <div
+              class="channel-name"
+              matTooltip="{{ videoAuthor.author.fullName }}"
+            >
+              {{ videoAuthor.author.fullName }}
+            </div>
+            <div class="metrics">
+              <span class="views"
+                >{{ videoAuthor.video.views | views }} views</span
+              >
+              <span class="bullet-point"> &bull;</span>
+              <span class="relative-time">{{
+                videoAuthor.video.publishedAt | relativeTime
+              }}</span>
+            </div>
+          </div>
+          <div class="save-action">
+            <button
+              mat-icon-button
+              class="save-btn"
+              (click)="stopPropagation($event)"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="inner" matRipple matRippleColor="#e5e5e5;">
         <img
           mat-card-image
           src="{{ videoAuthor.video.thumbnailUrl }}"
           class="thumbnail-image"
           alt="thumbnail"
         />
-        <mat-card-header>
-          <img
-            mat-card-avatar
-            class="header-image"
-            src="{{ videoAuthor.author.picture }}"
-            alt="display-picture"
-            referrerpolicy="no-referrer"
-          />
+        <div class="top">
+          <div>
+            <img
+              mat-card-avatar
+              class="header-image"
+              src="{{ videoAuthor.author.picture }}"
+              alt="display-picture"
+              referrerpolicy="no-referrer"
+            />
 
-          <mat-card-title class="title">{{
-            videoAuthor.video.title
-          }}</mat-card-title>
-          <mat-card-subtitle class="subtitle">
+            <div class="title">
+              <div class="video-title">
+                {{ videoAuthor.video.title }}
+              </div>
+              <div class="save-action">
+                <button mat-icon-button class="save-button">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="subtitle">
             {{ videoAuthor.author.fullName }}
-          </mat-card-subtitle>
-          <mat-card-subtitle class="subtitle">
+          </div>
+          <div class="subtitle">
             <span class="views"
               >{{ videoAuthor.video.views | views }} views</span
             >
@@ -36,9 +98,9 @@
             <span class="relative-time">{{
               videoAuthor.video.publishedAt | relativeTime
             }}</span>
-          </mat-card-subtitle>
-        </mat-card-header>
-      </div>
-    </mat-card>
+          </div>
+        </div>
+      </div> -->
+    </div>
   </div>
 </div>

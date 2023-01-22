@@ -1,5 +1,9 @@
 <div class="container">
-  <div class="inner-container" *ngFor="let videoAuthor of combinedVideoAuthor">
+  <div
+    class="inner-container"
+    *ngFor="let videoAuthor of combinedVideoAuthor"
+    routerLink="/watch-video/{{ videoAuthor.video.id }}"
+  >
     <div class="history-card" *ngIf="videoAuthor | searchCompare : searchInput">
       <div class="thumbnail">
         <img

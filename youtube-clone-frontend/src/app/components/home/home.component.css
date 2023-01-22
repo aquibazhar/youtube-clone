@@ -5,26 +5,62 @@ body {
 .outer-container {
   margin-left: 30px;
   width: 96%;
+  z-index: -20;
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 1, "wght" 100, "GRAD" -25, "opsz" 20;
 }
 
-.mat-icon {
-  vertical-align: bottom;
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.subtitle {
-  color: rgb(0, 0, 0, 0.8);
+.header-image .header {
+  width: 40px;
 }
 
 .title {
-  font-size: 16px;
-  text-align: left;
-  line-height: 1.5em;
-  max-height: 3em;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 15px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 8px;
+  width: 198px;
+}
+
+.save-action {
+  margin-top: 6px;
+  position: relative;
+  right: -10px;
+}
+
+.save-btn {
+  z-index: 20;
+}
+.save-btn {
+  z-index: 1;
+}
+.channel-name {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(96, 96, 96);
+}
+
+.channel-name:hover {
+  color: rgb(15, 15, 15);
+}
+
+.metrics {
+  font-size: 13px;
+
+  color: rgb(96, 96, 96);
 }
 
 .description {

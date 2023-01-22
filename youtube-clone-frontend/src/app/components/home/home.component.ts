@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
 }

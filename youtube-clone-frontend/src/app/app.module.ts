@@ -42,6 +42,8 @@ import { HistoryCardComponent } from './components/history-card/history-card.com
 import { DateAndDayPipe } from './pipes/date-and-day.pipe';
 import { WatchLaterComponent } from './components/watch-later/watch-later.component';
 import { WatchLaterViewComponent } from './components/watch-later-view/watch-later-view.component';
+import { SubscriptionGridViewComponent } from './components/subscription-grid-view/subscription-grid-view.component';
+import { SubscriptionListViewComponent } from './components/subscription-list-view/subscription-list-view.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { WatchLaterViewComponent } from './components/watch-later-view/watch-lat
     DateAndDayPipe,
     WatchLaterComponent,
     WatchLaterViewComponent,
+    SubscriptionGridViewComponent,
+    SubscriptionListViewComponent,
   ],
   imports: [
     BrowserModule,

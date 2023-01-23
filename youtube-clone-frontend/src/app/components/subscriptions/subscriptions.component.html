@@ -1,4 +1,19 @@
-<!-- <app-playlist-view
-  [currentUser]="currentUser"
-  [userSubscriptions]="userSubscriptions"
-></app-playlist-view> -->
+<div class="outer-container">
+  <div class="toggle-view">
+    <button mat-icon-button (click)="toggleView = true">
+      <mat-icon [ngClass]="toggleView ? 'selected-view' : 'unselected-view'"
+        >grid_view</mat-icon
+      >
+    </button>
+    <button mat-icon-button (click)="toggleView = false">
+      <mat-icon [ngClass]="!toggleView ? 'selected-view' : 'unselected-view'"
+        >list_view</mat-icon
+      >
+    </button>
+  </div>
+  <app-subscription-grid-view *ngIf="toggleView"></app-subscription-grid-view>
+  <app-subscription-list-view
+    *ngIf="!toggleView && dataFetched"
+    [userSubscriptions]="userSubscriptions"
+  ></app-subscription-list-view>
+</div>

@@ -43,4 +43,5 @@ public interface VideoService {
 
    public List<Video> getVideosByDate(LocalDateTime addedOn);
 
+    public List<Video> getVideosByUserIds(List<String> userIds);
 }

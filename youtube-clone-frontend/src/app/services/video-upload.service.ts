@@ -80,6 +80,13 @@ export class VideoUploadService {
     return this.http.get<Video[]>(VIDEO_SERVICE_URL + '/history/' + addedOn);
   }
 
+  getVideosByUserIds(userIds: string[]): Observable<Video[]> {
+    return this.http.post<Video[]>(
+      VIDEO_SERVICE_URL + '/subscriptions',
+      userIds
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

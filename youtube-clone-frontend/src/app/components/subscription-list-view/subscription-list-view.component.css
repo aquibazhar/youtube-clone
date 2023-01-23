@@ -1,0 +1,128 @@
+.outer-container {
+  margin-top: 25px;
+  width: 77%;
+  margin-left: 130px;
+  display: block;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.video-card {
+  display: flex;
+  align-items: flex-start;
+  padding: 0px;
+  box-shadow: none;
+  background-color: transparent;
+  margin-bottom: 15px;
+}
+
+.thumbnail {
+  align-self: flex-start;
+  width: 25%;
+}
+
+.video-details {
+  width: 60%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.thumbnail-image {
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.title {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-height: 25px;
+}
+
+.channel-name {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0px;
+  margin-bottom: 20px;
+  color: rgb(100, 100, 100);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.channel-avatar {
+  height: 35px;
+  width: 35px;
+}
+
+.channel-avatar-img {
+  height: 35px;
+  width: 35px;
+}
+
+.views-time {
+  color: rgb(96, 96, 96);
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 1px;
+  margin-bottom: 15px;
+}
+
+.mat-card-header-text {
+  margin: 0px;
+}
+
+.bullet-point {
+  margin: 4px;
+}
+
+.video-description {
+  color: rgb(96, 96, 96);
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.heading .full-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.list-divider {
+  width: 105%;
+}
+
+.options {
+  visibility: hidden;
+}
+
+.container:hover .options {
+  position: relative;
+  top: -10px;
+  display: block;
+  visibility: visible;
+}

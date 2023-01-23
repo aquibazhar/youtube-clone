@@ -133,5 +133,13 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(videoList);
     }
 
+    @PostMapping("/subscriptions")
+    public ResponseEntity<List<Video>> getVideosByUserIds(@RequestBody List<String> userIds){
+        List<Video> videoList =  service.getVideosByUserIds(userIds);
+        if (videoList.isEmpty()) {
+            throw new ResourceNotFoundException("No Videos present in the playlist.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(videoList);
+    }
 
 }

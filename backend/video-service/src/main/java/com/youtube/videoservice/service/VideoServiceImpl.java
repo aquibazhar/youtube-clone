@@ -207,6 +207,8 @@ public class VideoServiceImpl implements VideoService {
         return this.getVideosByIds(videoIds);
     }
 
-
-
+    @Override
+    public List<Video> getVideosByUserIds(List<String> userIds) {
+        return repository.findByUserIdIn(userIds);
+    }
 }

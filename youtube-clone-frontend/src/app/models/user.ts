@@ -13,6 +13,7 @@ export class User {
     public subscribedToUsers: string[],
     public subscribers: string[],
     public videoHistory: VideoHistory[],
+    public watchLater: VideoHistory[],
     public likedVideos: string[],
     public dislikedVideos: string[]
   ) {}

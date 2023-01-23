@@ -1,11 +1,7 @@
 - enable chips component in home.
 - Auth guard
-- hover on comment cancel button
-- add sorting in comments.
 - add watch-time on video cards
 - add scnackbars to every place needed.
 - subscriptions yet to be implemented
-- have to implement watch later functionality in backend and frontend.
 - show subscriptions on the left side
-- on clicking the cards on history you should be navigated to watch video
 

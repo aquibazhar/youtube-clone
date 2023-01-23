@@ -70,7 +70,17 @@
 }
 
 .actions-container {
-  margin-left: 445px;
+  margin-left: 400px;
+}
+
+.options-btn {
+  margin-left: 20px;
+  background-color: rgb(242, 242, 242);
+}
+
+.options-btn:hover {
+  margin-left: 20px;
+  background-color: rgb(215, 215, 215);
 }
 
 .like {
@@ -79,6 +89,10 @@
   border-radius: 0px;
   border-radius: 25px 0px 0px 25px;
   background-color: rgb(242, 242, 242);
+}
+
+.save-btn {
+  color: black;
 }
 
 .like:hover {

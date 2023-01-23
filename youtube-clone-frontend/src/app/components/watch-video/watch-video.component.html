@@ -59,6 +59,19 @@
               >
               <span class="like-count">{{ videoDetails.dislikes }}</span>
             </button>
+            <button
+              mat-icon-button
+              class="options-btn"
+              [matMenuTriggerFor]="menu"
+            >
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" class="save-menu">
+              <button mat-menu-item (click)="addToWatchLater()">
+                <mat-icon class="save-btn">schedule</mat-icon>
+                <span class="save-btn">Add to Watch later</span>
+              </button>
+            </mat-menu>
           </span>
         </div>
       </mat-card-header>

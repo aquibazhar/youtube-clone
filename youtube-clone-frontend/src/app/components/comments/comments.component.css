@@ -14,6 +14,18 @@
 
 .comment-header {
   margin-bottom: 25px;
+  display: flex;
+  gap: 20px;
+}
+
+.sort-btn {
+  display: block;
+  top: -12px;
+  font-size: 16px;
+}
+
+.sort-btn .mat-icon {
+  margin-right: 7px;
 }
 
 .add-comment {
@@ -70,21 +82,26 @@
   width: auto;
 }
 
-.comment-btn :hover {
-  background-color: rgb(6, 95, 212);
+.comment-btn:hover {
+  background-color: #0556bf;
   color: white;
   border-radius: 25px;
+}
+
+.comment-btn:disabled {
+  background-color: rgb(242, 242, 242);
+  color: rgb(144, 144, 144);
 }
 
 .cancel-btn {
   border-radius: 25px;
   width: auto;
   margin-right: 5px;
-  background-color: transparent;
+  background-color: white;
 }
 
-.cancel-btn :hover {
-  background-color: #e5e5e5;
+.cancel-btn:hover {
+  background-color: rgb(229, 229, 229);
 }
 
 .mat-card-header {
@@ -196,4 +213,15 @@
 ::ng-deep .comment-form .mat-form-field-ripple {
   /*change color of underline when focused*/
   background-color: black !important;
+}
+
+.active-type {
+  background-color: #cccccc;
+}
+.active-type:hover {
+  background-color: #b8b8b8;
+}
+
+.save-menu .mat-menu-item:hover {
+  background-color: black;
 }

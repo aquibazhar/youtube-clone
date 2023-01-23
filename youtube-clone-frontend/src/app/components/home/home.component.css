@@ -5,7 +5,6 @@ body {
 .outer-container {
   margin-left: 30px;
   width: 96%;
-  z-index: -20;
 }
 
 .material-symbols-outlined {
@@ -38,15 +37,22 @@ body {
 .save-action {
   margin-top: 6px;
   position: relative;
-  right: -10px;
+  right: -5px;
 }
 
 .save-btn {
-  z-index: 20;
+  height: 33px;
+  width: 33px;
 }
-.save-btn {
-  z-index: 1;
+.save-btn mat-icon {
+  height: 33px;
+  width: 33px;
 }
+
+.save-options {
+  color: black;
+}
+
 .channel-name {
   font-size: 13px;
   font-weight: 400;

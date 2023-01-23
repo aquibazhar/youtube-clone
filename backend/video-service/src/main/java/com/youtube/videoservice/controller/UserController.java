@@ -69,6 +69,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
+    @PutMapping("/watchLater/{videoId}")
+    public ResponseEntity<String> addToWatchLater(@PathVariable String videoId){
+        service.addToWatchLater(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body("Added to Watch later successfully!!!");
+    }
+
+    @DeleteMapping("/watchLater/{videoId}")
+    public ResponseEntity<String> removeFromWatchLater(@PathVariable String videoId){
+        service.removeFromWatchLater(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body("Removed from Watch later successfully!!!");
+    }
+
     @DeleteMapping("/history")
     public ResponseEntity<String> clearWatchHistory(){
        service.clearWatchHistory();

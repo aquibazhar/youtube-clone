@@ -1,7 +1,29 @@
 <div class="container">
   <div class="comment-form">
     <div class="comment-header">
-      <span class="comment-count">{{ comments.length }} Comments</span>
+      <div class="comment-count">{{ comments.length }} Comments</div>
+      <div class="comment-sort">
+        <button mat-flat-button class="sort-btn" [matMenuTriggerFor]="menu">
+          <mat-icon>sort</mat-icon>
+          <span>Sort by</span>
+        </button>
+        <mat-menu #menu="matMenu" class="save-menu">
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'topComments' }"
+            (click)="topComments()"
+          >
+            <span>Top comments</span>
+          </button>
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'newestFirst' }"
+            (click)="newestFirst()"
+          >
+            <span>Newest first</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
     <div class="add-comment">
       <div class="avatar header-element">

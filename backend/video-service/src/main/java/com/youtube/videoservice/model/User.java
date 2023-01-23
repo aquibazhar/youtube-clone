@@ -31,6 +31,8 @@ public class User {
     ;
     private Set<History> videoHistory = ConcurrentHashMap.newKeySet();
     // To keep it thread safe we used ConcurrentHashMap.newKeySet();
+
+    private Set<History> watchLater = ConcurrentHashMap.newKeySet();
     private Set<String> likedVideos = ConcurrentHashMap.newKeySet();
     private Set<String> dislikedVideos = ConcurrentHashMap.newKeySet();
 
@@ -53,35 +55,50 @@ public class User {
         dislikedVideos.remove(videoId);
     }
 
-    public void addToLikedComments(String commentId){
+    public void addToLikedComments(String commentId) {
         likedComments.add(commentId);
     }
 
-    public void removeFromLikedComments(String commentId){
+    public void removeFromLikedComments(String commentId) {
         likedComments.remove(commentId);
     }
 
-    public void addToDislikedComments(String commentId){
+    public void addToDislikedComments(String commentId) {
         dislikedComments.add(commentId);
     }
 
-    public void removeFromDislikedComments(String commentId){
+    public void removeFromDislikedComments(String commentId) {
         dislikedComments.remove(commentId);
     }
 
     public void addToHistory(History history) {
         boolean videoIdPresent = false;
 
-        for(History h: videoHistory){
-            if(h.getVideoId().equals(history.getVideoId())){
-                videoIdPresent=true;
+        for (History h : videoHistory) {
+            if (h.getVideoId().equals(history.getVideoId())) {
+                videoIdPresent = true;
                 h.setAddedOn(history.getAddedOn());
                 break;
             }
         }
 
-        if(!videoIdPresent)
+        if (!videoIdPresent)
             videoHistory.add(history);
+    }
+
+    public void addToWatchLater(History history) {
+        boolean videoIdPresent = false;
+
+        for (History h : watchLater) {
+            if (h.getVideoId().equals(history.getVideoId())) {
+                videoIdPresent = true;
+                h.setAddedOn(history.getAddedOn());
+                break;
+            }
+        }
+
+        if (!videoIdPresent)
+            watchLater.add(history);
     }
 
     public void subscribeToUser(String userId) {
@@ -100,14 +117,23 @@ public class User {
         subscribers.remove(userId);
     }
 
-    public void removeAllFromLikedVideos(){
+    public void removeAllFromLikedVideos() {
         likedVideos.clear();
     }
 
     public void removeFromWatchHistory(String videoId) {
-        for (History h: videoHistory){
-            if(h.getVideoId().equals(videoId)){
+        for (History h : videoHistory) {
+            if (h.getVideoId().equals(videoId)) {
                 videoHistory.remove(h);
+                break;
+            }
+        }
+    }
+
+    public void removeFromWatchLater(String videoId) {
+        for (History h : watchLater) {
+            if (h.getVideoId().equals(videoId)) {
+                watchLater.remove(h);
                 break;
             }
         }

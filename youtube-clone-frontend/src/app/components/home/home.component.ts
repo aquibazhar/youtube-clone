@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Video } from 'src/app/models/video';
 import { VideoAuthor } from 'src/app/models/video-author';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
@@ -39,5 +40,11 @@ export class HomeComponent implements OnInit {
 
   stopPropagation(event: Event) {
     event.stopPropagation();
+  }
+
+  addToWatchLater(videoId: string) {
+    this.userService.addToWatchLater(videoId).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

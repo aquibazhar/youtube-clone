@@ -1,0 +1,149 @@
+<div class="outer-container">
+  <div class="container">
+    <div class="left">
+      <div class="playlist-card">
+        <div class="playlist-image">
+          <img
+            src="{{ combinedVideoAuthor[0].video.thumbnailUrl }}"
+            alt="thumbnail"
+            class="image"
+          />
+        </div>
+        <div class="other-details">
+          <div class="playlist-title">Liked videos</div>
+          <div class="current-user-name">{{ currentUser.fullName }}</div>
+          <div class="count">1000 videos</div>
+          <div class="action-buttons">
+            <button mat-flat-button class="shuffle-btn" (click)="onClear()">
+              <mat-icon class="button-icon">delete</mat-icon>
+
+              <span class="button-text">Clear</span>
+            </button>
+            <button mat-flat-button class="clear-btn" (click)="onShuffle()">
+              <mat-icon class="button-icon clear-btn-icon">shuffle</mat-icon>
+              <span class="button-text clear-btn-text">Shuffle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="overlay-1"
+        [ngStyle]="{
+          'background-image':
+            'url(' + combinedVideoAuthor[0].video.thumbnailUrl + ')'
+        }"
+      ></div>
+      <div
+        class="overlay-2"
+        [ngStyle]="{
+          'background-image':
+            'url(' + combinedVideoAuthor[0].video.thumbnailUrl + ')'
+        }"
+      ></div>
+    </div>
+    <div class="right">
+      <div class="video-sort">
+        <button mat-flat-button class="sort-btn" [matMenuTriggerFor]="menu">
+          <mat-icon>sort</mat-icon>
+          <span class="span-sort">Sort</span>
+        </button>
+        <mat-menu #menu="matMenu" class="save-menu">
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'dateAddedNewest' }"
+            (click)="dateAddedNewest()"
+          >
+            <span>Date added (newest)</span>
+          </button>
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'dateAddedOldest' }"
+            (click)="dateAddedOldest()"
+          >
+            <span>Date added (oldest)</span>
+          </button>
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'mostPopular' }"
+            (click)="mostPopular()"
+          >
+            <span>Most popular</span>
+          </button>
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'datePublishedNewest' }"
+            (click)="datePublishedNewest()"
+          >
+            <span>Date Published (newest)</span>
+          </button>
+          <button
+            mat-menu-item
+            [ngClass]="{ 'active-type': sortType === 'datePublishedOldest' }"
+            (click)="datePublishedOldest()"
+          >
+            <span>Date Published (oldest)</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="right-container">
+        <mat-card
+          class="video-card"
+          *ngFor="let videoAuthor of combinedVideoAuthor; let i = index"
+          routerLink="/watch-video/{{ videoAuthor.video.id }}"
+        >
+          <div class="serial-number">{{ i + 1 }}</div>
+          <div class="thumbnail">
+            <img
+              mat-card-image
+              src="{{ videoAuthor.video.thumbnailUrl }}"
+              alt="thumbnail"
+              class="thumbnail-image"
+            />
+          </div>
+
+          <mat-card-header class="video-details">
+            <mat-card-title class="title">
+              {{ videoAuthor.video.title }}
+            </mat-card-title>
+
+            <mat-card-subtitle class="views-time">
+              <span
+                class="channel-name"
+                matTooltip=" {{ videoAuthor.author.fullName }}"
+              >
+                {{ videoAuthor.author.fullName }}</span
+              >
+              <span class="bullet-point"> &bull;</span>
+              <span class="views"
+                >{{ videoAuthor.video.views | views }} views</span
+              >
+              <span class="bullet-point"> &bull;</span>
+              <span class="relative-time">{{
+                videoAuthor.video.publishedAt | relativeTime
+              }}</span>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <div
+            class="options-button"
+            [matMenuTriggerFor]="menu"
+            (click)="stopOuterEvent($event)"
+          >
+            <button mat-icon-button class="option-btn">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                class="options-menu"
+                (click)="onDelete(videoAuthor.video.id)"
+              >
+                <mat-icon class="delete-menu-icon">delete</mat-icon>
+                <span class="delete-menu-item">Remove from Liked videos</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

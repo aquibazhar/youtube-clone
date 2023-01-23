@@ -8,6 +8,7 @@ import { SaveVideoDetailsComponent } from './components/save-video-details/save-
 import { SearchVideosComponent } from './components/search-videos/search-videos.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { UploadVideoComponent } from './components/upload-video/upload-video.component';
+import { WatchLaterComponent } from './components/watch-later/watch-later.component';
 import { WatchVideoComponent } from './components/watch-video/watch-video.component';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'watch-video/:videoId', component: WatchVideoComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'search/:searchInput', component: SearchVideosComponent },
+  { path: 'watch-later', component: WatchLaterComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

@@ -20,6 +20,7 @@ export class CommentsComponent implements OnInit {
   currentDate: string = '';
   commentAuthorId: string = '';
   combinedCommentAuthor: CommentAuthor[] = [];
+  sortType: string = 'newestFirst';
 
   constructor(
     private fb: FormBuilder,
@@ -67,7 +68,11 @@ export class CommentsComponent implements OnInit {
             new CommentAuthor(returnedComment, data)
           );
 
-          this.sortCombinedArray();
+          if (this.sortType === 'newestFirst') {
+            this.sortCombinedArrayByNewestFirst();
+          } else {
+            this.sortCombinedArrayByLikes();
+          }
         });
       this.onCancel();
     });
@@ -99,16 +104,26 @@ export class CommentsComponent implements OnInit {
     this.comments.forEach((comment) => {
       this.userService.getUserById(comment.authorId).subscribe((data) => {
         this.combinedCommentAuthor.push(new CommentAuthor(comment, data));
-        this.sortCombinedArray();
+        if (this.sortType === 'newestFirst') {
+          this.sortCombinedArrayByNewestFirst();
+        } else {
+          this.sortCombinedArrayByLikes();
+        }
       });
     });
   }
 
-  sortCombinedArray() {
+  sortCombinedArrayByNewestFirst() {
     this.combinedCommentAuthor.sort((a, b) => {
       let date1 = Date.parse(a.comment.publishedAt);
       let date2 = Date.parse(b.comment.publishedAt);
       return date2 - date1;
+    });
+  }
+
+  sortCombinedArrayByLikes() {
+    this.combinedCommentAuthor.sort((a, b) => {
+      return b.comment.likes - a.comment.likes;
     });
   }
 
@@ -153,5 +168,15 @@ export class CommentsComponent implements OnInit {
         }
       });
     });
+  }
+
+  newestFirst() {
+    this.sortType = 'newestFirst';
+    this.getComments();
+  }
+
+  topComments() {
+    this.sortType = 'topComments';
+    this.getComments();
   }
 }

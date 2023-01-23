@@ -145,4 +145,10 @@ export class WatchVideoComponent implements OnInit {
       this.currentUser.id
     );
   }
+
+  addToWatchLater() {
+    this.userService.addToWatchLater(this.videoId).subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

@@ -6,7 +6,7 @@
       routerLink="/watch-video/{{ videoAuthor.video.id }}"
       class="video-card"
     >
-      <div class="inner" class="inner" matRipple matRippleColor="#e5e5e5;">
+      <div class="inner" matRipple matRippleColor="#e5e5e5;">
         <div class="thumbnail">
           <img
             mat-card-image
@@ -46,61 +46,26 @@
               }}</span>
             </div>
           </div>
-          <div class="save-action">
-            <button
-              mat-icon-button
-              class="save-btn"
-              (click)="stopPropagation($event)"
-            >
+          <div
+            class="save-action"
+            (click)="stopPropagation($event)"
+            [matMenuTriggerFor]="menu"
+          >
+            <button mat-icon-button class="save-btn">
               <mat-icon>more_vert</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                (click)="addToWatchLater(videoAuthor.video.id)"
+              >
+                <mat-icon class="save-options">schedule</mat-icon>
+                <span class="save-options">Save to Watch later</span>
+              </button>
+            </mat-menu>
           </div>
         </div>
       </div>
-
-      <!-- <div class="inner" matRipple matRippleColor="#e5e5e5;">
-        <img
-          mat-card-image
-          src="{{ videoAuthor.video.thumbnailUrl }}"
-          class="thumbnail-image"
-          alt="thumbnail"
-        />
-        <div class="top">
-          <div>
-            <img
-              mat-card-avatar
-              class="header-image"
-              src="{{ videoAuthor.author.picture }}"
-              alt="display-picture"
-              referrerpolicy="no-referrer"
-            />
-
-            <div class="title">
-              <div class="video-title">
-                {{ videoAuthor.video.title }}
-              </div>
-              <div class="save-action">
-                <button mat-icon-button class="save-button">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="subtitle">
-            {{ videoAuthor.author.fullName }}
-          </div>
-          <div class="subtitle">
-            <span class="views"
-              >{{ videoAuthor.video.views | views }} views</span
-            >
-            <span class="bullet-point"> &bull;</span>
-            <span class="relative-time">{{
-              videoAuthor.video.publishedAt | relativeTime
-            }}</span>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>

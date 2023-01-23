@@ -51,4 +51,8 @@ public interface UserService {
     public User togglePauseHistory();
 
     public void clearWatchHistory();
+
+    public void addToWatchLater(String videoId);
+
+    public void removeFromWatchLater(String videoId);
 }

@@ -1,5 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" [mode]="mode" [opened]="homePage">
+  <mat-sidenav
+    #drawer
+    [mode]="mode"
+    [opened]="homePage"
+    [ngClass]="homePage ? 'sidenav-home' : 'sidenav-other'"
+  >
     <mat-toolbar [ngClass]="homePage ? 'home-component' : 'other-component'">
       <div class="burger-btn" *ngIf="!homePage">
         <button
@@ -57,13 +62,23 @@
       </a>
       <a
         mat-list-item
-        matTooltip="Watch History"
+        matTooltip="History"
         routerLink="/history"
         *ngIf="isAuthenticated"
         class="sidenav-list-item"
       >
         <mat-icon mat-list-icon class="sidenav-icons">history</mat-icon>
-        <span class="sidenav-item">Watch History</span>
+        <span class="sidenav-item">History</span>
+      </a>
+      <a
+        mat-list-item
+        matTooltip="Watch Later"
+        routerLink="/watch-later"
+        *ngIf="isAuthenticated"
+        class="sidenav-list-item"
+      >
+        <mat-icon mat-list-icon class="sidenav-icons">schedule</mat-icon>
+        <span class="sidenav-item">Watch Later</span>
       </a>
       <a
         mat-list-item

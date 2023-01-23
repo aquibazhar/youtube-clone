@@ -1,0 +1,290 @@
+* {
+  box-sizing: border-box;
+}
+
+.outer-container {
+  margin-top: 20px;
+  margin-left: 46px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.left {
+  position: fixed;
+  width: 365px;
+  height: 620px;
+  /* border: 1px solid black; */
+  overflow: hidden;
+  border-radius: 15px;
+}
+.right {
+  width: 70%;
+  position: absolute;
+  right: 0;
+}
+
+.playlist-card {
+  width: 365px;
+  height: 650px;
+  overflow: hidden;
+  /* background-color: red; */
+  border-radius: 15px;
+}
+
+.overlay-1 {
+  border: 1px solid black;
+  opacity: 1;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-position: right;
+  background-size: 400%;
+  background-repeat: no-repeat;
+  transform: scale(2.5);
+  filter: blur(70px) brightness(0.8) saturate(1.8);
+}
+.overlay-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  background-position: center 35%;
+  background-size: contain;
+  transform: scale(2.2);
+  z-index: -1;
+  background-repeat: no-repeat;
+
+  filter: blur(15px);
+}
+
+.playlist-image {
+  padding: 25px;
+  padding-bottom: 0px;
+  z-index: 1;
+}
+
+.image {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.other-details {
+  padding: 25px;
+  z-index: 1;
+}
+
+.playlist-title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+  transform: contrast(1.1);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  letter-spacing: 1px;
+}
+
+.current-user-name {
+  font-weight: 500;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+}
+
+.count {
+  font-size: 13px;
+  opacity: 65%;
+  color: white;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.shuffle-btn {
+  width: 50%;
+  height: 36px;
+  border: none;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shuffle-btn:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.button-icon {
+  opacity: 1 !important;
+}
+
+.button-text {
+  margin-left: 5px;
+  opacity: 1;
+}
+
+.clear-btn {
+  width: 50%;
+  height: 36px;
+  border: none;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.clear-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.clear-btn-icon {
+  color: rgba(255, 255, 255, 1);
+}
+
+.clear-btn-text {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* RIGHT */
+
+.right-container {
+  margin-top: 10px;
+  width: 97%;
+}
+
+.video-card {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px 15px;
+  height: auto;
+  box-shadow: none;
+  background-color: transparent;
+  margin-bottom: 0px;
+  border-radius: 20px;
+}
+
+.video-card:hover {
+  background-color: rgb(242, 242, 242);
+}
+
+.thumbnail {
+  align-self: flex-start;
+  width: 21%;
+}
+
+.video-details {
+  width: 60%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.thumbnail-image {
+  margin: 0px;
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 16px;
+  margin: 0px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.channel-name {
+  font-size: 13px;
+  font-weight: 400;
+
+  margin: 0px;
+  margin-bottom: 13px;
+  color: rgb(96, 96, 96);
+}
+
+.views-time {
+  color: rgb(96, 96, 96);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.mat-card-header-text {
+  margin: 0px;
+}
+
+.bullet-point {
+  margin: 4px;
+}
+
+.serial-number {
+  margin-top: 38px;
+  margin-right: 15px;
+  color: rgb(96, 96, 96);
+  font-weight: 500;
+}
+
+.options-button {
+  position: absolute;
+  right: 0;
+  top: 35px;
+}
+
+.options-menu {
+  display: flex;
+  align-items: center;
+}
+
+.delete-menu-icon {
+  color: black;
+}
+
+.video-sort {
+  margin-left: 20px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.span-sort {
+  font-weight: 500;
+}
+
+.video-sort mat-icon {
+  margin-right: 7px;
+}
+
+.active-type {
+  background-color: rgb(229, 229, 229);
+}
+.active-type:hover {
+  background-color: #cccccc;
+}
+
+/* RIGHT */

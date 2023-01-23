@@ -59,6 +59,12 @@ export class UserService {
     });
   }
 
+  addToWatchLater(videoId: string): Observable<string> {
+    return this.http.put(USER_SERVICE_URL + '/watchLater/' + videoId, null, {
+      responseType: 'text',
+    });
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

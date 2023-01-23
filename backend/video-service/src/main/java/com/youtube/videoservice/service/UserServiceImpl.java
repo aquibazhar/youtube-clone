@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -193,6 +194,23 @@ public class UserServiceImpl implements UserService {
     public void clearWatchHistory() {
         User currentUser = this.getCurrentUser();
         currentUser.clearWatchHistory();
+        repository.save(currentUser);
+    }
+
+    @Override
+    public void addToWatchLater(String videoId) {
+        User currentUser = this.getCurrentUser();
+        History history = new History();
+        history.setVideoId(videoId);
+        history.setAddedOn(LocalDateTime.now());
+        currentUser.addToWatchLater(history);
+        repository.save(currentUser);
+    }
+
+    @Override
+    public void removeFromWatchLater(String videoId) {
+        User currentUser = this.getCurrentUser();
+        currentUser.removeFromWatchLater(videoId);
         repository.save(currentUser);
     }
 

@@ -40,6 +40,8 @@ import { HistoryCardViewComponent } from './components/history-card-view/history
 import { HistoryManagementComponent } from './components/history-management/history-management.component';
 import { HistoryCardComponent } from './components/history-card/history-card.component';
 import { DateAndDayPipe } from './pipes/date-and-day.pipe';
+import { WatchLaterComponent } from './components/watch-later/watch-later.component';
+import { WatchLaterViewComponent } from './components/watch-later-view/watch-later-view.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { DateAndDayPipe } from './pipes/date-and-day.pipe';
     HistoryManagementComponent,
     HistoryCardComponent,
     DateAndDayPipe,
+    WatchLaterComponent,
+    WatchLaterViewComponent,
   ],
   imports: [
     BrowserModule,

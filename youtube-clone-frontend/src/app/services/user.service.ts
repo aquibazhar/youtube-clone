@@ -7,6 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { User } from '../models/user';
+import { VideoHistory } from '../models/video-history';
 
 const USER_SERVICE_URL = 'http://localhost:8080/api/v1/user';
 const httpOptions = {
@@ -63,6 +64,25 @@ export class UserService {
     return this.http.put(USER_SERVICE_URL + '/watchLater/' + videoId, null, {
       responseType: 'text',
     });
+  }
+
+  removeFromWatchLater(videoId: string): Observable<VideoHistory[]> {
+    return this.http.delete<VideoHistory[]>(
+      USER_SERVICE_URL + '/watchLater/' + videoId
+    );
+  }
+
+  removAllFromWatchLater(): Observable<string> {
+    return this.http.delete(USER_SERVICE_URL + '/watchLater', {
+      responseType: 'text',
+    });
+  }
+
+  findUsersByIds(subscriptionsIds: string[]): Observable<User[]> {
+    return this.http.post<User[]>(
+      USER_SERVICE_URL + '/subscriptions',
+      subscriptionsIds
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

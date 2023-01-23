@@ -32,13 +32,10 @@ export class HistoryCardComponent implements OnInit {
       .subscribe((data) => {
         this.videos = data;
         this.videos.sort((a, b) => {
-          // Find the video history object for video a
           let addedOnA = this.addedOn.find((vh) => vh.videoId === a.id);
-          // Find the video history object for video b
-          let addedOnB = this.addedOn.find((vh) => vh.videoId === b.id);
-          // Compare the addedOn date of video a and b
 
-          // Check if they are undefined
+          let addedOnB = this.addedOn.find((vh) => vh.videoId === b.id);
+
           if (addedOnA === undefined || addedOnB === undefined) {
             return 0;
           }

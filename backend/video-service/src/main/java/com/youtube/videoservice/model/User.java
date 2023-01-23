@@ -142,4 +142,8 @@ public class User {
     public void clearWatchHistory() {
         videoHistory.clear();
     }
+
+    public void removeAllFromWatchLater() {
+        watchLater.clear();
+    }
 }

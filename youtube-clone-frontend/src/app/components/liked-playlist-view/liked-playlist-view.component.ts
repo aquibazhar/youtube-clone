@@ -59,13 +59,11 @@ export class LikedPlaylistViewComponent implements OnInit {
   }
 
   onClear() {
-    this.videoService
-      .removeAllFromLikedVideos(this.currentUser.id)
-      .subscribe((data) => {
-        console.log(data);
-        this.combinedVideoAuthor = [];
-        this.playlistCleared.emit(data);
-      });
+    this.videoService.removeAllFromLikedVideos().subscribe((data) => {
+      console.log(data);
+      this.combinedVideoAuthor = [];
+      this.playlistCleared.emit(data);
+    });
   }
 
   stopOuterEvent(event: any) {

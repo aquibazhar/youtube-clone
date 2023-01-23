@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -76,14 +77,29 @@ public class UserController {
     }
 
     @DeleteMapping("/watchLater/{videoId}")
-    public ResponseEntity<String> removeFromWatchLater(@PathVariable String videoId){
-        service.removeFromWatchLater(videoId);
-        return ResponseEntity.status(HttpStatus.OK).body("Removed from Watch later successfully!!!");
+    public ResponseEntity<Set<History>> removeFromWatchLater(@PathVariable String videoId){
+        Set<History> watchLaterList = service.removeFromWatchLater(videoId);
+        return ResponseEntity.status(HttpStatus.OK).body(watchLaterList);
     }
 
     @DeleteMapping("/history")
     public ResponseEntity<String> clearWatchHistory(){
        service.clearWatchHistory();
         return ResponseEntity.status(HttpStatus.OK).body("Watch History cleared successfully!!!");
+    }
+
+    @DeleteMapping("/watchLater")
+    public ResponseEntity<String> clearWatchLater(){
+        service.clearWatchLater();
+        return ResponseEntity.status(HttpStatus.OK).body("Watch Later cleared successfully!!!");
+    }
+
+    @PostMapping("/subscriptions")
+    public ResponseEntity<List<User>> getUsersByIds(@RequestBody List<String> userIds){
+        List<User> userSubscriptions = service.getUsersByIds(userIds);
+        if (userSubscriptions.isEmpty()) {
+            throw new ResourceNotFoundException("The user hasn't subscribed to anyone.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(userSubscriptions);
     }
 }

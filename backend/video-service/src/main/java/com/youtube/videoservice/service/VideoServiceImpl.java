@@ -182,11 +182,8 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void removeAllLikedVideos(String userId) {
-        Optional<User> userOptional = userService.getUserById(userId);
-        if (userOptional.isEmpty())
-            throw new ResourceNotFoundException("User with this ID doesn't exist.");
-        User currentUser = userOptional.get();
+    public void removeAllLikedVideos() {
+        User currentUser = userService.getCurrentUser();
 
         List<String> likedVideos = new ArrayList<>(currentUser.getLikedVideos());
         // 1) Run likeVideo for every videoId in getLikedVideos()

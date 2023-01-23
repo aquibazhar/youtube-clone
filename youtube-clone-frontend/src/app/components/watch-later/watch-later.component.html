@@ -4,4 +4,8 @@
   (playlistCleared)="onPlaylistCleared($event)"
   *ngIf="dataFetched"
 ></app-watch-later-view>
-<app-empty-playlist *ngIf="!dataFetched"></app-empty-playlist>
+<app-empty-playlist
+  *ngIf="!dataFetched"
+  heading="Watch later"
+  [currentUserName]="currentUser.fullName"
+></app-empty-playlist>

@@ -3,6 +3,7 @@ package com.youtube.videoservice.service;
 import com.youtube.videoservice.model.History;
 import com.youtube.videoservice.model.User;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -54,5 +55,9 @@ public interface UserService {
 
     public void addToWatchLater(String videoId);
 
-    public void removeFromWatchLater(String videoId);
+    public Set<History> removeFromWatchLater(String videoId);
+
+    public void clearWatchLater();
+
+    public List<User> getUsersByIds(List<String> userIds);
 }

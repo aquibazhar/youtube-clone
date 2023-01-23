@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawerMode } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { User } from 'src/app/models/user';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
@@ -23,6 +23,9 @@ export class ToolbarComponent implements OnInit {
   activeFlag: boolean = false;
   mode: MatDrawerMode = 'over';
   searchForm: FormGroup;
+  subscriptionsIds: string[] = [];
+  subscriptions: User[] = [];
+
   constructor(
     private oidcSecurityService: OidcSecurityService,
     public dialog: MatDialog,
@@ -48,12 +51,23 @@ export class ToolbarComponent implements OnInit {
         this.isAuthenticated = isAuthenticated;
         this.userService.getUserById(this.currentUserId).subscribe((data) => {
           this.currentUser = data;
+          this.subscriptionsIds = data.subscribedToUsers;
+          this.findSubscriptions();
         });
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  findSubscriptions() {
+    this.userService
+      .findUsersByIds(this.subscriptionsIds)
+      .subscribe((subscriptions) => {
+        console.log(subscriptions);
+        this.subscriptions = subscriptions;
+      });
   }
 
   login() {

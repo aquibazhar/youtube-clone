@@ -39,7 +39,7 @@ public interface VideoService {
 
     public List<Video> getVideosByIds(List<String> videoIds);
 
-    public void removeAllLikedVideos(String userId);
+    public void removeAllLikedVideos();
 
    public List<Video> getVideosByDate(LocalDateTime addedOn);
 

@@ -85,13 +85,20 @@
           </button>
         </mat-menu>
       </div>
-      <div class="right-container">
+      <div
+        class="right-container"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
         <mat-card
           class="video-card"
-          *ngFor="let videoAuthor of combinedVideoAuthor; let i = index"
+          *ngFor="let videoAuthor of combinedVideoAuthor"
           routerLink="/watch-video/{{ videoAuthor.video.id }}"
+          cdkDrag
         >
-          <div class="serial-number">{{ i + 1 }}</div>
+          <div class="drag" cdkDragHandle>
+            <mat-icon>drag_handle</mat-icon>
+          </div>
           <div class="thumbnail">
             <img
               mat-card-image
@@ -138,7 +145,7 @@
                 (click)="onDelete(videoAuthor.video.id)"
               >
                 <mat-icon class="delete-menu-icon">delete</mat-icon>
-                <span class="delete-menu-item">Remove from Liked videos</span>
+                <span class="delete-menu-item">Remove from Watch later</span>
               </button>
             </mat-menu>
           </div>

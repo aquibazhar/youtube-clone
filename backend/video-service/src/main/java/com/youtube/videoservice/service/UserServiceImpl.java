@@ -18,7 +18,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -208,11 +207,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeFromWatchLater(String videoId) {
+    public Set<History> removeFromWatchLater(String videoId) {
         User currentUser = this.getCurrentUser();
         currentUser.removeFromWatchLater(videoId);
         repository.save(currentUser);
+        return currentUser.getWatchLater();
     }
+
+    @Override
+    public void clearWatchLater() {
+        User currentUser = this.getCurrentUser();
+        currentUser.removeAllFromWatchLater();
+        repository.save(currentUser);
+    }
+
+
 
 
     // COMMENTS
@@ -256,5 +265,8 @@ public class UserServiceImpl implements UserService {
         return this.getCurrentUser().getDislikedComments().stream().anyMatch((dislikedComment) -> dislikedComment.equals(commentId));
     }
 
-
+    @Override
+    public List<User> getUsersByIds(List<String> userIds) {
+        return repository.findAllByIdIn(userIds);
+    }
 }

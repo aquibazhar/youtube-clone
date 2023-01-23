@@ -117,9 +117,9 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(videoList);
     }
 
-    @DeleteMapping("/playlist/{userId}")
-    public ResponseEntity<String> removeAllFromLikedVideos(@PathVariable String userId) {
-        service.removeAllLikedVideos(userId);
+    @DeleteMapping("/playlist")
+    public ResponseEntity<String> removeAllFromLikedVideos() {
+        service.removeAllLikedVideos();
         return ResponseEntity.status(HttpStatus.OK).body("Everything from the Liked Videos playlist removed successfully!!!");
     }
 

@@ -70,8 +70,8 @@ export class VideoUploadService {
     return this.http.post<Video[]>(VIDEO_SERVICE_URL + '/playlist', videoIds);
   }
 
-  removeAllFromLikedVideos(userId: string): Observable<string> {
-    return this.http.delete(VIDEO_SERVICE_URL + '/playlist/' + userId, {
+  removeAllFromLikedVideos(): Observable<string> {
+    return this.http.delete(VIDEO_SERVICE_URL + '/playlist', {
       responseType: 'text',
     });
   }

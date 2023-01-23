@@ -33,6 +33,7 @@ export class WatchVideoComponent implements OnInit {
   currentUserId: string;
 
   videoIdAvailable: boolean;
+  sameAuthorViewer: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,6 +42,7 @@ export class WatchVideoComponent implements OnInit {
     private navbarService: NavbarToggleService,
     private router: Router
   ) {
+    this.sameAuthorViewer = false;
     this.videoIdAvailable = false;
     this.videoAvailable = false;
     const userId = localStorage.getItem('userId');
@@ -60,6 +62,8 @@ export class WatchVideoComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.videoId =
           this.activatedRoute.snapshot.params['videoId'].toLowerCase();
+
+        this.sameAuthorViewer = false;
         this.getVideoById();
         this.checkIfCurrentUserLiked();
         this.checkIfCurrentUserDisliked();
@@ -110,6 +114,9 @@ export class WatchVideoComponent implements OnInit {
     this.videoService.getVideoDetails(this.videoId).subscribe((data) => {
       this.videoDetails = data;
       this.videoAvailable = true;
+      if (this.videoDetails.userId === this.currentUserId) {
+        this.sameAuthorViewer = true;
+      }
       this.getVideoAuthorDetails(data.userId);
     });
   }

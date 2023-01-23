@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -21,6 +22,7 @@ export class WatchLaterViewComponent implements OnInit {
   videos: Video[] = [];
   combinedVideoAuthor: VideoAuthor[] = [];
   @Output() playlistCleared: EventEmitter<string> = new EventEmitter<string>();
+
   sortType: string = 'dateAddedNewest';
   videoIds: string[] = [];
 
@@ -81,9 +83,13 @@ export class WatchLaterViewComponent implements OnInit {
 
   sortByDateAddedOldest() {
     this.combinedVideoAuthor.sort((a, b) => {
-      let addedOnA = this.watchLater.find((vh) => vh.videoId === a.video.id);
+      let addedOnA: any = this.watchLater.find(
+        (vh) => vh.videoId === a.video.id
+      );
 
-      let addedOnB = this.watchLater.find((vh) => vh.videoId === b.video.id);
+      let addedOnB: any = this.watchLater.find(
+        (vh) => vh.videoId === b.video.id
+      );
 
       if (addedOnA === undefined || addedOnB === undefined) {
         return 0;
@@ -118,10 +124,22 @@ export class WatchLaterViewComponent implements OnInit {
   }
 
   onDelete(videoId: string) {
-    this.videoService.likeVideo(videoId).subscribe((updatedVideo) => {
-      this.combinedVideoAuthor = [];
-      this.videoIds = this.videoIds.filter((id) => id !== videoId);
-      this.getVideosByIds();
+    this.userService.removeFromWatchLater(videoId).subscribe((data) => {
+      console.log(data);
+      this.watchLater = data;
+      console.log(this.combinedVideoAuthor);
+      if (this.watchLater.length !== 0) {
+        this.combinedVideoAuthor = this.combinedVideoAuthor.filter(
+          (videoAuthor) => {
+            return this.watchLater.some((wl) => {
+              return wl.videoId === videoAuthor.video.id;
+            });
+          }
+        );
+        console.log(this.combinedVideoAuthor);
+      } else {
+        this.playlistCleared.emit();
+      }
     });
   }
 
@@ -131,13 +149,15 @@ export class WatchLaterViewComponent implements OnInit {
   }
 
   onClear() {
-    this.videoService
-      .removeAllFromLikedVideos(this.currentUser.id)
-      .subscribe((data) => {
-        console.log(data);
-        this.combinedVideoAuthor = [];
-        this.playlistCleared.emit(data);
-      });
+    this.userService.removAllFromWatchLater().subscribe((data) => {
+      console.log(data);
+      this.combinedVideoAuthor = [];
+      this.playlistCleared.emit(data);
+    });
+    // .subscribe((data) => {
+    //   console.log(data);
+
+    // });
   }
 
   stopOuterEvent(event: any) {
@@ -172,5 +192,13 @@ export class WatchLaterViewComponent implements OnInit {
     this.sortType = 'datePublishedOldest';
     this.getVideosByIds();
     this.combinedVideoAuthor = [];
+  }
+
+  drop(event: CdkDragDrop<VideoAuthor[]>) {
+    moveItemInArray(
+      this.combinedVideoAuthor,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

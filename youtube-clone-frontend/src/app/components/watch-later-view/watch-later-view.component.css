@@ -244,11 +244,12 @@
   margin: 4px;
 }
 
-.serial-number {
-  margin-top: 38px;
-  margin-right: 15px;
+.drag {
+  padding-top: 5px;
+  padding-right: 15px;
   color: rgb(96, 96, 96);
   font-weight: 500;
+  line-height: 100px;
 }
 
 .options-button {

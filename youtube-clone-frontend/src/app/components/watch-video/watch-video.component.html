@@ -22,11 +22,11 @@
         <mat-card-subtitle class="subtitle"
           >{{ videoSubscribers | views }} subscribers
         </mat-card-subtitle>
-        <div class="actions group">
+        <div class="actions">
           <button
             mat-flat-button
             class="subscribe-button"
-            *ngIf="!subscribed"
+            *ngIf="!subscribed && !sameAuthorViewer"
             (click)="onSubscribe()"
           >
             Subscribe
@@ -34,12 +34,19 @@
           <button
             mat-flat-button
             class="subscribed-button"
-            *ngIf="subscribed"
+            *ngIf="subscribed && !sameAuthorViewer"
             (click)="onUnsubscribe()"
           >
             Subscribed
           </button>
-          <span class="actions-container">
+          <span class="actions-spacer"></span>
+          <div
+            [ngClass]="
+              !sameAuthorViewer
+                ? 'actions-container'
+                : 'different-actions-container'
+            "
+          >
             <button mat-flat-button class="like" (click)="onLike()">
               <mat-icon *ngIf="likeFlag" matTooltip="I like this"
                 >thumb_up</mat-icon
@@ -72,7 +79,7 @@
                 <span class="save-btn">Add to Watch later</span>
               </button>
             </mat-menu>
-          </span>
+          </div>
         </div>
       </mat-card-header>
     </mat-card>

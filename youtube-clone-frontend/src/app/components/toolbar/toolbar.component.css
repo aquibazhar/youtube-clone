@@ -269,6 +269,47 @@
 
 /*AVATAR*/
 
+.toolbar-divider {
+  margin: 15px 0px;
+  margin-left: 10px;
+  text-overflow: visible;
+  width: 300px;
+}
+
+.subscriptions-heading {
+  margin-left: 25px;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.display-picture {
+  height: 27px;
+  width: 27px;
+  margin-left: 3px;
+}
+
+.subscriptions {
+  display: flex;
+  align-items: center;
+  /* margin-left: 16px; */
+  padding-left: 12px;
+  gap: 20px;
+}
+
+.subscription-name {
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.sidenav-list-item:hover .subscription-name {
+  background-color: #f2f2f2;
+}
+
+.sidenav-list-item:focus .subscription-name {
+  background-color: #e5e5e5;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .hide-in-mobile {

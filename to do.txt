@@ -3,5 +3,5 @@
 - add watch-time on video cards
 - add scnackbars to every place needed.
 - subscriptions yet to be implemented
-- show subscriptions on the left side
+- subscriptions not updating
 

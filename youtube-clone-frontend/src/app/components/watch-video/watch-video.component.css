@@ -23,13 +23,18 @@
   font-size: 1.2rem;
   font-weight: 500;
 }
-.mat-card-header .mat-card-title {
+.video-card .mat-card-header .mat-card-title {
   margin-bottom: 8px;
 }
 
+.video-card .mat-card-header {
+  display: flex;
+  align-items: center;
+}
+
 .channel-title {
-  font-size: 1.1rem;
-  margin: 0px;
+  font-size: 16px;
+  margin-top: 0px;
 }
 
 .subtitle {
@@ -41,13 +46,19 @@
 
 .actions {
   font-size: 50px;
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  width: 79%;
 }
 
 .subscribe-button {
   background-color: rgb(39, 39, 39);
   color: white;
   border-radius: 25px;
-  width: 100px;
+  width: 95px;
+  display: block;
+  height: 35px;
 }
 
 .subscribe-button:hover {
@@ -60,7 +71,9 @@
   background-color: rgb(242, 242, 242);
   color: black;
   border-radius: 25px;
-  width: 100px;
+  width: 95px;
+  display: block;
+  height: 35px;
 }
 
 .subscribed-button:hover {
@@ -69,9 +82,17 @@
   border-radius: 25px;
 }
 
-.actions-container {
-  margin-left: 400px;
+.actions-spacer {
+  flex: 1 1 auto;
 }
+
+/* .actions-container {
+  margin-left: 390px;
+}
+
+.different-actions-container {
+  margin-left: 470px;
+} */
 
 .options-btn {
   margin-left: 20px;

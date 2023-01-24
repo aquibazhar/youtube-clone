@@ -15,7 +15,7 @@
   padding: 0px;
   box-shadow: none;
   background-color: transparent;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .thumbnail {
@@ -65,6 +65,10 @@
 .channel-avatar {
   height: 35px;
   width: 35px;
+}
+
+.channel-name:hover {
+  color: rgb(15, 15, 15);
 }
 
 .channel-avatar-img {

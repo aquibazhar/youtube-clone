@@ -240,8 +240,16 @@
   margin: 0px;
 }
 
+.channel-name:hover {
+  color: rgb(15, 15, 15);
+}
+
 .bullet-point {
   margin: 4px;
+}
+
+.save-options {
+  color: black;
 }
 
 .serial-number {

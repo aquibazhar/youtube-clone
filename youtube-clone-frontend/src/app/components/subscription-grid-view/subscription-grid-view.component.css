@@ -1,0 +1,22 @@
+.page-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.day-heading {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.outer-container {
+  margin-top: 25px;
+  width: 88%;
+  margin-left: 130px;
+  display: block;
+}
+
+.subscription-divider {
+  width: 92%;
+}

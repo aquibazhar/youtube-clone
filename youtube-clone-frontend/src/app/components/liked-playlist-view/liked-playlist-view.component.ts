@@ -69,4 +69,10 @@ export class LikedPlaylistViewComponent implements OnInit {
   stopOuterEvent(event: any) {
     event.stopPropagation();
   }
+
+  addToWatchLater(videoId: string) {
+    this.userService.addToWatchLater(videoId).subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

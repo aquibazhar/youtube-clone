@@ -28,15 +28,33 @@
                 <mat-icon>close</mat-icon>
               </button>
             </div>
-            <div class="options">
+            <div
+              class="options"
+              (click)="stopPropagation($event)"
+              [matMenuTriggerFor]="menu"
+            >
               <button mat-icon-button class="options-btn">
                 <mat-icon>more_vert</mat-icon>
               </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="addToWatchLater(videoAuthor.video.id)"
+                >
+                  <mat-icon class="save-options">schedule</mat-icon>
+                  <span class="save-options">Save to Watch later</span>
+                </button>
+              </mat-menu>
             </div>
           </div>
         </div>
         <div class="metrics">
-          <div class="channel-name">{{ videoAuthor.author.fullName }}</div>
+          <div
+            class="channel-name"
+            matTooltip="{{ videoAuthor.author.fullName }}"
+          >
+            {{ videoAuthor.author.fullName }}
+          </div>
           <span class="bullet-point"> &bull;</span>
           <div class="view-count">
             {{ videoAuthor.video.views | views }} views

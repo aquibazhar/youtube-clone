@@ -13,7 +13,7 @@ export class SubscriptionsComponent implements OnInit {
   currentUserId: string;
   userSubscriptions: string[] = [];
 
-  toggleView: boolean = false;
+  toggleView: boolean = true;
   dataFetched: boolean;
 
   constructor(
@@ -27,6 +27,7 @@ export class SubscriptionsComponent implements OnInit {
     this.userService.getUserById(this.currentUserId).subscribe((data) => {
       this.currentUser = data;
       this.userSubscriptions = data.subscribedToUsers;
+
       this.dataFetched = true;
     });
   }

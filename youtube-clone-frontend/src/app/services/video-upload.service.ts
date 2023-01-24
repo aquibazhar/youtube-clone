@@ -76,7 +76,7 @@ export class VideoUploadService {
     });
   }
 
-  getVideosFromDate(addedOn: string): Observable<Video[]> {
+  getVideosFromVideoHistoryByDate(addedOn: string): Observable<Video[]> {
     return this.http.get<Video[]>(VIDEO_SERVICE_URL + '/history/' + addedOn);
   }
 
@@ -84,6 +84,12 @@ export class VideoUploadService {
     return this.http.post<Video[]>(
       VIDEO_SERVICE_URL + '/subscriptions',
       userIds
+    );
+  }
+
+  getVideosByDate(publishedAt: string): Observable<Video[]> {
+    return this.http.get<Video[]>(
+      VIDEO_SERVICE_URL + '/publishedAt/' + publishedAt
     );
   }
 

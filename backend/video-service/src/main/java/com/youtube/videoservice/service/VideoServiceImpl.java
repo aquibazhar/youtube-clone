@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -195,7 +197,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> getVideosByDate(LocalDateTime addedOn) {
+    public List<Video> getVideosFromHistoryByDate(LocalDateTime addedOn) {
         Set<History> videoHistory = userService.getCurrentUser().getVideoHistory();
         List<String> videoIds = new ArrayList<>();
         for(History h: videoHistory) {
@@ -210,5 +212,12 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<Video> getVideosByUserIds(List<String> userIds) {
         return repository.findByUserIdIn(userIds);
+    }
+
+    @Override
+    public List<Video> getVideosByPublishedAt(String date) {
+        LocalDateTime start = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay();
+        LocalDateTime end = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(LocalTime.MAX);
+        return repository.findByPublishedAtBetween(start, end);
     }
 }

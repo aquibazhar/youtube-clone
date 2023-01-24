@@ -124,9 +124,9 @@ public class VideoController {
     }
 
     @GetMapping("/history/{date}")
-    public ResponseEntity<List<Video>> getVideosFromDate(@PathVariable String date) {
+    public ResponseEntity<List<Video>> getVideosFromHistoryByDate(@PathVariable String date) {
         LocalDateTime addedOn = LocalDateTime.parse(date);
-        List<Video> videoList = service.getVideosByDate(addedOn);
+        List<Video> videoList = service.getVideosFromHistoryByDate(addedOn);
         if (videoList.isEmpty()) {
             throw new ResourceNotFoundException("No Videos were watched on this date.");
         }
@@ -142,4 +142,12 @@ public class VideoController {
         return ResponseEntity.status(HttpStatus.OK).body(videoList);
     }
 
+    @GetMapping("/publishedAt/{date}")
+    public ResponseEntity<List<Video>> getVideosByPublishedAt(@PathVariable String date) {
+        List<Video> videoList = service.getVideosByPublishedAt(date);
+        if (videoList.isEmpty()) {
+            throw new ResourceNotFoundException("No Videos were published on this date.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(videoList);
+    }
 }

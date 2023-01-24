@@ -41,7 +41,9 @@ public interface VideoService {
 
     public void removeAllLikedVideos();
 
-   public List<Video> getVideosByDate(LocalDateTime addedOn);
+   public List<Video> getVideosFromHistoryByDate(LocalDateTime addedOn);
 
     public List<Video> getVideosByUserIds(List<String> userIds);
+
+    public List<Video> getVideosByPublishedAt(String date);
 }

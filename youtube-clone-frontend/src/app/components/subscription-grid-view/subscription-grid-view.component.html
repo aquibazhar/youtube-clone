@@ -1,1 +1,11 @@
-<p>subscription-grid-view works!</p>
+<div class="outer-container" *ngFor="let published of publishedAt">
+  <div class="day-heading" *ngIf="dataFetched">
+    {{ published | dateAndDay }}
+  </div>
+  <app-subscription-grid-card
+    *ngIf="dataFetched"
+    [publishedAt]="published"
+    [subscriptionsVideos]="videos"
+  ></app-subscription-grid-card>
+  <mat-divider class="subscription-divider"></mat-divider>
+</div>

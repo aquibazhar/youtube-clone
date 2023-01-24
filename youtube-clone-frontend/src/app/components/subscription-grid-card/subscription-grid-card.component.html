@@ -1,0 +1,63 @@
+<div class="outer-container">
+  <div class="container">
+    <div class="inner">
+      <div
+        class="video-card"
+        matRipple
+        matRippleColor="#e5e5e5;"
+        *ngFor="let videoAuthor of combinedVideoAuthor"
+        routerLink="/watch-video/{{ videoAuthor.video.id }}"
+      >
+        <div class="thumbnail">
+          <img
+            src="{{ videoAuthor.video.thumbnailUrl }}"
+            alt="thumbnail"
+            class="thumbnail-image"
+          />
+        </div>
+        <div class="details">
+          <div class="top">
+            <div
+              class="video-title"
+              matTooltip=" {{ videoAuthor.video.title }}"
+            >
+              {{ videoAuthor.video.title }}
+            </div>
+            <div class="save-action">
+              <button
+                mat-icon-button
+                class="save-btn"
+                [matMenuTriggerFor]="menu"
+                (click)="stopPropagation($event)"
+              >
+                <mat-icon class="save-icon">more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="addToWatchLater(videoAuthor.video.id)"
+                >
+                  <mat-icon class="save-options">schedule</mat-icon>
+                  <span class="save-options">Save to Watch later</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <div
+            class="channel-name"
+            matTooltip="{{ videoAuthor.author.fullName }}"
+          >
+            {{ videoAuthor.author.fullName }}
+          </div>
+          <div class="view-time">
+            <div class="views">{{ videoAuthor.video.views | views }} views</div>
+            <span class="bullet-point"> &bull;</span>
+            <div class="time">
+              {{ videoAuthor.video.publishedAt | relativeTime }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

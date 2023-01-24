@@ -28,7 +28,7 @@ export class HistoryCardComponent implements OnInit {
 
   getVideos() {
     this.videoService
-      .getVideosFromDate(this.addedOn[0].addedOn)
+      .getVideosFromVideoHistoryByDate(this.addedOn[0].addedOn)
       .subscribe((data) => {
         this.videos = data;
         this.videos.sort((a, b) => {
@@ -57,5 +57,15 @@ export class HistoryCardComponent implements OnInit {
     this.combinedVideoAuthor = [];
     this.videos = [];
     this.videoRemoved.emit(videoId);
+  }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
+  addToWatchLater(videoId: string) {
+    this.userService.addToWatchLater(videoId).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

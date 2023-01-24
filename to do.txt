@@ -2,7 +2,4 @@
 - Auth guard
 - add watch-time on video cards
 - add scnackbars to every place needed.
-- subscriptions yet to be implemented
 - subscriptions not updating
-- add to watch later wherever necessary
-- check for bug in history

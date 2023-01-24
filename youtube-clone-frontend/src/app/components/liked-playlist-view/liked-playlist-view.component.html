@@ -12,7 +12,9 @@
         <div class="other-details">
           <div class="playlist-title">Liked videos</div>
           <div class="current-user-name">{{ currentUser.fullName }}</div>
-          <div class="count">1000 videos</div>
+          <div class="count">
+            {{ combinedVideoAuthor.length | views }} videos
+          </div>
           <div class="action-buttons">
             <button mat-flat-button class="shuffle-btn" (click)="onClear()">
               <mat-icon class="button-icon">delete</mat-icon>
@@ -89,6 +91,15 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                class="options-menu"
+                (click)="addToWatchLater(videoAuthor.video.id)"
+              >
+                <mat-icon class="save-options">schedule</mat-icon>
+                <span class="save-options">Save to Watch later</span>
+              </button>
+              <mat-divider></mat-divider>
               <button
                 mat-menu-item
                 class="options-menu"

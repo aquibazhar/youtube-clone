@@ -1,17 +1,20 @@
 <div class="outer-container">
   <div class="toggle-view">
-    <button mat-icon-button (click)="toggleView = true">
+    <button mat-icon-button (click)="toggleView = true" matTooltip="Grid">
       <mat-icon [ngClass]="toggleView ? 'selected-view' : 'unselected-view'"
         >grid_view</mat-icon
       >
     </button>
-    <button mat-icon-button (click)="toggleView = false">
+    <button mat-icon-button (click)="toggleView = false" matTooltip="List">
       <mat-icon [ngClass]="!toggleView ? 'selected-view' : 'unselected-view'"
         >list_view</mat-icon
       >
     </button>
   </div>
-  <app-subscription-grid-view *ngIf="toggleView"></app-subscription-grid-view>
+  <app-subscription-grid-view
+    *ngIf="toggleView && dataFetched"
+    [userSubscriptions]="userSubscriptions"
+  ></app-subscription-grid-view>
   <app-subscription-list-view
     *ngIf="!toggleView && dataFetched"
     [userSubscriptions]="userSubscriptions"

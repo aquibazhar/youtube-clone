@@ -250,6 +250,12 @@
   color: rgb(96, 96, 96);
   font-weight: 500;
   line-height: 100px;
+  cursor: grab;
+}
+
+.drag:active,
+.drag:focus {
+  cursor: grabbing;
 }
 
 .options-button {

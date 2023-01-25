@@ -1,68 +1,73 @@
 <div class="outer-container">
-  <app-chips-bar></app-chips-bar>
+  <app-chips-bar
+    [videoTags]="videoTags"
+    (tagChanged)="onTagChange($event)"
+  ></app-chips-bar>
   <div class="container">
-    <div
-      *ngFor="let videoAuthor of combinedVideoAuthor"
-      routerLink="/watch-video/{{ videoAuthor.video.id }}"
-      class="video-card"
-    >
-      <div class="inner" matRipple matRippleColor="#e5e5e5;">
-        <div class="thumbnail">
-          <img
-            mat-card-image
-            src="{{ videoAuthor.video.thumbnailUrl }}"
-            class="thumbnail-image"
-            alt="thumbnail"
-          />
-        </div>
-        <div class="top">
-          <div class="header-image">
-            <mat-card-header class="header"
-              ><img
-                mat-card-avatar
-                class="header-image"
-                src="{{ videoAuthor.author.picture }}"
-                alt="display-picture"
-                referrerpolicy="no-referrer"
-            /></mat-card-header>
+    <div class="outer" *ngFor="let videoAuthor of combinedVideoAuthor">
+      <div
+        routerLink="/watch-video/{{ videoAuthor.video.id }}"
+        *ngIf="videoAuthor | searchCompare : selectedTag"
+        class="video-card"
+      >
+        <div class="inner" matRipple matRippleColor="#e5e5e5;">
+          <div class="thumbnail">
+            <img
+              mat-card-image
+              src="{{ videoAuthor.video.thumbnailUrl }}"
+              class="thumbnail-image"
+              alt="thumbnail"
+            />
           </div>
-          <div class="middle">
-            <div class="title">
-              {{ videoAuthor.video.title }}
+          <div class="top">
+            <div class="header-image">
+              <mat-card-header class="header"
+                ><img
+                  mat-card-avatar
+                  class="header-image"
+                  src="{{ videoAuthor.author.picture }}"
+                  alt="display-picture"
+                  referrerpolicy="no-referrer"
+              /></mat-card-header>
+            </div>
+            <div class="middle">
+              <div class="title">
+                {{ videoAuthor.video.title }}
+              </div>
+              <div
+                class="channel-name"
+                matTooltip="{{ videoAuthor.author.fullName }}"
+              >
+                {{ videoAuthor.author.fullName }}
+              </div>
+              <div class="metrics">
+                <span class="views"
+                  >{{ videoAuthor.video.views | views }} views</span
+                >
+                <span class="bullet-point"> &bull;</span>
+                <span class="relative-time">{{
+                  videoAuthor.video.publishedAt | relativeTime
+                }}</span>
+              </div>
             </div>
             <div
-              class="channel-name"
-              matTooltip="{{ videoAuthor.author.fullName }}"
+              class="save-action"
+              (click)="stopPropagation($event)"
+              [matMenuTriggerFor]="menu"
             >
-              {{ videoAuthor.author.fullName }}
-            </div>
-            <div class="metrics">
-              <span class="views"
-                >{{ videoAuthor.video.views | views }} views</span
-              >
-              <span class="bullet-point"> &bull;</span>
-              <span class="relative-time">{{
-                videoAuthor.video.publishedAt | relativeTime
-              }}</span>
-            </div>
-          </div>
-          <div
-            class="save-action"
-            (click)="stopPropagation($event)"
-            [matMenuTriggerFor]="menu"
-          >
-            <button mat-icon-button class="save-btn">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button
-                mat-menu-item
-                (click)="addToWatchLater(videoAuthor.video.id)"
-              >
-                <mat-icon class="save-options">schedule</mat-icon>
-                <span class="save-options">Save to Watch later</span>
+              <button mat-icon-button class="save-btn">
+                <mat-icon>more_vert</mat-icon>
               </button>
-            </mat-menu>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="addToWatchLater(videoAuthor.video.id)"
+                >
+                  <mat-icon class="save-options">schedule</mat-icon>
+                  <span class="save-options">Save to Watch later</span>
+                </button>
+              </mat-menu>
+            </div>
           </div>
         </div>
       </div>

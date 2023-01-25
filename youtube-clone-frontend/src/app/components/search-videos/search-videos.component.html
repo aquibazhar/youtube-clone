@@ -3,6 +3,7 @@
     <mat-card
       class="video-card"
       *ngIf="videoAuthor | searchCompare : searchInput"
+      routerLink="/watch-video/{{ videoAuthor.video.id }}"
     >
       <div class="thumbnail">
         <img
@@ -15,7 +16,29 @@
 
       <mat-card-header class="video-details">
         <mat-card-title class="title">
-          {{ videoAuthor.video.title }}
+          <div class="top">
+            <div class="video-title">
+              {{ videoAuthor.video.title }}
+            </div>
+            <div
+              class="save-actions"
+              (click)="stopPropagation($event)"
+              [matMenuTriggerFor]="menu"
+            >
+              <button mat-icon-button class="save-btn">
+                <mat-icon class="mat-icon">more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="addToWatchLater(videoAuthor.video.id)"
+                >
+                  <mat-icon class="save-options">schedule</mat-icon>
+                  <span class="save-options">Save to Watch later</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
         </mat-card-title>
         <mat-card-subtitle class="views-time"
           ><span class="views"

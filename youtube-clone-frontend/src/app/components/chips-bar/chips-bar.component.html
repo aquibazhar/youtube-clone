@@ -1,8 +1,29 @@
-<mat-chip-list class="chip-list">
-  <mat-chip>All</mat-chip>
-  <mat-chip>Valorant</mat-chip>
-  <mat-chip>Gaming</mat-chip>
-  <mat-chip>Scenery</mat-chip>
-  <mat-chip>Vlogging</mat-chip>
-  <mat-chip>Comedy</mat-chip>
-</mat-chip-list>
+<div class="fixed-container">
+  <div class="outer-container">
+    <div class="left-btn" *ngIf="showLeft">
+      <div class="blur-overlay-left"></div>
+      <button mat-icon-button (click)="goLeft()" class="left-button">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+    </div>
+    <div class="right-btn" *ngIf="showRight">
+      <div class="blur-overlay-right"></div>
+      <button mat-icon-button (click)="goRight()" class="right-button">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+    <div class="container">
+      <mat-chip-list class="chip-list">
+        <mat-chip
+          [ngStyle]="{
+            transform: 'translateX(' + shift + 'px)'
+          }"
+          *ngFor="let tag of videoTags"
+          [selected]="selectedTags.has(tag)"
+          (click)="onTagClicked(tag)"
+          >{{ tag }}</mat-chip
+        >
+      </mat-chip-list>
+    </div>
+  </div>
+</div>

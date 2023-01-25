@@ -59,7 +59,7 @@ export class SaveVideoDetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const value = (event.value || '').trim().toLowerCase();
 
     // Add our tag
     if (value) {

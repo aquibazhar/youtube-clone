@@ -78,12 +78,12 @@ body {
 }
 
 .container {
-  margin-top: 35px;
+  margin-top: 20px;
   margin-left: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 16px;
+  /* gap: 16px; */
 }
 
 .video-card {
@@ -94,6 +94,7 @@ body {
   border: none;
   box-shadow: none;
   margin-bottom: 24px;
+  margin-right: 12px;
 }
 
 mat-card-header {

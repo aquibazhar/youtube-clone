@@ -56,4 +56,14 @@ export class SearchVideosComponent implements OnInit {
   onClick(videoId: string) {
     this.router.navigateByUrl('watch-video/' + videoId);
   }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
+  addToWatchLater(videoId: string) {
+    this.userService.addToWatchLater(videoId).subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

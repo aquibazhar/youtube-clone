@@ -39,12 +39,39 @@
   font-weight: 400;
   margin: 0px;
   margin-bottom: 10px;
+  line-height: 25px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+}
+
+.video-title {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  line-height: 25px;
+}
+
+.video-card {
+  position: relative;
+}
+
+.save-actions {
+  position: absolute;
+  right: 120px;
+  top: -8px;
+  visibility: hidden;
+}
+
+.video-card:hover .save-actions {
+  visibility: visible;
+}
+
+.save-options {
+  color: black;
 }
 
 .channel-name {

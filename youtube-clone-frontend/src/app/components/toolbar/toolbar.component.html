@@ -16,7 +16,7 @@
         >
           <mat-icon>menu</mat-icon>
         </button>
-        <span>YouTube</span>
+        <span class="youtube">YouTube</span>
       </div>
       <div class="youtube-btn" *ngIf="homePage">
         <button
@@ -28,7 +28,7 @@
         >
           <mat-icon class="youtube-icon">smart_display</mat-icon>
         </button>
-        <span routerLink="/home">YouTube</span>
+        <span routerLink="/home" class="youtube">YouTube</span>
       </div>
     </mat-toolbar>
     <mat-nav-list>
@@ -138,7 +138,7 @@
           >menu</mat-icon
         >
       </button>
-      <span *ngIf="!homePage" class="app-heading" routerLink="/home"
+      <span *ngIf="!homePage" class="app-heading youtube" routerLink="/home"
         >YouTube</span
       >
       <span class="menu-spacer"></span>

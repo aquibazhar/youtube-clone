@@ -21,14 +21,14 @@
           </div>
           <div class="top">
             <div class="header-image">
-              <mat-card-header class="header"
-                ><img
-                  mat-card-avatar
+              <div class="header">
+                <img
                   class="header-image"
                   src="{{ videoAuthor.author.picture }}"
                   alt="display-picture"
                   referrerpolicy="no-referrer"
-              /></mat-card-header>
+                />
+              </div>
             </div>
             <div class="middle">
               <div class="title">
@@ -58,7 +58,7 @@
               <button mat-icon-button class="save-btn">
                 <mat-icon>more_vert</mat-icon>
               </button>
-              <mat-menu #menu="matMenu">
+              <mat-menu #menu="matMenu" class="actions-menu">
                 <button
                   mat-menu-item
                   (click)="addToWatchLater(videoAuthor.video.id)"

@@ -26,11 +26,44 @@
           <button
             mat-flat-button
             class="subscribe-button"
-            *ngIf="!subscribed && !sameAuthorViewer"
+            *ngIf="!subscribed && !sameAuthorViewer && isAuthenticated"
             (click)="onSubscribe()"
           >
             Subscribe
           </button>
+          <button
+            mat-flat-button
+            class="subscribe-button"
+            *ngIf="!isAuthenticated"
+            [matMenuTriggerFor]="signInMenu"
+            [matMenuTriggerData]="{
+              title: 'Want to subscribe to this channel?',
+              subtitle: 'Sign in to subscribe to this channel.'
+            }"
+          >
+            Subscribe
+          </button>
+          <mat-menu
+            #signInMenu="matMenu"
+            class="sign-in-menu"
+            [overlapTrigger]="false"
+          >
+            <ng-template
+              matMenuContent
+              let-title="title"
+              let-subtitle="subtitle"
+            >
+              <div class="sign-in">
+                <div class="menu-title">{{ title }}</div>
+                <div class="menu-subtitle">
+                  {{ subtitle }}
+                </div>
+                <div class="button">
+                  <button mat-flat-button (click)="login()">Sign in</button>
+                </div>
+              </div>
+            </ng-template>
+          </mat-menu>
           <button
             mat-flat-button
             class="subscribed-button"
@@ -47,17 +80,59 @@
                 : 'different-actions-container'
             "
           >
-            <button mat-flat-button class="like" (click)="onLike()">
-              <mat-icon *ngIf="likeFlag" matTooltip="I like this"
-                >thumb_up</mat-icon
+            <button
+              mat-flat-button
+              class="like"
+              (click)="onLike()"
+              *ngIf="isAuthenticated"
+            >
+              <mat-icon *ngIf="likeFlag" matTooltip="Unlike">thumb_up</mat-icon>
+              <mat-icon *ngIf="!likeFlag" matTooltip="I like this"
+                >thumb_up_off_alt</mat-icon
               >
-              <mat-icon *ngIf="!likeFlag" matTooltip="Unlike"
+              <span class="like-count">{{ videoDetails.likes }}</span>
+            </button>
+            <button
+              mat-flat-button
+              class="like"
+              [matMenuTriggerFor]="signInMenu"
+              [matMenuTriggerData]="{
+                title: 'Like this video?',
+                subtitle: 'Sign in to make your opinion count.'
+              }"
+              *ngIf="!isAuthenticated"
+            >
+              <mat-icon *ngIf="likeFlag" matTooltip="Unlike">thumb_up</mat-icon>
+              <mat-icon *ngIf="!likeFlag" matTooltip="I like this"
                 >thumb_up_off_alt</mat-icon
               >
               <span class="like-count">{{ videoDetails.likes }}</span>
             </button>
 
-            <button mat-flat-button class="dislike" (click)="onDislike()">
+            <button
+              mat-flat-button
+              class="dislike"
+              (click)="onDislike()"
+              *ngIf="isAuthenticated"
+            >
+              <mat-icon *ngIf="dislikeFlag" matTooltip="I dislike this"
+                >thumb_down</mat-icon
+              >
+              <mat-icon *ngIf="!dislikeFlag" matTooltip="I dislike this"
+                >thumb_down_off_alt</mat-icon
+              >
+              <span class="like-count">{{ videoDetails.dislikes }}</span>
+            </button>
+            <button
+              mat-flat-button
+              class="dislike"
+              [matMenuTriggerFor]="signInMenu"
+              [matMenuTriggerData]="{
+                title: 'Don\'t like this video?',
+                subtitle: 'Sign in to make your opinion count.'
+              }"
+              *ngIf="!isAuthenticated"
+            >
               <mat-icon *ngIf="dislikeFlag" matTooltip="I dislike this"
                 >thumb_down</mat-icon
               >
@@ -70,10 +145,27 @@
               mat-icon-button
               class="options-btn"
               [matMenuTriggerFor]="menu"
+              *ngIf="isAuthenticated"
             >
               <mat-icon>more_horiz</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" class="save-menu">
+            <button
+              mat-icon-button
+              class="options-btn"
+              [matMenuTriggerFor]="signInMenu"
+              [matMenuTriggerData]="{
+                title: 'Want to watch this again later?',
+                subtitle: 'Sign in to add this video to watch later.'
+              }"
+              *ngIf="!isAuthenticated"
+            >
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu
+              #menu="matMenu"
+              class="save-menu"
+              [overlapTrigger]="false"
+            >
               <button mat-menu-item (click)="addToWatchLater()">
                 <mat-icon class="save-btn">schedule</mat-icon>
                 <span class="save-btn">Add to Watch later</span>

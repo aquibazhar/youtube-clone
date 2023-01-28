@@ -42,27 +42,6 @@ export class HomeComponent implements OnInit {
         });
       });
       this.videoTags = [...new Set(this.videoTags)];
-      // this.videoTags.pop();
-      // this.videoTags.pop();
-      // this.videoTags.push(
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-      //   'fours',
-
-      //   'fours',
-      //   'fours',
-      //   'fours',
-
-      //   'fours'
-      // );
       if (this.videoTags.length > 33) {
         this.videoTags = this.videoTags.slice(0, 33);
       }

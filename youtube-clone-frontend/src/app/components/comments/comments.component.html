@@ -29,6 +29,7 @@
       <div class="avatar header-element">
         <mat-card-header>
           <img
+            *ngIf="isAuthenticated"
             mat-card-avatar
             class="header-image"
             src="{{ currentUser.picture }}"
@@ -36,8 +37,27 @@
             referrerpolicy="no-referrer"
           />
         </mat-card-header>
+        <div class="header-icon" *ngIf="!isAuthenticated">
+          <mat-icon>account_circle</mat-icon>
+        </div>
       </div>
-
+      <mat-menu
+        #signInMenu="matMenu"
+        class="sign-in-menu"
+        [overlapTrigger]="false"
+      >
+        <ng-template matMenuContent let-title="title" let-subtitle="subtitle">
+          <div class="sign-in">
+            <div class="menu-title">{{ title }}</div>
+            <div class="menu-subtitle">
+              {{ subtitle }}
+            </div>
+            <div class="button">
+              <button mat-flat-button (click)="login()">Sign in</button>
+            </div>
+          </div>
+        </ng-template>
+      </mat-menu>
       <div class="comment header-element">
         <form (ngSubmit)="onComment()" [formGroup]="commentForm">
           <mat-form-field appearance="legacy" class="comment-field">
@@ -64,7 +84,20 @@
             </button>
             <button
               type="submit"
-              *ngIf="inputIsFocussed"
+              *ngIf="inputIsFocussed && isAuthenticated"
+              mat-flat-button
+              class="comment-btn"
+              [disabled]="!commentForm.get('comment')?.value"
+            >
+              Comment
+            </button>
+            <button
+              [matMenuTriggerFor]="signInMenu"
+              [matMenuTriggerData]="{
+                title: 'Want to share your thoughts about this video?',
+                subtitle: 'Sign in to post a comment.'
+              }"
+              *ngIf="inputIsFocussed && !isAuthenticated"
               mat-flat-button
               class="comment-btn"
               [disabled]="!commentForm.get('comment')?.value"
@@ -103,6 +136,24 @@
             mat-mini-fab
             class="action-buttons like-btn"
             (click)="onLike(commentAuthor.comment.id)"
+            *ngIf="isAuthenticated"
+          >
+            <mat-icon matTooltip="like" *ngIf="commentAuthor.comment.likeFlag"
+              >thumb_up</mat-icon
+            >
+            <mat-icon matTooltip="like" *ngIf="!commentAuthor.comment.likeFlag"
+              >thumb_up_off_alt</mat-icon
+            >
+          </button>
+          <button
+            mat-mini-fab
+            class="action-buttons like-btn"
+            [matMenuTriggerFor]="signInMenu"
+            [matMenuTriggerData]="{
+              title: 'Like this comment?',
+              subtitle: 'Sign in to make your opinion count.'
+            }"
+            *ngIf="!isAuthenticated"
           >
             <mat-icon matTooltip="like" *ngIf="commentAuthor.comment.likeFlag"
               >thumb_up</mat-icon
@@ -118,6 +169,28 @@
             mat-mini-fab
             class="action-buttons dislike-btn"
             (click)="onDislike(commentAuthor.comment.id)"
+            *ngIf="isAuthenticated"
+          >
+            <mat-icon
+              matTooltip="dislike"
+              *ngIf="commentAuthor.comment.dislikeFlag"
+              >thumb_down</mat-icon
+            >
+            <mat-icon
+              matTooltip="dislike"
+              *ngIf="!commentAuthor.comment.dislikeFlag"
+              >thumb_down_off_alt</mat-icon
+            >
+          </button>
+          <button
+            mat-mini-fab
+            class="action-buttons dislike-btn"
+            [matMenuTriggerFor]="signInMenu"
+            [matMenuTriggerData]="{
+              title: 'Don\'t like this comment?',
+              subtitle: 'Sign in to make your opinion count.'
+            }"
+            *ngIf="!isAuthenticated"
           >
             <mat-icon
               matTooltip="dislike"

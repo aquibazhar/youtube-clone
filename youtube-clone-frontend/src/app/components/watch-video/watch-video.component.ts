@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
@@ -35,12 +36,15 @@ export class WatchVideoComponent implements OnInit {
   videoIdAvailable: boolean;
   sameAuthorViewer: boolean;
 
+  isAuthenticated: boolean = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private videoService: VideoUploadService,
     private userService: UserService,
     private navbarService: NavbarToggleService,
-    private router: Router
+    private router: Router,
+    private oidcSecurityService: OidcSecurityService
   ) {
     this.sameAuthorViewer = false;
     this.videoIdAvailable = false;
@@ -52,12 +56,24 @@ export class WatchVideoComponent implements OnInit {
     });
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
     this.getVideoById();
-    this.checkIfCurrentUserLiked();
-    this.checkIfCurrentUserDisliked();
+
     this.navbarService.updateData(false, 'over');
   }
 
   ngOnInit(): void {
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      ({ isAuthenticated }) => {
+        this.isAuthenticated = isAuthenticated;
+        if (isAuthenticated) {
+          this.checkIfCurrentUserLiked();
+          this.checkIfCurrentUserDisliked();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.videoId =
@@ -65,8 +81,10 @@ export class WatchVideoComponent implements OnInit {
 
         this.sameAuthorViewer = false;
         this.getVideoById();
-        this.checkIfCurrentUserLiked();
-        this.checkIfCurrentUserDisliked();
+        if (this.isAuthenticated) {
+          this.checkIfCurrentUserLiked();
+          this.checkIfCurrentUserDisliked();
+        }
       }
     });
   }
@@ -79,35 +97,43 @@ export class WatchVideoComponent implements OnInit {
   }
 
   onLike() {
-    this.videoService.likeVideo(this.videoId).subscribe((data) => {
-      this.videoDetails = data;
-      this.checkIfCurrentUserLiked();
-      this.checkIfCurrentUserDisliked();
-    });
+    if (this.isAuthenticated) {
+      this.videoService.likeVideo(this.videoId).subscribe((data) => {
+        this.videoDetails = data;
+        this.checkIfCurrentUserLiked();
+        this.checkIfCurrentUserDisliked();
+      });
+    }
   }
 
   onDislike() {
-    this.videoService.dislikeVideo(this.videoId).subscribe((data) => {
-      this.videoDetails = data;
-      this.checkIfCurrentUserLiked();
-      this.checkIfCurrentUserDisliked();
-    });
+    if (this.isAuthenticated) {
+      this.videoService.dislikeVideo(this.videoId).subscribe((data) => {
+        this.videoDetails = data;
+        this.checkIfCurrentUserLiked();
+        this.checkIfCurrentUserDisliked();
+      });
+    }
   }
 
   onSubscribe() {
-    this.userService
-      .subscribeToUser(this.videoDetails.userId)
-      .subscribe((data) => {
-        this.getVideoAuthorDetails(this.videoDetails.userId);
-      });
+    if (this.isAuthenticated) {
+      this.userService
+        .subscribeToUser(this.videoDetails.userId)
+        .subscribe((data) => {
+          this.getVideoAuthorDetails(this.videoDetails.userId);
+        });
+    }
   }
 
   onUnsubscribe() {
-    this.userService
-      .unsubscribeFromuser(this.videoDetails.userId)
-      .subscribe((data) => {
-        this.getVideoAuthorDetails(this.videoDetails.userId);
-      });
+    if (this.isAuthenticated) {
+      this.userService
+        .unsubscribeFromuser(this.videoDetails.userId)
+        .subscribe((data) => {
+          this.getVideoAuthorDetails(this.videoDetails.userId);
+        });
+    }
   }
 
   getVideoById() {
@@ -157,5 +183,9 @@ export class WatchVideoComponent implements OnInit {
     this.userService.addToWatchLater(this.videoId).subscribe((data) => {
       console.log(data);
     });
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
   }
 }

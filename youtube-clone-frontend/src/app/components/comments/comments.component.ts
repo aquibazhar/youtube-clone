@@ -5,6 +5,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { UserService } from 'src/app/services/user.service';
 import { CommentAuthor } from 'src/app/models/comment-author';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-comments',
@@ -21,11 +22,13 @@ export class CommentsComponent implements OnInit {
   commentAuthorId: string = '';
   combinedCommentAuthor: CommentAuthor[] = [];
   sortType: string = 'newestFirst';
+  isAuthenticated: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private commentService: CommentService,
-    private userService: UserService
+    private userService: UserService,
+    private oidcSecurityService: OidcSecurityService
   ) {
     this.commentForm = this.fb.group({
       comment: [''],
@@ -34,6 +37,14 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getComments();
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      ({ isAuthenticated }) => {
+        this.isAuthenticated = isAuthenticated;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onComment() {
@@ -86,14 +97,16 @@ export class CommentsComponent implements OnInit {
   getComments() {
     this.commentService.getAllComments(this.videoId).subscribe((data) => {
       this.comments = data;
-      this.comments.forEach((comment) => {
-        this.commentService.hasUserLiked(comment.id).subscribe((data) => {
-          comment.likeFlag = data;
+      if (this.isAuthenticated) {
+        this.comments.forEach((comment) => {
+          this.commentService.hasUserLiked(comment.id).subscribe((data) => {
+            comment.likeFlag = data;
+          });
+          this.commentService.hasUserDisliked(comment.id).subscribe((data) => {
+            comment.dislikeFlag = data;
+          });
         });
-        this.commentService.hasUserDisliked(comment.id).subscribe((data) => {
-          comment.dislikeFlag = data;
-        });
-      });
+      }
       this.getAllCommentAuthors();
       console.log(this.combinedCommentAuthor);
     });
@@ -129,45 +142,49 @@ export class CommentsComponent implements OnInit {
 
   // LIKE DISLIKE
   onLike(commentId: string) {
-    this.commentService.likeComment(commentId).subscribe((data) => {
-      this.combinedCommentAuthor.forEach((commentAuthor) => {
-        if (commentAuthor.comment.id === commentId) {
-          commentAuthor.comment = data;
-          this.commentService
-            .hasUserLiked(commentAuthor.comment.id)
-            .subscribe((data) => {
-              commentAuthor.comment.likeFlag = data;
-            });
+    if (this.isAuthenticated) {
+      this.commentService.likeComment(commentId).subscribe((data) => {
+        this.combinedCommentAuthor.forEach((commentAuthor) => {
+          if (commentAuthor.comment.id === commentId) {
+            commentAuthor.comment = data;
+            this.commentService
+              .hasUserLiked(commentAuthor.comment.id)
+              .subscribe((data) => {
+                commentAuthor.comment.likeFlag = data;
+              });
 
-          this.commentService
-            .hasUserDisliked(commentAuthor.comment.id)
-            .subscribe((data) => {
-              commentAuthor.comment.dislikeFlag = data;
-            });
-        }
+            this.commentService
+              .hasUserDisliked(commentAuthor.comment.id)
+              .subscribe((data) => {
+                commentAuthor.comment.dislikeFlag = data;
+              });
+          }
+        });
       });
-    });
+    }
   }
 
   onDislike(commentId: string) {
-    this.commentService.dislikeComment(commentId).subscribe((data) => {
-      this.combinedCommentAuthor.forEach((commentAuthor) => {
-        if (commentAuthor.comment.id === commentId) {
-          commentAuthor.comment = data;
-          this.commentService
-            .hasUserLiked(commentAuthor.comment.id)
-            .subscribe((data) => {
-              commentAuthor.comment.likeFlag = data;
-            });
+    if (this.isAuthenticated) {
+      this.commentService.dislikeComment(commentId).subscribe((data) => {
+        this.combinedCommentAuthor.forEach((commentAuthor) => {
+          if (commentAuthor.comment.id === commentId) {
+            commentAuthor.comment = data;
+            this.commentService
+              .hasUserLiked(commentAuthor.comment.id)
+              .subscribe((data) => {
+                commentAuthor.comment.likeFlag = data;
+              });
 
-          this.commentService
-            .hasUserDisliked(commentAuthor.comment.id)
-            .subscribe((data) => {
-              commentAuthor.comment.dislikeFlag = data;
-            });
-        }
+            this.commentService
+              .hasUserDisliked(commentAuthor.comment.id)
+              .subscribe((data) => {
+                commentAuthor.comment.dislikeFlag = data;
+              });
+          }
+        });
       });
-    });
+    }
   }
 
   newestFirst() {
@@ -178,5 +195,9 @@ export class CommentsComponent implements OnInit {
   topComments() {
     this.sortType = 'topComments';
     this.getComments();
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
   }
 }

@@ -21,6 +21,16 @@ body {
   width: 40px;
 }
 
+.header-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.header {
+  margin-top: 15px;
+}
+
 .title {
   font-size: 15px;
   font-weight: 500;
@@ -38,6 +48,7 @@ body {
   margin-top: 6px;
   position: relative;
   right: -5px;
+  visibility: hidden;
 }
 
 .save-btn {
@@ -52,6 +63,10 @@ body {
 
 .save-options {
   color: black;
+}
+
+.video-card:hover .save-action {
+  visibility: visible;
 }
 
 .channel-name {

@@ -3,6 +3,7 @@ package com.youtube.videoservice.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,6 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 2) session management should be stateless as we are using jwt which use stateless way to authenticate and
         // 3) enable resource server capability for our application and support jwt tokens.
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/api/v1/video/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/comment/**").permitAll()
+                .antMatchers().permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

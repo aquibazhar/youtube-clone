@@ -58,7 +58,7 @@ public class VideoServiceImpl implements VideoService {
         return repository.findById(id);
     }
 
-    public Video getVideoDetails(String id) {
+    public Video getVideoDetails(String id, boolean authenticated) {
         Optional<Video> videoOptional = this.getVideoById(id);
 
         if (videoOptional.isEmpty())
@@ -67,11 +67,13 @@ public class VideoServiceImpl implements VideoService {
         Video video = videoOptional.get();
 
         this.incrementViewCount(video);
-        History history = new History();
-        history.setVideoId(id);
-        history.setAddedOn(LocalDateTime.now());
-        userService.addToHistory(history);
 
+        if(authenticated){
+            History history = new History();
+            history.setVideoId(id);
+            history.setAddedOn(LocalDateTime.now());
+            userService.addToHistory(history);
+        }
         return video;
     }
 
@@ -191,7 +193,7 @@ public class VideoServiceImpl implements VideoService {
         // 1) Run likeVideo for every videoId in getLikedVideos()
         //    because they are already liked, this will remove them from liked videos and decrement likes as well.
 
-        for(String videoId: likedVideos){
+        for (String videoId : likedVideos) {
             this.likeVideo(videoId);
         }
     }
@@ -200,7 +202,7 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> getVideosFromHistoryByDate(LocalDateTime addedOn) {
         Set<History> videoHistory = userService.getCurrentUser().getVideoHistory();
         List<String> videoIds = new ArrayList<>();
-        for(History h: videoHistory) {
+        for (History h : videoHistory) {
             LocalDate addedOnDate = h.getAddedOn().toLocalDate();
             if (addedOnDate.isEqual(addedOn.toLocalDate())) {
                 videoIds.add(h.getVideoId());

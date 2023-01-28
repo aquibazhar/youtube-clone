@@ -29,7 +29,7 @@ public interface VideoService {
 
     public Video dislikeVideo(String videoId);
 
-    public Video getVideoDetails(String id);
+    public Video getVideoDetails(String id, boolean authenticated);
 
     public void incrementViewCount(Video video);
 

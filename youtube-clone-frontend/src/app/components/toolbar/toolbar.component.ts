@@ -87,13 +87,14 @@ export class ToolbarComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  openSaveVideo() {
-    const dialogRef = this.dialog.open(SaveVideoDetailsComponent, {
-      data: {
-        videoId: 'hello',
-      },
-    });
-  }
+
+  // openSaveVideo() {
+  //   const dialogRef = this.dialog.open(SaveVideoDetailsComponent, {
+  //     data: {
+  //       videoId: 'hello',
+  //     },
+  //   });
+  // }
 
   onSearch() {
     console.log(this.searchForm.value);

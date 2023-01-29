@@ -1,2 +1,2 @@
 - add watch-time on video cards
-- subscriptions not updating
+- test without oauth

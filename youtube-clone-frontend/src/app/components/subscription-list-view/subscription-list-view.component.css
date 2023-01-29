@@ -16,6 +16,7 @@
   box-shadow: none;
   background-color: transparent;
   margin-bottom: 25px;
+  /* position: relative; */
 }
 
 .thumbnail {
@@ -126,7 +127,11 @@
 
 .container:hover .options {
   position: relative;
-  top: -10px;
+  top: 0px;
   display: block;
   visibility: visible;
+}
+
+.save-options {
+  color: black;
 }

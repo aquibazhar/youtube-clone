@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Subscription } from 'rxjs';
@@ -36,7 +37,7 @@ export class WatchVideoComponent implements OnInit {
   videoIdAvailable: boolean;
   sameAuthorViewer: boolean;
 
-  isAuthenticated: boolean = false;
+  isAuthenticated: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -44,8 +45,10 @@ export class WatchVideoComponent implements OnInit {
     private userService: UserService,
     private navbarService: NavbarToggleService,
     private router: Router,
-    private oidcSecurityService: OidcSecurityService
+    private oidcSecurityService: OidcSecurityService,
+    private _snackBar: MatSnackBar
   ) {
+    this.isAuthenticated = false;
     this.sameAuthorViewer = false;
     this.videoIdAvailable = false;
     this.videoAvailable = false;
@@ -181,11 +184,18 @@ export class WatchVideoComponent implements OnInit {
 
   addToWatchLater() {
     this.userService.addToWatchLater(this.videoId).subscribe((data) => {
-      console.log(data);
+      this.openSnackBar(data, 'OK');
     });
   }
 
   login() {
     this.oidcSecurityService.authorize();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
   }
 }

@@ -17,6 +17,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
         customParamsAuthRequest: {
           audience: 'http://localhost:8080',
         },
+        postLogoutRedirectUri: 'http://localhost:4200',
       },
     }),
   ],

@@ -75,7 +75,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
-    this.oidcSecurityService.logoffAndRevokeTokens();
+    this.oidcSecurityService
+      .logoffAndRevokeTokens()
+      .subscribe((result) => console.log(result));
   }
 
   openDialog() {

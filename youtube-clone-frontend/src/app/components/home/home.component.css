@@ -138,6 +138,45 @@ mat-card-subtitle {
   margin: 4px;
 }
 
+/* SIGN IN MENU*/
+
+::ng-deep .sign-in-menu {
+  max-width: 400px !important;
+  box-sizing: border-box;
+}
+
+.sign-in {
+  padding-top: 20px;
+  padding-left: 20px;
+  height: 140px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in .menu-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.sign-in .menu-subtitle {
+  font-size: 14px;
+  color: rgb(96, 96, 96);
+}
+
+.sign-in .button {
+  margin-top: auto;
+  position: relative;
+  left: -16px;
+  color: blue;
+}
+
+.sign-in .button button {
+  color: #065fd4;
+}
+
+/* SIGN IN MENU*/
+
 /*CLEARING FLOAT*/
 .group:before,
 .group:after {

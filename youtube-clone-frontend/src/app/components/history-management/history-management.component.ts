@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
 import { UserService } from 'src/app/services/user.service';
+import { WarnDialogComponent } from '../warn-dialog/warn-dialog.component';
 
 @Component({
   selector: 'app-history-management',
@@ -23,7 +26,9 @@ export class HistoryManagementComponent implements OnInit {
   constructor(
     private navbarService: NavbarToggleService,
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.navbarService.updateData(true, 'side');
     this.searchForm = this.fb.group({
@@ -54,14 +59,64 @@ export class HistoryManagementComponent implements OnInit {
   }
 
   onPause() {
-    this.userService.togglePauseHistory().subscribe((data) => {
-      this.currentUser = data;
-      console.log(data.pauseHistory);
-    });
+    if (!this.currentUser.pauseHistory) {
+      const dialogRef = this.dialog.open(WarnDialogComponent, {
+        data: {
+          title: 'Pause watch history?',
+          subtitle: 'This will pause your watch history.',
+          buttonText: 'Pause',
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((confirmation) => {
+        if (confirmation) {
+          this.userService.togglePauseHistory().subscribe((data) => {
+            this.currentUser = data;
+            this.openSnackBar('Watch history paused successfully!!!', 'OK');
+          });
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(WarnDialogComponent, {
+        data: {
+          title: 'Turn on watch history?',
+          subtitle: 'This will turn on your watch history.',
+          buttonText: 'Turn on',
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((confirmation) => {
+        if (confirmation) {
+          this.userService.togglePauseHistory().subscribe((data) => {
+            this.currentUser = data;
+            this.openSnackBar('Watch history turned on successfully!!!', 'OK');
+          });
+        }
+      });
+    }
   }
 
   onClear() {
-    this.getUserDetails();
-    this.clearHistory.emit();
+    const dialogRef = this.dialog.open(WarnDialogComponent, {
+      data: {
+        title: 'Clear watch history?',
+        subtitle: 'Your YouTube watch history will be cleared completely.',
+        buttonText: 'Clear watch history',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmation) => {
+      if (confirmation) {
+        this.getUserDetails();
+        this.clearHistory.emit();
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
   }
 }

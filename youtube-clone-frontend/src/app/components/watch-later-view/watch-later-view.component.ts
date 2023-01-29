@@ -1,5 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
@@ -8,6 +10,7 @@ import { VideoHistory } from 'src/app/models/video-history';
 import { NavbarToggleService } from 'src/app/services/navbar-toggle.service';
 import { UserService } from 'src/app/services/user.service';
 import { VideoUploadService } from 'src/app/services/video-upload.service';
+import { WarnDialogComponent } from '../warn-dialog/warn-dialog.component';
 
 @Component({
   selector: 'app-watch-later-view',
@@ -30,7 +33,9 @@ export class WatchLaterViewComponent implements OnInit {
     private navbarService: NavbarToggleService,
     private videoService: VideoUploadService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.navbarService.updateData(true, 'side');
   }
@@ -125,7 +130,7 @@ export class WatchLaterViewComponent implements OnInit {
 
   onDelete(videoId: string) {
     this.userService.removeFromWatchLater(videoId).subscribe((data) => {
-      console.log(data);
+      this.openSnackBar('Removed from watch later successfully!!!', 'OK');
       this.watchLater = data;
       console.log(this.combinedVideoAuthor);
       if (this.watchLater.length !== 0) {
@@ -149,15 +154,7 @@ export class WatchLaterViewComponent implements OnInit {
   }
 
   onClear() {
-    this.userService.removAllFromWatchLater().subscribe((data) => {
-      console.log(data);
-      this.combinedVideoAuthor = [];
-      this.playlistCleared.emit(data);
-    });
-    // .subscribe((data) => {
-    //   console.log(data);
-
-    // });
+    this.openDialog();
   }
 
   stopOuterEvent(event: any) {
@@ -200,5 +197,32 @@ export class WatchLaterViewComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(WarnDialogComponent, {
+      data: {
+        title: 'Remove watched videos?',
+        subtitle: 'This will remove all watched videos from Watch later.',
+        buttonText: 'Remove',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmation) => {
+      if (confirmation) {
+        this.userService.removAllFromWatchLater().subscribe((data) => {
+          console.log(data);
+          this.combinedVideoAuthor = [];
+          this.playlistCleared.emit(data);
+        });
+      }
+    });
   }
 }

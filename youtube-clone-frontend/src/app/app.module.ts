@@ -45,6 +45,8 @@ import { WatchLaterViewComponent } from './components/watch-later-view/watch-lat
 import { SubscriptionGridViewComponent } from './components/subscription-grid-view/subscription-grid-view.component';
 import { SubscriptionListViewComponent } from './components/subscription-list-view/subscription-list-view.component';
 import { SubscriptionGridCardComponent } from './components/subscription-grid-card/subscription-grid-card.component';
+import { WarnDialogComponent } from './components/warn-dialog/warn-dialog.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { SubscriptionGridCardComponent } from './components/subscription-grid-ca
     SubscriptionGridViewComponent,
     SubscriptionListViewComponent,
     SubscriptionGridCardComponent,
+    WarnDialogComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

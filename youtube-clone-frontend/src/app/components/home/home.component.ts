@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 import { Video } from 'src/app/models/video';
 import { VideoAuthor } from 'src/app/models/video-author';
@@ -17,17 +18,29 @@ export class HomeComponent implements OnInit {
   combinedVideoAuthor: VideoAuthor[] = [];
   videoTags: string[] = ['All'];
   selectedTag: string;
+  isAuthenticated: boolean;
 
   constructor(
     private videoService: VideoUploadService,
     private userService: UserService,
-    private navbarService: NavbarToggleService
+    private navbarService: NavbarToggleService,
+    private oidcSecurityService: OidcSecurityService,
+    private _snackBar: MatSnackBar
   ) {
+    this.isAuthenticated = false;
     this.selectedTag = '';
     this.navbarService.updateData(true, 'side');
   }
 
   ngOnInit(): void {
+    this.oidcSecurityService.isAuthenticated$.subscribe(
+      ({ isAuthenticated }) => {
+        this.isAuthenticated = isAuthenticated;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.getAllVideos();
   }
 
@@ -55,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   addToWatchLater(videoId: string) {
     this.userService.addToWatchLater(videoId).subscribe((data) => {
-      console.log(data);
+      this.openSnackBar(data, 'OK');
     });
   }
 
@@ -65,5 +78,16 @@ export class HomeComponent implements OnInit {
     } else {
       this.selectedTag = '';
     }
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
+    });
   }
 }

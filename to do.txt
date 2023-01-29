@@ -1,4 +1,2 @@
-- Auth guard
 - add watch-time on video cards
-- add scnackbars to every place needed.
 - subscriptions not updating

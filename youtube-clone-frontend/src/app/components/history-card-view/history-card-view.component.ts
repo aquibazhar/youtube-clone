@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CombinedDateTime } from 'src/app/models/combined-date-time';
 import { User } from 'src/app/models/user';
 import { Video } from 'src/app/models/video';
@@ -27,7 +28,8 @@ export class HistoryCardViewComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private videoService: VideoUploadService
+    private videoService: VideoUploadService,
+    private _snackBar: MatSnackBar
   ) {
     this.dataFetched = false;
     const userId = localStorage.getItem('userId');
@@ -78,13 +80,20 @@ export class HistoryCardViewComponent implements OnInit {
 
   videoRemoved(videoId: string) {
     this.userService.removeVideoFromHistory(videoId).subscribe((data) => {
-      console.log(data);
+      this.openSnackBar(data, 'OK');
       this.dataFetched = false;
       this.videoHistory = [];
       this.combinedDateTime = [];
       this.uniqueDates = [];
       this.videoHistory = [];
       this.getUserHistory();
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
     });
   }
 }

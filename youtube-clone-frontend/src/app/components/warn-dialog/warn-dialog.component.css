@@ -1,0 +1,20 @@
+.action-btn {
+  border-radius: 20px;
+}
+
+.main-btn {
+  color: #065fd4;
+}
+
+.main-btn:hover {
+  background-color: #def1ff;
+}
+
+.subtitle {
+  margin-bottom: 15px;
+  color: rgb(96, 96, 96);
+}
+
+/* .cancel-btn {
+  background-color: white !important;
+} */

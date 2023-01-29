@@ -1,4 +1,4 @@
-<div class="outer-container">
+<div class="outer-container" *ngIf="dataFetched">
   <div class="container" *ngFor="let videoAuthor of combinedVideoAuthor">
     <mat-card
       class="video-card"
@@ -7,7 +7,6 @@
     >
       <div class="thumbnail">
         <img
-          mat-card-image
           src="{{ videoAuthor.video.thumbnailUrl }}"
           alt="Photo of a Shiba Inu"
           class="thumbnail-image"
@@ -24,6 +23,7 @@
               class="save-actions"
               (click)="stopPropagation($event)"
               [matMenuTriggerFor]="menu"
+              *ngIf="isAuthenticated"
             >
               <button mat-icon-button class="save-btn">
                 <mat-icon class="mat-icon">more_vert</mat-icon>
@@ -36,6 +36,37 @@
                   <mat-icon class="save-options">schedule</mat-icon>
                   <span class="save-options">Save to Watch later</span>
                 </button>
+              </mat-menu>
+            </div>
+            <div
+              class="save-actions"
+              (click)="stopPropagation($event)"
+              [matMenuTriggerFor]="signInMenu"
+              [matMenuTriggerData]="{
+                title: 'Want to watch this again later?',
+                subtitle: 'Sign in to add this video to watch later.'
+              }"
+              *ngIf="!isAuthenticated"
+            >
+              <button mat-icon-button class="save-btn">
+                <mat-icon class="mat-icon">more_vert</mat-icon>
+              </button>
+              <mat-menu #signInMenu="matMenu" class="sign-in-menu">
+                <ng-template
+                  matMenuContent
+                  let-title="title"
+                  let-subtitle="subtitle"
+                >
+                  <div class="sign-in">
+                    <div class="menu-title">{{ title }}</div>
+                    <div class="menu-subtitle">
+                      {{ subtitle }}
+                    </div>
+                    <div class="button">
+                      <button mat-flat-button (click)="login()">Sign in</button>
+                    </div>
+                  </div>
+                </ng-template>
               </mat-menu>
             </div>
           </div>
@@ -58,7 +89,7 @@
               class="channel-avatar-img"
             />
           </div>
-          <div class="full-name">
+          <div class="full-name" matTooltip="{{ videoAuthor.author.fullName }}">
             {{ videoAuthor.author.fullName }}
           </div>
         </mat-card-subtitle>

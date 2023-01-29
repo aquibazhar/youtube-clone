@@ -124,7 +124,7 @@ public class VideoController {
     @DeleteMapping("/playlist")
     public ResponseEntity<String> removeAllFromLikedVideos() {
         service.removeAllLikedVideos();
-        return ResponseEntity.status(HttpStatus.OK).body("Everything from the Liked Videos playlist removed successfully!!!");
+        return ResponseEntity.status(HttpStatus.OK).body("Liked videos cleared successfully!!!");
     }
 
     @GetMapping("/history/{date}")

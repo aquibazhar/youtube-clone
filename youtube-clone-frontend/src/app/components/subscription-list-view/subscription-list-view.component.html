@@ -49,26 +49,23 @@
             {{ videoAuthor.video.description }}
           </div>
         </mat-card-subtitle>
-        <div class="options">
-          <button
-            mat-icon-button
-            class="options-btn"
-            (click)="stopPropagation($event)"
-            [matMenuTriggerFor]="menu"
-          >
-            <mat-icon class="options-icon">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button
-              mat-menu-item
-              (click)="addToWatchLater(videoAuthor.video.id)"
-            >
-              <mat-icon class="save-options">schedule</mat-icon>
-              <span class="save-options">Save to Watch later</span>
-            </button>
-          </mat-menu>
-        </div>
       </mat-card-header>
+      <div class="options">
+        <button
+          mat-icon-button
+          class="options-btn"
+          (click)="stopPropagation($event)"
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon class="options-icon">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="addToWatchLater(videoAuthor.video.id)">
+            <mat-icon class="save-options">schedule</mat-icon>
+            <span class="save-options">Save to Watch later</span>
+          </button>
+        </mat-menu>
+      </div>
     </mat-card>
     <mat-divider class="list-divider"></mat-divider>
   </div>

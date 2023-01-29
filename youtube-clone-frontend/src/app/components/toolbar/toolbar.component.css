@@ -317,6 +317,47 @@ mat-sidenav-container {
   z-index: 10;
 }
 
+.logout-btn span {
+  /* color: #065fd4; */
+  color: rgb(15, 15, 15);
+  background: none;
+}
+
+.logout-btn mat-icon {
+  color: rgb(15, 15, 15);
+  background: none;
+}
+
+.login-btn {
+  border-radius: 20px;
+  border: 1px solid rgb(229, 229, 229);
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+.login-btn {
+  border-radius: 20px;
+  border: 1px solid rgb(229, 229, 229);
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+.login-btn:hover {
+  background-color: #def1ff;
+}
+
+.login-btn mat-icon {
+  margin-right: 5px;
+  color: #065fd4;
+  background: none;
+}
+
+.login-btn span {
+  margin-left: 5px;
+  color: #065fd4;
+  background: none;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .hide-in-mobile {

@@ -43,11 +43,7 @@
           >
             Subscribe
           </button>
-          <mat-menu
-            #signInMenu="matMenu"
-            class="sign-in-menu"
-            [overlapTrigger]="false"
-          >
+          <mat-menu #signInMenu="matMenu" class="sign-in-menu">
             <ng-template
               matMenuContent
               let-title="title"
@@ -161,11 +157,7 @@
             >
               <mat-icon>more_horiz</mat-icon>
             </button>
-            <mat-menu
-              #menu="matMenu"
-              class="save-menu"
-              [overlapTrigger]="false"
-            >
+            <mat-menu #menu="matMenu" class="save-menu">
               <button mat-menu-item (click)="addToWatchLater()">
                 <mat-icon class="save-btn">schedule</mat-icon>
                 <span class="save-btn">Add to Watch later</span>

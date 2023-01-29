@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Video } from 'src/app/models/video';
 import { VideoAuthor } from 'src/app/models/video-author';
 import { UserService } from 'src/app/services/user.service';
@@ -17,7 +18,8 @@ export class SubscriptionGridCardComponent implements OnInit {
 
   constructor(
     private videoService: VideoUploadService,
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,14 @@ export class SubscriptionGridCardComponent implements OnInit {
 
   addToWatchLater(videoId: string) {
     this.userService.addToWatchLater(videoId).subscribe((data) => {
-      console.log(data);
+      this.openSnackBar(data, 'OK');
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['blue-snackbar'],
     });
   }
 }

@@ -186,7 +186,12 @@
       <button mat-icon-button routerLink="/home" matTooltip="Home">
         <mat-icon class="toolbar-icons">home</mat-icon>
       </button>
-      <button mat-icon-button (click)="openDialog()" matTooltip="Upload">
+      <button
+        mat-icon-button
+        (click)="openDialog()"
+        matTooltip="Upload"
+        *ngIf="isAuthenticated"
+      >
         <mat-icon class="toolbar-icons">video_call</mat-icon>
       </button>
       <button
@@ -194,9 +199,10 @@
         mat-button
         matTooltip="login"
         (click)="login()"
-        class="toolbar-icons"
+        class="toolbar-icons login-btn"
       >
-        <span>Sign In</span>
+        <mat-icon>account_circle</mat-icon>
+        <span>Sign in</span>
       </button>
 
       <div *ngIf="isAuthenticated">
@@ -215,10 +221,10 @@
           </button>
         </div>
         <mat-menu #menu="matMenu">
-          <!-- <div class="hello-user" mat-menu-item disabled>
-            Hello, {{ currentUser.firstName }}
-          </div> -->
-          <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item (click)="logout()" class="logout-btn">
+            <mat-icon>logout</mat-icon>
+            <span>Sign out</span>
+          </button>
           <button mat-menu-item (click)="openSaveVideo()">save</button>
         </mat-menu>
       </div>

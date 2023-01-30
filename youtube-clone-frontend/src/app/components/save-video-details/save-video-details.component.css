@@ -112,4 +112,6 @@ mat-form-field {
 
 .save-button {
   margin-bottom: 20px;
+  background-color: #065fd4;
+  color: white;
 }

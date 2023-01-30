@@ -16,7 +16,7 @@ import { VideoUploadService } from 'src/app/services/video-upload.service';
 export class HomeComponent implements OnInit {
   videos: Video[] = [];
   combinedVideoAuthor: VideoAuthor[] = [];
-  videoTags: string[] = ['All'];
+  videoTags: string[] = [];
   selectedTag: string;
   isAuthenticated: boolean;
 
@@ -49,15 +49,20 @@ export class HomeComponent implements OnInit {
       this.videos = data;
 
       this.videos.forEach((video) => {
-        this.videoTags = this.videoTags.concat(this.videoTags, video.tags);
         this.userService.getUserById(video.userId).subscribe((data) => {
           this.combinedVideoAuthor.push(new VideoAuthor(video, data));
+          this.shuffleVideos();
         });
+        this.videoTags = this.videoTags.concat(this.videoTags, video.tags);
       });
+
       this.videoTags = [...new Set(this.videoTags)];
-      if (this.videoTags.length > 33) {
-        this.videoTags = this.videoTags.slice(0, 33);
+      this.shuffleTags();
+
+      if (this.videoTags.length > 29) {
+        this.videoTags = this.videoTags.slice(0, 29);
       }
+      this.videoTags.unshift('All');
       console.log(this.videoTags);
     });
   }
@@ -89,5 +94,25 @@ export class HomeComponent implements OnInit {
       duration: 2000,
       panelClass: ['blue-snackbar'],
     });
+  }
+
+  shuffleVideos() {
+    for (let i = this.combinedVideoAuthor.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.combinedVideoAuthor[i], this.combinedVideoAuthor[j]] = [
+        this.combinedVideoAuthor[j],
+        this.combinedVideoAuthor[i],
+      ];
+    }
+  }
+
+  shuffleTags() {
+    for (let i = this.videoTags.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.videoTags[i], this.videoTags[j]] = [
+        this.videoTags[j],
+        this.videoTags[i],
+      ];
+    }
   }
 }

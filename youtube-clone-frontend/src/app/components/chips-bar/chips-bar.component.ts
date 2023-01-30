@@ -17,10 +17,11 @@ export class ChipsBarComponent implements OnInit {
 
   constructor() {
     this.selectedTags.add('All');
-    console.log(this.shift);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.videoTags.findIndex;
+  }
 
   onTagClicked(tag: string) {
     if (this.selectedTags.has(tag)) {

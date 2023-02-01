@@ -33,3 +33,26 @@ https://user-images.githubusercontent.com/84010175/216092809-d8f63bcc-b481-4e35-
 - MongoDB
 - Amazon AWS S3 bucket for videos and thumbnails
 - [Auth0](https://auth0.com/) for OAuth
+
+## What's missing❓
+### Customized Channels
+Allow users to personalize their video channels with banners, display pictures, titles, and descriptions.
+
+### Custom Playlists and Management
+Enable users to create and manage their own playlists, add videos to them, and make them public for other users to discover.
+
+### Search Suggestions
+Feature to display previous search results as suggestions while searching.
+
+### Unit/Integration tests 🧪
+I skipped writing test for this project.
+
+## Support 🤝
+Give a ⭐️ if you like this project!
+
+Thanks a lot for stopping by and supporting me!
+
+## License 📝
+Feel free to use my code on your project. Please put a reference to this repository.
+
+This project is under the MIT license. See the [LICENSE]() for more information.

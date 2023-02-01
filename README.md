@@ -26,10 +26,10 @@ https://user-images.githubusercontent.com/84010175/216092809-d8f63bcc-b481-4e35-
 - Typescript
 - HTML
 - CSS
-- ngx videogular library(https://www.npmjs.com/package/@videogular/ngx-videogular)
-- angular-auth-oidc-client(https://github.com/damienbod/angular-auth-oidc-client) for OAuth
+- [ngx videogular library](https://www.npmjs.com/package/@videogular/ngx-videogular)
+- [angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client) for OAuth
 - Java
 - Spring Boot
 - MongoDB
 - Amazon AWS S3 bucket for videos and thumbnails
-- Auth0(https://auth0.com/) for OAuth
+- [Auth0](https://auth0.com/) for OAuth

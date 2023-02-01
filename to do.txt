@@ -1,2 +1,0 @@
-- add watch-time on video cards
-- test without oauth

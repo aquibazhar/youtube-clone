@@ -3,6 +3,10 @@ YouTube Clone is a full-stack video-sharing web application that has been develo
 
 ## Demo
 
+
+https://user-images.githubusercontent.com/84010175/216092809-d8f63bcc-b481-4e35-8de0-5916472368b6.mp4
+
+
 ## Features 🚀
 
 - Browse, search, and watch videos without logging in.

@@ -1,5 +1,5 @@
 <h1 align="center">YouTube Clone App </h1>
-YouTube Clone is a full-stack web application built using Angular and Spring Boot.
+YouTube Clone is a full-stack video-sharing web application that has been developed using Angular and Spring Boot. It aims to replicate the features and user experience of the popular video-sharing platform, YouTube.
 
 ## Demo
 
@@ -17,24 +17,15 @@ YouTube Clone is a full-stack web application built using Angular and Spring Boo
 
 ## Built with 🛠️
 
-- Front-end:
 - Angular
 - Angular Material
 - Typescript
 - HTML
 - CSS
-- ngx videogular library
-- angular-auth-oidc-client for OAuth
-- Back-end:
+- ngx videogular library(https://www.npmjs.com/package/@videogular/ngx-videogular)
+- angular-auth-oidc-client(https://github.com/damienbod/angular-auth-oidc-client) for OAuth
 - Java
 - Spring Boot
-- Database:
 - MongoDB
-- Storage:
 - Amazon AWS S3 bucket for videos and thumbnails
-- Authentication:
-- Auth0 for OAuth
-
-## Flow of the Web Application
-
-    Home/Register > Login > Search AQI of the desired city and Add to Watchlist > View AQI of cities in Watchlist > View/Edit Profile Details
+- Auth0(https://auth0.com/) for OAuth
